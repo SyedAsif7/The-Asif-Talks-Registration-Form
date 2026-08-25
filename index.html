@@ -173,6 +173,26 @@
       50% { opacity: 0.85; transform: scale(0.96); }
     }
 
+    .badge-seats {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fef08a;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 4px 11px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+    }
+
+    .badge-seats strong {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
     /* Dual Speaker Showcase (Mobile Optimized) */
     .speaker-showcase {
       display: grid;
@@ -911,6 +931,10 @@
         <span class="badge-live">
           <span class="pulse-dot"></span> Live Studio • Ep #1
         </span>
+        <span class="badge-seats" id="seatsBadge">
+          <i data-lucide="ticket" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+          <strong id="remainingSeatsCount">198</strong> / 200 Seats Left
+        </span>
       </div>
 
       <!-- Dual Spotlight: Host & Distinguished Guest -->
@@ -1214,19 +1238,32 @@
   const msg = document.getElementById('statusMsg');
   const successCard = document.getElementById('passSuccessCard');
 
+  const TOTAL_SEATS = 200;
   let registeredPassNumber = 1;
 
-  // Sync pass count from backend if available
+  function updateSeatsUI(regCount) {
+    const remaining = Math.max(0, TOTAL_SEATS - (regCount || 0));
+    const countElem = document.getElementById('remainingSeatsCount');
+    if (countElem) {
+      countElem.innerText = remaining;
+    }
+  }
+
+  // Sync pass count and remaining seats from backend
   async function syncPassCount() {
     try {
       const response = await fetch(scriptURL);
       const data = await response.json();
       if (data && data.registeredCount !== undefined) {
         registeredPassNumber = data.registeredCount + 1;
+        updateSeatsUI(data.registeredCount);
+      } else {
+        updateSeatsUI(1);
       }
     } catch(err) {
-      const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '0', 10);
-      if (savedCount > 0) registeredPassNumber = savedCount + 1;
+      const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '1', 10);
+      registeredPassNumber = savedCount + 1;
+      updateSeatsUI(savedCount);
     }
   }
   syncPassCount();
@@ -1234,6 +1271,7 @@
   function getNextPassCode() {
     const code = "TAT-" + String(registeredPassNumber).padStart(3, '0');
     localStorage.setItem('tat_last_pass_num', registeredPassNumber);
+    updateSeatsUI(registeredPassNumber);
     registeredPassNumber++;
     return code;
   }
