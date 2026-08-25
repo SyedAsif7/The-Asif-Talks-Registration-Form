@@ -1,6 +1,6 @@
 # The Asif Talks — Episode #1 Registration Page
 
-A dedicated, high-converting, mobile-responsive live audience registration and digital pass generator for **The Asif Talks (Episode #1)** with **Syed Asif**.
+A dedicated, high-converting, mobile-responsive live audience registration page for **The Asif Talks (Episode #1)** with **Syed Asif**.
 
 ---
 
@@ -8,29 +8,28 @@ A dedicated, high-converting, mobile-responsive live audience registration and d
 
 ```
 .
-├── index.html              # Standalone registration & digital pass generator
+├── index.html              # Mobile-responsive registration landing page & digital pass generator
 ├── assets/                 # High-resolution logos & branding images
 │   ├── asif_talks_host.jpg # Host & Podcast branding graphic
 │   ├── dcode_logo.jpg      # DCode Developers Club logo
 │   ├── ssiems_logo.png     # SSIEMS Parbhani emblem
 │   └── vertex_logo.jpg     # Vertex Institute of Technology logo
+├── google-apps-script.js   # Google Sheets Apps Script backend with LockService & Pass IDs
 └── README.md               # Quickstart and deployment instructions
 ```
 
 ---
 
-## ⚡ Features
+## ⚡ Google Sheet Column Headers (Row 1)
 
-- **100% Standalone & Zero Backend Required:** Runs instantly on any browser, static host, Vercel, or GitHub Pages.
-- **Dynamic 200 Seats Counter:** Decrements remaining seats per registration.
-- **Sequential Pass Numbering:** Generates `TAT-001`, `TAT-002`, `TAT-003`, etc.
-- **Mobile-First UX:** 16px iOS auto-zoom prevention, touch-friendly inputs, custom checkbox, and screenshot-ready pass card.
-- **Print & PDF Pass Support:** Built-in 1-click printable / PDF boarding pass.
+Open your [Google Sheet](https://docs.google.com/spreadsheets/d/1vfBoWXanT1TIZ3TZTyHUIjdb7Lbdqkx6LRBav1LqY1A/edit) and set Row 1 to:
+```
+Timestamp | Pass ID | Student Name | Mobile Number | Email Address | Gender | College / Institute / Organization | City / Location | How Heard | Question for Guest Speaker | Photo & Video Consent
+```
 
 ---
 
-## 🌐 Deploy to GitHub Pages / Vercel
+## 🌐 Live Deployment Link
 
-1. Push to GitHub.
-2. In GitHub, go to **Settings $\rightarrow$ Pages $\rightarrow$ Deploy from `main` branch**.
-3. Live URL: `https://syedasif7.github.io/The-Asif-Talks-Registration-Form/`
+- **GitHub Repository:** `https://github.com/SyedAsif7/The-Asif-Talks-Registration-Form`
+- **GitHub Pages Link:** `https://syedasif7.github.io/The-Asif-Talks-Registration-Form/`
