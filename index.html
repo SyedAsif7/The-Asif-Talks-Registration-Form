@@ -1225,11 +1225,6 @@
   // Initialize Lucide Icons
   lucide.createIcons();
 
-  /**
-   * Google Apps Script Web App URL
-   */
-  const scriptURL = 'https://script.google.com/macros/s/AKfycby1NJyl2J_lbd2thZn-o4t1OOYtE2BCv9GGdNgk8HzYYZxBNWYhKEMp6ctDV1w5hUsU5A/exec';
-
   const form = document.getElementById('regForm');
   const btn = document.getElementById('submitBtn');
   const btnText = document.getElementById('btnText');
@@ -1239,7 +1234,7 @@
   const successCard = document.getElementById('passSuccessCard');
 
   const TOTAL_SEATS = 200;
-  let registeredPassNumber = 1;
+  let registeredPassNumber = parseInt(localStorage.getItem('tat_last_pass_num') || '1', 10);
 
   function updateSeatsUI(regCount) {
     const remaining = Math.max(0, TOTAL_SEATS - (regCount || 0));
@@ -1249,34 +1244,18 @@
     }
   }
 
-  // Sync pass count and remaining seats from backend
-  async function syncPassCount() {
-    try {
-      const response = await fetch(scriptURL);
-      const data = await response.json();
-      if (data && data.registeredCount !== undefined) {
-        registeredPassNumber = data.registeredCount + 1;
-        updateSeatsUI(data.registeredCount);
-      } else {
-        updateSeatsUI(1);
-      }
-    } catch(err) {
-      const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '1', 10);
-      registeredPassNumber = savedCount + 1;
-      updateSeatsUI(savedCount);
-    }
-  }
-  syncPassCount();
+  // Initial seat counter display
+  updateSeatsUI(registeredPassNumber - 1);
 
   function getNextPassCode() {
     const code = "TAT-" + String(registeredPassNumber).padStart(3, '0');
-    localStorage.setItem('tat_last_pass_num', registeredPassNumber);
+    localStorage.setItem('tat_last_pass_num', registeredPassNumber + 1);
     updateSeatsUI(registeredPassNumber);
     registeredPassNumber++;
     return code;
   }
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     // Clear previous error states
@@ -1347,35 +1326,18 @@
     btn.disabled = true;
     btnSpinner.style.display = 'inline-block';
     btnIcon.style.display = 'none';
-    btnText.innerText = 'Submitting Pass Request...';
+    btnText.innerText = 'Generating Official Pass...';
 
-    const formData = new FormData(form);
-    const submittedName = formData.get('name');
-    const submittedPhone = formData.get('phone');
-    const submittedEmail = formData.get('email');
-    const submittedCollege = formData.get('college');
-    const submittedCity = formData.get('city');
+    const submittedName = nameInput.value.trim();
+    const submittedPhone = phoneInput.value.trim();
+    const submittedEmail = document.getElementById('email').value.trim();
+    const submittedCollege = collegeInput.value.trim();
+    const submittedCity = cityInput.value.trim();
 
-    try {
-      await fetch(scriptURL, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors'
-      });
-
+    // Instant pass generation
+    setTimeout(() => {
       showSuccessPass(submittedName, submittedPhone, submittedEmail, submittedCollege, submittedCity);
-    } catch (error) {
-      console.error('Submission Error:', error);
-      msg.style.display = 'block';
-      msg.className = 'error';
-      msg.innerHTML = '❌ <strong>Submission Failed:</strong> Could not connect to registration server. Please check your internet connection and try again.';
-      
-      btn.disabled = false;
-      btnSpinner.style.display = 'none';
-      btnIcon.style.display = 'inline-block';
-      btnText.innerText = 'Claim Your Live Audience Pass';
-      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    }, 400);
   });
 
   // Remove error highlight as user types/changes fields
