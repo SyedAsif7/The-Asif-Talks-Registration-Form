@@ -1213,6 +1213,9 @@
     }
   }
 
+  // Initial clean display: 200 / 200
+  updateSeatsUI(0);
+
   // Sync pass count and remaining seats from Google Sheets
   async function syncPassCount() {
     try {
@@ -1222,10 +1225,10 @@
         registeredPassNumber = data.registeredCount + 1;
         updateSeatsUI(data.registeredCount);
       } else {
-        updateSeatsUI(1);
+        updateSeatsUI(0);
       }
     } catch(err) {
-      const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '1', 10);
+      const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '0', 10);
       registeredPassNumber = savedCount + 1;
       updateSeatsUI(savedCount);
     }
