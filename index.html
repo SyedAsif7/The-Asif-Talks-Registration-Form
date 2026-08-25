@@ -559,15 +559,58 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Status Message */
+    /* Status & Validation Messages */
+    .input-error {
+      border-color: #ef4444 !important;
+      background-color: #fffbfb !important;
+      box-shadow: 0 0 0 3.5px rgba(239, 68, 68, 0.15) !important;
+      animation: shakeField 0.3s ease-in-out;
+    }
+
+    @keyframes shakeField {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-4px); }
+      40%, 80% { transform: translateX(4px); }
+    }
+
+    .field-error-msg {
+      display: none;
+      font-size: 11.5px;
+      color: #dc2626;
+      font-weight: 600;
+      margin-top: 4px;
+      align-items: center;
+      gap: 4px;
+    }
+
     #statusMsg {
       display: none;
       margin-top: 14px;
-      padding: 12px 14px;
+      padding: 13px 16px;
       border-radius: var(--radius-sm);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       text-align: center;
+      line-height: 1.45;
+      animation: fadeIn 0.3s ease;
+    }
+
+    #statusMsg.error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+    }
+
+    #statusMsg.warning {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #b45309;
+    }
+
+    #statusMsg.success {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
     }
 
     /* Success Card & Digital Pass */
@@ -1195,12 +1238,81 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // Clear previous error states
+    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+    msg.style.display = 'none';
+    msg.className = '';
+
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const genderInput = document.getElementById('gender');
+    const collegeInput = document.getElementById('college');
+    const cityInput = document.getElementById('city');
+    const sourceInput = document.getElementById('source');
+    const consentInput = document.getElementById('consent');
+
+    let firstInvalid = null;
+    const missingFields = [];
+
+    if (!nameInput.value.trim()) {
+      nameInput.classList.add('input-error');
+      missingFields.push('Full Name');
+      if (!firstInvalid) firstInvalid = nameInput;
+    }
+
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phoneInput.value.trim())) {
+      phoneInput.classList.add('input-error');
+      missingFields.push('10-digit Mobile Number');
+      if (!firstInvalid) firstInvalid = phoneInput;
+    }
+
+    if (!genderInput.value) {
+      genderInput.classList.add('input-error');
+      missingFields.push('Gender');
+      if (!firstInvalid) firstInvalid = genderInput;
+    }
+
+    if (!collegeInput.value.trim()) {
+      collegeInput.classList.add('input-error');
+      missingFields.push('College / Organization');
+      if (!firstInvalid) firstInvalid = collegeInput;
+    }
+
+    if (!cityInput.value.trim()) {
+      cityInput.classList.add('input-error');
+      missingFields.push('City / Location');
+      if (!firstInvalid) firstInvalid = cityInput;
+    }
+
+    if (!sourceInput.value) {
+      sourceInput.classList.add('input-error');
+      missingFields.push('How you heard about event');
+      if (!firstInvalid) firstInvalid = sourceInput;
+    }
+
+    if (!consentInput.checked) {
+      consentInput.closest('.consent-card').classList.add('input-error');
+      missingFields.push('Photo & Video Consent');
+      if (!firstInvalid) firstInvalid = consentInput.closest('.consent-card');
+    }
+
+    if (missingFields.length > 0) {
+      msg.style.display = 'block';
+      msg.className = 'warning';
+      msg.innerHTML = `⚠️ <strong>Please complete required field(s):</strong><br>${missingFields.join(', ')}`;
+      if (firstInvalid) {
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (typeof firstInvalid.focus === 'function') firstInvalid.focus();
+      }
+      return;
+    }
+
     // UI Loading state
     btn.disabled = true;
     btnSpinner.style.display = 'inline-block';
     btnIcon.style.display = 'none';
-    btnText.innerText = 'Confirming Pass Request...';
-    msg.style.display = 'none';
+    btnText.innerText = 'Submitting Pass Request...';
 
     const formData = new FormData(form);
     const submittedName = formData.get('name');
@@ -1220,15 +1332,35 @@
     } catch (error) {
       console.error('Submission Error:', error);
       msg.style.display = 'block';
-      msg.style.background = '#fee2e2';
-      msg.style.color = '#b91c1c';
-      msg.innerText = '⚠️ Submission could not be completed. Please check your internet connection or try again.';
+      msg.className = 'error';
+      msg.innerHTML = '❌ <strong>Submission Failed:</strong> Could not connect to registration server. Please check your internet connection and try again.';
       
       btn.disabled = false;
       btnSpinner.style.display = 'none';
       btnIcon.style.display = 'inline-block';
       btnText.innerText = 'Claim Your Live Audience Pass';
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  });
+
+  // Remove error highlight as user types/changes fields
+  form.querySelectorAll('input, select, textarea').forEach(input => {
+    input.addEventListener('input', () => {
+      input.classList.remove('input-error');
+      const consentCard = input.closest('.consent-card');
+      if (consentCard) consentCard.classList.remove('input-error');
+      if (document.querySelectorAll('.input-error').length === 0) {
+        msg.style.display = 'none';
+      }
+    });
+    input.addEventListener('change', () => {
+      input.classList.remove('input-error');
+      const consentCard = input.closest('.consent-card');
+      if (consentCard) consentCard.classList.remove('input-error');
+      if (document.querySelectorAll('.input-error').length === 0) {
+        msg.style.display = 'none';
+      }
+    });
   });
 
   function showSuccessPass(name, phone, email, college, city) {
@@ -1250,6 +1382,8 @@
 
   function resetFormForNew() {
     form.reset();
+    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+    msg.style.display = 'none';
     form.style.display = 'block';
     successCard.style.display = 'none';
     btn.disabled = false;
