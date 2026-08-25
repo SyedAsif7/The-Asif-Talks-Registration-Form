@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Asif Talks — Live Episode #1 Pass Registration</title>
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #070d17;
+      --bg-surface: #0f172a;
+      --card-bg: #ffffff;
+      --card-alt: #f8fafc;
+      --primary: #0f2744;
+      --primary-accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-gold: #f59e0b;
+      --accent-red: #ef4444;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --radius-lg: 24px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 10% 10%, rgba(37, 99, 235, 0.22) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(245, 158, 11, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.9) 0px, transparent 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Top Partner Bar */
+    .top-partner-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .partner-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 14px 5px 6px;
+      border-radius: 999px;
+      color: #e2e8f0;
+      font-size: 11.5px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .partner-pill img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    /* Main Container Card */
+    .container {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Header Section */
+    .header {
+      background: linear-gradient(135deg, #06111f 0%, #0d213a 45%, #18375c 100%);
+      color: #fff;
+      padding: 34px 24px 28px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #2563eb 0%, #f59e0b 50%, #ef4444 100%);
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ef4444;
+      color: #fff;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      box-shadow: 0 0 18px rgba(239, 68, 68, 0.6);
+      animation: pulseLive 2s infinite;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    @keyframes pulseLive {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(0.96); }
+    }
+
+    .badge-seats {
+      background: rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    /* Dual Speaker Showcase */
+    .speaker-showcase {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin: 16px 0 20px;
+      position: relative;
+    }
+
+    .speaker-box {
+      flex: 1;
+      max-width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .speaker-img-wrap {
+      position: relative;
+      width: 94px;
+      height: 94px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
+    }
+
+    .speaker-img-wrap.guest-wrap {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.35);
+    }
+
+    .speaker-img-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #0b1320;
+    }
+
+    .speaker-role {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    .role-host {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .role-guest {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .speaker-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .speaker-desc {
+      font-size: 11px;
+      color: #cbd5e1;
+      line-height: 1.3;
+    }
+
+    .speaker-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .speaker-divider span {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 8px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #93c5fd;
+    }
+
+    /* Event Quick Info Ribbon */
+    .event-ribbon {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      text-align: center;
+    }
+
+    .ribbon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .ribbon-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #64748b;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ribbon-value {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Notice Banner */
+    .notice {
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-left: 4px solid #f59e0b;
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 12.5px;
+      color: #92400e;
+      line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .notice-icon {
+      color: #d97706;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Form Content */
+    form {
+      padding: 28px 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 7px;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    label span.req {
+      color: #ef4444;
+      margin-left: 3px;
+    }
+
+    label span.opt {
+      font-size: 11px;
+      font-weight: 500;
+      color: #64748b;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: #94a3b8;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: #0f172a;
+      background: #ffffff;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+    }
+
+    textarea {
+      padding: 12px 14px 12px 42px;
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.5;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-accent);
+      box-shadow: 0 0 0 3.5px rgba(37, 99, 235, 0.15);
+      background-color: #fff;
+    }
+
+    .input-wrapper:focus-within .input-icon {
+      color: var(--primary-accent);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .helper-text {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+    /* Consent Checkbox Box */
+    .consent-card {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-top: 6px;
+      transition: all 0.2s;
+    }
+
+    .consent-card:hover {
+      border-color: #cbd5e1;
+      background: #f1f5f9;
+    }
+
+    .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .consent-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      padding: 0;
+      accent-color: var(--primary-accent);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+      transition: all 0.2s ease;
+      margin-top: 14px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.45);
+    }
+
+    .submit-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Status Message */
+    #statusMsg {
+      display: none;
+      margin-top: 16px;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Success Card & Digital Pass */
+    #passSuccessCard {
+      display: none;
+      padding: 34px 24px;
+      text-align: center;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-icon-wrap {
+      width: 58px;
+      height: 58px;
+      background: #dcfce7;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    /* Digital Boarding Pass */
+    .pass-ticket {
+      background: #ffffff;
+      border: 2px dashed #93c5fd;
+      border-radius: 14px;
+      padding: 24px;
+      margin: 22px 0;
+      text-align: left;
+      position: relative;
+      background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+      background-size: 14px 14px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .pass-ticket-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid #cbd5e1;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+
+    .pass-brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pass-brand-lockup img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #2563eb;
+    }
+
+    .pass-title-main {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0f2744;
+      letter-spacing: 0.5px;
+    }
+
+    .pass-title-sub {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    .pass-id-badge {
+      font-family: monospace;
+      font-size: 13.5px;
+      font-weight: 800;
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 5px 12px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+    }
+
+    .pass-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .pass-grid-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .pass-grid-item .label {
+      font-size: 10.5px;
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .pass-grid-item .value {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+      word-break: break-word;
+    }
+
+    .pass-notice-footer {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed #cbd5e1;
+      font-size: 11.5px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pass-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 13px;
+      border: 1.5px solid #cbd5e1;
+      background: white;
+      color: #1e293b;
+      font-weight: 700;
+      font-size: 13.5px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    /* Partner Logos Showcase in Footer */
+    .partner-section {
+      background: #fafafa;
+      border-top: 1px solid #f1f5f9;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .partner-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    .partner-logos-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .partner-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .partner-item img {
+      height: 38px;
+      max-width: 100px;
+      object-fit: contain;
+      border-radius: 6px;
+      filter: grayscale(10%);
+      transition: all 0.2s;
+    }
+
+    .partner-item img:hover {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .partner-item span {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #334155;
+      text-align: left;
+      line-height: 1.25;
+    }
+
+    .footer-credits {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    @media (max-width: 600px) {
+      .speaker-showcase {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .speaker-divider {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+      }
+      .speaker-box {
+        max-width: 100%;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      .event-ribbon {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .pass-actions {
+        flex-direction: column;
+      }
+      .pass-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .partner-logos-row {
+        gap: 16px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .header, form, .top-partner-bar, .pass-actions, .event-ribbon, .partner-section, .success-icon-wrap, h2, p {
+        display: none !important;
+      }
+      #passSuccessCard {
+        display: block !important;
+        padding: 0;
+      }
+      .pass-ticket {
+        border: 2px solid #000;
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  
+  <!-- Top Partner Badges -->
+  <div class="top-partner-bar">
+    <div class="partner-pill">
+      <img src="assets/dcode_logo.jpg" alt="DCode Club" />
+      <span>DCode Club</span>
+    </div>
+    <div class="partner-pill">
+      <img src="assets/ssiems_logo.png" alt="SSIEMS Parbhani" />
+      <span>SSIEMS Parbhani</span>
+    </div>
+    <div class="partner-pill">
+      <img src="assets/vertex_logo.jpg" alt="Vertex" />
+      <span>Vertex Tech</span>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <!-- Header Section -->
+    <div class="header">
+      
+      <div class="badge-row">
+        <span class="badge-live">
+          <span class="pulse-dot"></span> Live Studio • Ep #1
+        </span>
+      </div>
+
+      <!-- Dual Spotlight: Host & Distinguished Guest -->
+      <div class="speaker-showcase">
+        
+        <!-- Host: The Asif Talks -->
+        <div class="speaker-box">
+          <div class="speaker-img-wrap">
+            <img src="assets/asif_talks_host.jpg" alt="Host - Asif" />
+          </div>
+          <span class="speaker-role role-host">Host &amp; Creator</span>
+          <div class="speaker-name">The Asif Talks</div>
+          <div class="speaker-desc">Live Studio Podcast</div>
+        </div>
+
+        <!-- In Dialogue Badge -->
+        <div class="speaker-divider">
+          <span>WITH</span>
+        </div>
+
+        <!-- Guest: Shri Sanjaysinh Chavan (IAS) -->
+        <div class="speaker-box">
+          <div class="speaker-img-wrap guest-wrap">
+            <img src="assets/collector_chavan.png" alt="Shri Sanjaysinh Chavan (IAS)" />
+          </div>
+          <span class="speaker-role role-guest">Distinguished Guest</span>
+          <div class="speaker-name">Shri Sanjaysinh Chavan</div>
+          <div class="speaker-desc">District Collector &amp; DM, Parbhani (IAS)</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Event Quick Details Ribbon -->
+    <div class="event-ribbon">
+      <div class="ribbon-item">
+        <span class="ribbon-label"><i data-lucide="calendar" style="width: 12px; height: 12px;"></i> Event Date</span>
+        <span class="ribbon-value">Monday, Aug 31, 2026</span>
+      </div>
+      <div class="ribbon-item">
+        <span class="ribbon-label"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> Gate Closure</span>
+        <span class="ribbon-value">10:15 AM Sharp</span>
+      </div>
+      <div class="ribbon-item">
+        <span class="ribbon-label"><i data-lucide="map-pin" style="width: 12px; height: 12px;"></i> Location</span>
+        <span class="ribbon-value">SSIEMS Auditorium</span>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <form id="regForm">
+      <div class="notice">
+        <i data-lucide="alert-circle" class="notice-icon" style="width: 18px; height: 18px;"></i>
+        <div>
+          <strong>Important Notice:</strong> Strictly <strong>First-Come, First-Served</strong>. All attendees must present their physical College ID or Govt Photo ID at the registration desk. Gates close at 10:15 AM.
+        </div>
+      </div>
+
+      <div class="form-grid">
+        
+        <!-- 1. Student Name -->
+        <div class="form-group">
+          <label for="name">Student Name <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <i data-lucide="user" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name" />
+          </div>
+        </div>
+
+        <!-- 2. Mobile Number -->
+        <div class="form-group">
+          <label for="phone">Mobile Number <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <i data-lucide="phone" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" required autocomplete="tel" />
+          </div>
+          <div class="helper-text">For pass confirmation &amp; updates</div>
+        </div>
+
+        <!-- 3. Email Address -->
+        <div class="form-group">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <i data-lucide="mail" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <input type="email" id="email" name="email" placeholder="abc@gmail.com" required autocomplete="email" />
+          </div>
+        </div>
+
+        <!-- 4. Gender -->
+        <div class="form-group">
+          <label for="gender">Gender <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <i data-lucide="user-check" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <select id="gender" name="gender" required>
+              <option value="" disabled selected>-- Select Gender --</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 5. College / Institute / Organization Name -->
+        <div class="form-group">
+          <label for="college">College / Institute / Organization Name <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <i data-lucide="building-2" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <input type="text" id="college" name="college" placeholder="College / Institute / Organization Name ( Required )" required />
+          </div>
+        </div>
+
+        <!-- 6. City / Location -->
+        <div class="form-group">
+          <label for="city">City / Location <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <i data-lucide="map-pin" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <input type="text" id="city" name="city" placeholder="e.g. Parbhani, Nanded, Jalna..." required />
+          </div>
+        </div>
+
+        <!-- 7. What are you expecting from The ASIF Talks? (Optional) -->
+        <div class="form-group">
+          <label for="expectations">
+            <span>What are you expecting from The ASIF Talks?</span>
+            <span class="opt">(Optional)</span>
+          </label>
+          <div class="input-wrapper">
+            <i data-lucide="sparkles" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <select id="expectations" name="expectations">
+              <option value="" selected>--Select--</option>
+              <option value="Leadership insights">Leadership insights</option>
+              <option value="Career guidance">Career guidance</option>
+              <option value="New perspectives">New perspectives</option>
+              <option value="Networking">Networking</option>
+              <option value="Knowledge about governance">Knowledge about governance</option>
+              <option value="Youth empowerment">Youth empowerment</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 8. How did you hear about this event? -->
+        <div class="form-group">
+          <label for="source">How did you hear about this event? <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <i data-lucide="megaphone" class="input-icon" style="width: 16px; height: 16px;"></i>
+            <select id="source" name="source" required>
+              <option value="" disabled selected>--Select--</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Instagram">Instagram</option>
+              <option value="College/School">College/School</option>
+              <option value="Friend">Friend</option>
+              <option value="Event Team">Event Team</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 9. Question for District Collector (Optional) -->
+        <div class="form-group full-width">
+          <label for="question">
+            <span>Your Question for District Collector Shri Sanjaysinh Chavan (IAS)</span>
+            <span class="opt">(Optional)</span>
+          </label>
+          <div class="input-wrapper">
+            <i data-lucide="mic" class="input-icon" style="width: 16px; height: 16px; top: 14px; transform: none;"></i>
+            <textarea id="question" name="question" rows="3" placeholder="What key question or perspective would you like to discuss with the District Collector? (Top questions will be shortlisted for live mic...)"></textarea>
+          </div>
+          <div class="helper-text">Shortlisted attendees will be invited to ask questions directly on the live studio mic.</div>
+        </div>
+
+        <!-- 10. Photo/Video Consent -->
+        <div class="form-group full-width">
+          <div class="consent-card">
+            <label class="consent-label" for="consent">
+              <input type="checkbox" id="consent" name="consent" value="Agreed" required />
+              <span>
+                <strong>Photo/Video Consent <span class="req">*</span>:</strong> I agree that photographs/videos taken during the event may be used for event documentation and promotional purposes.
+              </span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Submit Action Button -->
+      <button type="submit" id="submitBtn" class="submit-btn">
+        <span class="spinner" id="btnSpinner"></span>
+        <span id="btnText">Claim Your Live Audience Pass</span>
+        <i data-lucide="arrow-right" id="btnIcon" style="width: 18px; height: 18px;"></i>
+      </button>
+
+      <div id="statusMsg"></div>
+    </form>
+
+    <!-- Success Pass Confirmation Card -->
+    <div id="passSuccessCard">
+      <div class="success-icon-wrap">
+        <i data-lucide="check-circle-2" style="width: 34px; height: 34px; color: #16a34a;"></i>
+      </div>
+      <h2 style="font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">Pass Registration Confirmed!</h2>
+      <p style="font-size: 13.5px; color: #64748b;">Save or print your official pass below. Please report on time with your physical ID.</p>
+
+      <!-- Digital Pass Card -->
+      <div class="pass-ticket" id="printablePass">
+        <div class="pass-ticket-header">
+          <div class="pass-brand-lockup">
+            <img src="assets/asif_talks_host.jpg" alt="The Asif Talks" />
+            <div>
+              <div class="pass-title-main">THE ASIF TALKS • EPISODE #1</div>
+              <div class="pass-title-sub">Official Live Audience Access Pass</div>
+            </div>
+          </div>
+          <div class="pass-id-badge" id="passBadgeCode">TAT-001</div>
+        </div>
+
+        <div class="pass-grid">
+          <div class="pass-grid-item">
+            <span class="label">Attendee Name</span>
+            <span class="value" id="passName">-</span>
+          </div>
+          <div class="pass-grid-item">
+            <span class="label">Mobile Number</span>
+            <span class="value" id="passPhone">-</span>
+          </div>
+          <div class="pass-grid-item">
+            <span class="label">Email Address</span>
+            <span class="value" id="passEmail">-</span>
+          </div>
+          <div class="pass-grid-item">
+            <span class="label">City / Location</span>
+            <span class="value" id="passCity">-</span>
+          </div>
+          <div class="pass-grid-item full-width" style="grid-column: span 2;">
+            <span class="label">College / Organization</span>
+            <span class="value" id="passCollege">-</span>
+          </div>
+          <div class="pass-grid-item">
+            <span class="label">Reporting Time</span>
+            <span class="value" style="color: #b45309;">10:00 AM (Sharp)</span>
+          </div>
+          <div class="pass-grid-item">
+            <span class="label">Venue &amp; Entry</span>
+            <span class="value">SSIEMS Auditorium Gate 1</span>
+          </div>
+        </div>
+
+        <div class="pass-notice-footer">
+          <i data-lucide="shield-check" style="width: 15px; height: 15px; color: #2563eb;"></i>
+          <span>Valid with physical College ID or Government Photo ID card only.</span>
+        </div>
+      </div>
+
+      <div class="pass-actions">
+        <button type="button" class="btn-secondary" onclick="window.print()">
+          <i data-lucide="printer" style="width: 16px; height: 16px;"></i> Print / Save Pass PDF
+        </button>
+        <button type="button" class="btn-secondary" onclick="resetFormForNew()">
+          <i data-lucide="user-plus" style="width: 16px; height: 16px;"></i> Register Another
+        </button>
+      </div>
+    </div>
+
+    <!-- Partner Logos Showcase in Footer -->
+    <div class="partner-section">
+      <div class="partner-title">Presented &amp; Powered By</div>
+      <div class="partner-logos-row">
+        
+        <div class="partner-item">
+          <img src="assets/dcode_logo.jpg" alt="DCode Developers Club" />
+          <span>DCode Developers<br>Club (DDSC)</span>
+        </div>
+
+        <div class="partner-item">
+          <img src="assets/ssiems_logo.png" alt="SSIEMS Parbhani" />
+          <span>SSIEMS<br>Parbhani</span>
+        </div>
+
+        <div class="partner-item">
+          <img src="assets/vertex_logo.jpg" alt="Vertex Institute of Technology" />
+          <span>Vertex Institute<br>of Technology</span>
+        </div>
+
+      </div>
+
+      <div class="footer-credits">
+        Technical Partner: <strong>Vertex Institute of Technology</strong> • In Association with <strong>SSIEMS</strong>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Initialize Lucide Icons
+  lucide.createIcons();
+
+  /**
+   * CONFIGURATION:
+   * Paste your deployed Google Apps Script Web App URL below:
+   * Example: https://script.google.com/macros/s/AKfycbx.../exec
+   */
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby1NJyl2J_lbd2thZn-o4t1OOYtE2BCv9GGdNgk8HzYYZxBNWYhKEMp6ctDV1w5hUsU5A/exec';
+
+  const form = document.getElementById('regForm');
+  const btn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+  const btnSpinner = document.getElementById('btnSpinner');
+  const btnIcon = document.getElementById('btnIcon');
+  const msg = document.getElementById('statusMsg');
+  const successCard = document.getElementById('passSuccessCard');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // UI Loading state
+    btn.disabled = true;
+    btnSpinner.style.display = 'inline-block';
+    btnIcon.style.display = 'none';
+    btnText.innerText = 'Confirming Pass Request...';
+    msg.style.display = 'none';
+
+    const formData = new FormData(form);
+    const submittedName = formData.get('name');
+    const submittedPhone = formData.get('phone');
+    const submittedEmail = formData.get('email');
+    const submittedCollege = formData.get('college');
+    const submittedCity = formData.get('city');
+
+    // Demo fallback if scriptURL is not configured yet
+    if (scriptURL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+      setTimeout(() => {
+        showSuccessPass(submittedName, submittedPhone, submittedEmail, submittedCollege, submittedCity);
+      }, 700);
+      return;
+    }
+
+    try {
+      await fetch(scriptURL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Google Apps Script handles cross-origin POST
+      });
+
+      showSuccessPass(submittedName, submittedPhone, submittedEmail, submittedCollege, submittedCity);
+    } catch (error) {
+      console.error('Submission Error:', error);
+      msg.style.display = 'block';
+      msg.style.background = '#fee2e2';
+      msg.style.color = '#b91c1c';
+      msg.innerText = '⚠️ Submission could not be completed. Please check your internet connection or try again.';
+      
+      btn.disabled = false;
+      btnSpinner.style.display = 'none';
+      btnIcon.style.display = 'inline-block';
+      btnText.innerText = 'Claim Your Live Audience Pass';
+    }
+  });
+
+  function showSuccessPass(name, phone, email, college, city) {
+    const randomSerial = 'TAT-' + Math.floor(1000 + Math.random() * 9000);
+    
+    document.getElementById('passBadgeCode').innerText = randomSerial;
+    document.getElementById('passName').innerText = name || '-';
+    document.getElementById('passPhone').innerText = phone ? '+91 ' + phone : '-';
+    document.getElementById('passEmail').innerText = email || '-';
+    document.getElementById('passCollege').innerText = college || '-';
+    document.getElementById('passCity').innerText = city || '-';
+
+    form.style.display = 'none';
+    successCard.style.display = 'block';
+    lucide.createIcons();
+  }
+
+  function resetFormForNew() {
+    form.reset();
+    form.style.display = 'block';
+    successCard.style.display = 'none';
+    btn.disabled = false;
+    btnSpinner.style.display = 'none';
+    btnIcon.style.display = 'inline-block';
+    btnText.innerText = 'Claim Your Live Audience Pass';
+    lucide.createIcons();
+  }
+</script>
+
+</body>
+</html>
