@@ -1313,19 +1313,30 @@
     btnIcon.style.display = 'none';
     btnText.innerText = 'Submitting Pass Request...';
 
-    const formData = new FormData(form);
-    formData.set('consent', consentInput.checked ? 'Agreed' : 'Agreed');
     const submittedName = nameInput.value.trim();
     const submittedPhone = phoneInput.value.trim();
     const submittedEmail = document.getElementById('email').value.trim();
     const submittedCollege = collegeInput.value.trim();
     const submittedCity = cityInput.value.trim();
+    const submittedQuestion = document.getElementById('question').value.trim();
+
+    // Use URLSearchParams for 100% reliable field delivery to Google Sheets
+    const params = new URLSearchParams();
+    params.append('name', submittedName);
+    params.append('phone', submittedPhone);
+    params.append('email', submittedEmail);
+    params.append('gender', genderInput.value);
+    params.append('college', submittedCollege);
+    params.append('city', submittedCity);
+    params.append('source', sourceInput.value);
+    params.append('question', submittedQuestion);
+    params.append('consent', consentInput.checked ? 'Agreed' : 'Agreed');
 
     try {
       // Send directly to Google Sheet
       await fetch(scriptURL, {
         method: 'POST',
-        body: formData,
+        body: params,
         mode: 'no-cors'
       });
 
