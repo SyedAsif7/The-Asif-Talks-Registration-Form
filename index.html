@@ -1020,12 +1020,15 @@
           </div>
         </div>
 
-        <!-- 5. College / Institute / Organization Name -->
+        <!-- 5. College / Institute / Organization Name (Optional) -->
         <div class="form-group">
-          <label for="college">College / Institute / Organization <span class="req">*</span></label>
+          <label for="college">
+            <span>College / Institute / Organization</span>
+            <span class="opt">(Optional)</span>
+          </label>
           <div class="input-wrapper">
             <i data-lucide="building-2" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="text" id="college" name="college" placeholder="College / Institute / Organization Name" required />
+            <input type="text" id="college" name="college" placeholder="College / Institute / Organization Name" />
           </div>
         </div>
 
@@ -1271,12 +1274,6 @@
       genderInput.classList.add('input-error');
       missingFields.push('Gender');
       if (!firstInvalid) firstInvalid = genderInput;
-    }
-
-    if (!collegeInput.value.trim()) {
-      collegeInput.classList.add('input-error');
-      missingFields.push('College / Organization');
-      if (!firstInvalid) firstInvalid = collegeInput;
     }
 
     if (!cityInput.value.trim()) {
