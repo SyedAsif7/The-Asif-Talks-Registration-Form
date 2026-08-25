@@ -437,43 +437,43 @@
       line-height: 1.35;
     }
 
-    /* Consent Checkbox Box (Mobile Touch Friendly) */
+    /* Consent Checkbox Box (100% Reliable Native Touch) */
     .consent-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
       background: #f8fafc;
       border: 1.5px solid #e2e8f0;
       border-radius: var(--radius-sm);
-      padding: 12px 14px;
+      padding: 14px;
       margin-top: 4px;
       cursor: pointer;
       user-select: none;
       transition: all 0.2s;
     }
 
-    .consent-card:active {
+    .consent-card:hover {
+      border-color: #cbd5e1;
       background: #f1f5f9;
     }
 
-    .consent-label {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 500;
-      color: #334155;
-      line-height: 1.45;
-      margin-bottom: 0;
-    }
-
-    .consent-label input[type="checkbox"] {
-      width: 18px;
-      min-height: 18px;
-      height: 18px;
+    .consent-card input[type="checkbox"] {
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      min-height: 20px;
       margin-top: 1px;
       padding: 0;
       accent-color: var(--primary-accent);
-      flex-shrink: 0;
       cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .consent-text {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #334155;
+      line-height: 1.45;
     }
 
     /* Submit Button (Big Touch Target) */
@@ -1005,14 +1005,12 @@
 
         <!-- 10. Photo/Video Consent -->
         <div class="form-group full-width">
-          <div class="consent-card" onclick="document.getElementById('consent').click();">
-            <label class="consent-label" for="consent" onclick="event.stopPropagation();">
-              <input type="checkbox" id="consent" name="consent" value="Agreed" required />
-              <span>
-                <strong>Photo/Video Consent <span class="req">*</span>:</strong> I agree that photos/videos taken during the event may be used for event documentation and promotional purposes.
-              </span>
-            </label>
-          </div>
+          <label class="consent-card" for="consent">
+            <input type="checkbox" id="consent" name="consent" value="Agreed" required />
+            <span class="consent-text">
+              <strong>Photo/Video Consent <span class="req">*</span>:</strong> I agree that photos/videos taken during the event may be used for event documentation and promotional purposes.
+            </span>
+          </label>
         </div>
 
       </div>
