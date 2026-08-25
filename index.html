@@ -1186,10 +1186,35 @@
     }
   });
 
+  let registeredPassNumber = 1;
+
+  // Sync pass count from backend if available
+  async function syncPassCount() {
+    try {
+      const response = await fetch(scriptURL);
+      const data = await response.json();
+      if (data && data.registeredCount !== undefined) {
+        registeredPassNumber = data.registeredCount + 1;
+      }
+    } catch(err) {
+      // Keep fallback counter from local storage
+      const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '0', 10);
+      if (savedCount > 0) registeredPassNumber = savedCount + 1;
+    }
+  }
+  syncPassCount();
+
+  function getNextPassCode() {
+    const code = "TAT-" + String(registeredPassNumber).padStart(3, '0');
+    localStorage.setItem('tat_last_pass_num', registeredPassNumber);
+    registeredPassNumber++;
+    return code;
+  }
+
   function showSuccessPass(name, phone, email, college, city) {
-    const randomSerial = 'TAT-' + Math.floor(1000 + Math.random() * 9000);
+    const passCode = getNextPassCode();
     
-    document.getElementById('passBadgeCode').innerText = randomSerial;
+    document.getElementById('passBadgeCode').innerText = passCode;
     document.getElementById('passName').innerText = name || '-';
     document.getElementById('passPhone').innerText = phone ? '+91 ' + phone : '-';
     document.getElementById('passEmail').innerText = email || '-';
