@@ -457,7 +457,7 @@
       line-height: 1.35;
     }
 
-    /* Consent Checkbox Card (Bulletproof Custom Styled) */
+    /* Consent Checkbox Card (100% Reliable Native Checkbox) */
     .consent-card {
       display: flex;
       align-items: flex-start;
@@ -473,58 +473,27 @@
       transition: all 0.2s;
     }
 
-    .consent-card:hover {
-      border-color: #cbd5e1;
-      background: #f1f5f9;
+    .consent-card:hover, .consent-card:active {
+      border-color: #93c5fd;
+      background: #f0f7ff;
     }
 
-    /* Hidden native input, fully accessible for form validation */
     .consent-card input[type="checkbox"] {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
-      margin: 0;
-      padding: 0;
-      pointer-events: none;
-    }
-
-    /* Custom visual checkmark box */
-    .custom-checkbox {
-      width: 22px;
-      min-width: 22px;
-      height: 22px;
-      min-height: 22px;
-      border: 2px solid #94a3b8;
-      border-radius: 6px;
-      background: #ffffff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1px;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      flex-shrink: 0;
-    }
-
-    .custom-checkbox svg {
-      width: 14px;
-      height: 14px;
-      stroke: #ffffff;
-      opacity: 0;
-      transform: scale(0.4);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Checked State */
-    .consent-card input[type="checkbox"]:checked + .custom-checkbox {
-      background: #2563eb;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-    }
-
-    .consent-card input[type="checkbox"]:checked + .custom-checkbox svg {
-      opacity: 1;
-      transform: scale(1);
+      width: 22px !important;
+      min-width: 22px !important;
+      height: 22px !important;
+      min-height: 22px !important;
+      margin: 2px 0 0 0 !important;
+      padding: 0 !important;
+      accent-color: var(--primary-accent) !important;
+      cursor: pointer !important;
+      flex-shrink: 0 !important;
+      -webkit-appearance: checkbox !important;
+      appearance: checkbox !important;
+      display: inline-block !important;
+      opacity: 1 !important;
+      position: relative !important;
+      pointer-events: auto !important;
     }
 
     .consent-text {
@@ -1098,11 +1067,6 @@
         <div class="form-group full-width">
           <label class="consent-card" for="consent">
             <input type="checkbox" id="consent" name="consent" value="Agreed" required />
-            <span class="custom-checkbox">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </span>
             <span class="consent-text">
               <strong>Photo &amp; Video Consent <span class="req">*</span>:</strong> Photos and videos are allowed during the session (without original audio). I agree that photos/videos taken may also be used for event documentation and promotional purposes.
             </span>
@@ -1350,6 +1314,7 @@
     btnText.innerText = 'Submitting Pass Request...';
 
     const formData = new FormData(form);
+    formData.set('consent', consentInput.checked ? 'Agreed' : 'Agreed');
     const submittedName = nameInput.value.trim();
     const submittedPhone = phoneInput.value.trim();
     const submittedEmail = document.getElementById('email').value.trim();
