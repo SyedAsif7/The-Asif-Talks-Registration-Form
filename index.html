@@ -640,6 +640,72 @@
       margin-top: 8px;
     }
 
+    /* WhatsApp Group Join Card */
+    .whatsapp-card {
+      background: linear-gradient(135deg, #052e16 0%, #064e3b 100%);
+      border: 1.5px solid #22c55e;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin: 16px 0;
+      text-align: left;
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
+    }
+
+    .whatsapp-card-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .whatsapp-icon-circle {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 50%;
+      background: #22c55e;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+    }
+
+    .whatsapp-card-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .whatsapp-card-sub {
+      font-size: 11.5px;
+      color: #bbf7d0;
+      line-height: 1.35;
+    }
+
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: #22c55e;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+
+    .whatsapp-btn:hover, .whatsapp-btn:active {
+      background: #16a34a;
+      transform: translateY(-1px);
+    }
+
     /* Digital Boarding Pass */
     .pass-ticket {
       background: #ffffff;
@@ -1095,6 +1161,24 @@
         <span class="screenshot-tip">
           <i data-lucide="camera" style="width: 13px; height: 13px;"></i> Take a screenshot of this pass
         </span>
+      </div>
+
+      <!-- WhatsApp Group Join Card -->
+      <div class="whatsapp-card">
+        <div class="whatsapp-card-content">
+          <div class="whatsapp-icon-circle">
+            <i data-lucide="message-circle" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div>
+            <div class="whatsapp-card-title">Join Official Audience WhatsApp Group</div>
+            <div class="whatsapp-card-sub">Get live episode entry updates, seating instructions &amp; announcements</div>
+          </div>
+        </div>
+        <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+          <i data-lucide="users" style="width: 16px; height: 16px;"></i>
+          <span>Join Audience WhatsApp Group</span>
+          <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+        </a>
       </div>
 
       <!-- Digital Pass Card -->
