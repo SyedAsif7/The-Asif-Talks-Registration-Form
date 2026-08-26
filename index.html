@@ -904,27 +904,30 @@
       align-items: center;
       justify-content: center;
       background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      padding: 8px 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1.5px solid #0f2744;
+      padding: 8px 10px 6px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(15, 39, 68, 0.08);
       flex-shrink: 0;
     }
 
     .pass-qr-box img {
-      width: 80px !important;
-      height: 80px !important;
+      width: 88px !important;
+      height: 88px !important;
       display: block;
       border-radius: 4px;
     }
 
     .pass-qr-lbl {
-      font-size: 8.5px;
+      font-size: 8px;
       font-weight: 800;
-      color: #64748b;
-      letter-spacing: 0.5px;
+      color: #0f2744;
+      letter-spacing: 0.6px;
       margin-top: 4px;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 3px;
     }
 
     .pass-grid {
@@ -1485,7 +1488,7 @@
           </div>
           <div class="pass-qr-box">
             <div id="passQrCode"></div>
-            <span class="pass-qr-lbl">ENTRY VERIFY</span>
+            <span class="pass-qr-lbl"><i data-lucide="shield-check" style="width: 10px; height: 10px; color: #2563eb;"></i> GATE VERIFY</span>
           </div>
         </div>
 
@@ -1768,14 +1771,35 @@
     });
   });
 
-  function generatePassQrCode(passCode, name, phone) {
+  function generatePassQrCode(passCode, name, phone, email, college, city) {
     const qrContainer = document.getElementById('passQrCode');
     if (!qrContainer) return;
     
-    const qrData = `THE ASIF TALKS | PASS: ${passCode} | ${name || 'Attendee'} | ${phone || ''} | Kalam Auditorium | STATUS: VERIFIED`;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrData)}&color=0f172a&bgcolor=ffffff&qzone=1`;
+    const qrLines = [
+      "╔════════════════════════════════════╗",
+      "║   THE ASIF TALKS • OFFICIAL PASS   ║",
+      "╚════════════════════════════════════╝",
+      `🎫 PASS ID   : ${passCode || 'TAT-001'}`,
+      `👤 ATTENDEE  : ${name || 'Attendee'}`,
+      `📞 MOBILE    : ${phone ? '+91 ' + phone : '-'}`,
+      email ? `✉️ EMAIL     : ${email}` : null,
+      `🏛️ COLLEGE   : ${college || '-'}`,
+      `📍 CITY      : ${city || '-'}`,
+      "──────────────────────────────────────",
+      "🎙️ EVENT     : The Asif Talks (Live Ep #1)",
+      "👑 GUEST     : Shri Sanjaysinh Chavan (IAS)",
+      "               District Collector & DM, Parbhani",
+      "📅 DATE/TIME : Mon, Aug 31, 2026 | 10:00 AM",
+      "📍 VENUE     : Dr. A.P.J. Abdul Kalam Auditorium Hall",
+      "──────────────────────────────────────",
+      "✅ STATUS    : OFFICIAL VERIFIED PASS",
+      "⚠️ NOTE      : Valid with physical College/Govt Photo ID",
+      "🌐 OFFICIAL  : https://www.dcode.club"
+    ].filter(Boolean).join('\n');
 
-    qrContainer.innerHTML = `<img src="${qrUrl}" alt="Pass QR Code" width="80" height="80" style="display:block; width:80px; height:80px; border-radius:4px;" crossOrigin="anonymous" />`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrLines)}&color=0f172a&bgcolor=ffffff&qzone=1`;
+
+    qrContainer.innerHTML = `<img src="${qrUrl}" alt="Official Pass QR Code" width="88" height="88" style="display:block; width:88px; height:88px; border-radius:4px;" crossOrigin="anonymous" />`;
   }
 
   function showSuccessPass(name, phone, email, college, city) {
@@ -1790,8 +1814,8 @@
     form.style.display = 'none';
     successCard.style.display = 'block';
 
-    // Generate QR code after successCard is visible
-    generatePassQrCode(currentPassCode, name, phone);
+    // Generate QR code with full attendee & event details
+    generatePassQrCode(currentPassCode, name, phone, email, college, city);
     
     // Scroll to top of pass card on mobile
     window.scrollTo({ top: 0, behavior: 'smooth' });
