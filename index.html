@@ -974,47 +974,53 @@
 
     @media print {
       @page {
-        margin: 0;
-        size: auto;
+        size: A4 portrait;
+        margin: 15mm;
       }
-      body {
-        background: white !important;
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html, body {
+        background: #ffffff !important;
         padding: 0 !important;
         margin: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        min-height: 100vh !important;
+        width: 100% !important;
+        min-height: 100% !important;
       }
       .wrapper {
         max-width: 100% !important;
         width: 100% !important;
         margin: 0 auto !important;
+        padding: 0 !important;
       }
       .container {
         box-shadow: none !important;
         border: none !important;
-        background: white !important;
+        background: #ffffff !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
       }
       .header, form, .top-partner-bar, .pass-actions, .event-ribbon, .partner-section, .success-icon-wrap, .screenshot-tip, .whatsapp-card, h2, p {
         display: none !important;
       }
       #passSuccessCard {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
+        display: block !important;
         padding: 0 !important;
         margin: 0 auto !important;
         width: 100% !important;
+        text-align: center !important;
       }
       .pass-ticket {
+        display: block !important;
         border: 2px solid #0f172a !important;
         box-shadow: none !important;
-        margin: 30px auto !important;
-        max-width: 480px !important;
-        width: 90% !important;
+        margin: 60px auto !important;
+        max-width: 500px !important;
+        width: 95% !important;
         page-break-inside: avoid !important;
+        text-align: left !important;
       }
     }
   </style>
@@ -1312,10 +1318,13 @@
       <div class="pass-actions">
         <button type="button" class="btn-download" id="downloadPassBtn" onclick="downloadPassAsImage()">
           <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-          <span id="downloadBtnText">Download Official Pass</span>
+          <span id="downloadBtnText">Download Pass (PNG)</span>
+        </button>
+        <button type="button" class="btn-secondary" onclick="window.print()">
+          <i data-lucide="printer" style="width: 15px; height: 15px;"></i> Save / Print PDF
         </button>
         <button type="button" class="btn-secondary" onclick="resetFormForNew()">
-          <i data-lucide="user-plus" style="width: 15px; height: 15px;"></i> Register Another
+          <i data-lucide="user-plus" style="width: 15px; height: 15px;"></i> New
         </button>
       </div>
     </div>
