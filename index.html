@@ -30,9 +30,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons & html2canvas for Pass Download -->
+  <!-- Lucide Icons, html2canvas & QRCode.js -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     /* ==========================================================================
@@ -906,10 +907,56 @@
       flex-shrink: 0;
     }
 
+    .pass-body-wrap {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .pass-qr-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      padding: 8px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+
+    .pass-qr-box canvas, .pass-qr-box img {
+      width: 78px !important;
+      height: 78px !important;
+      display: block;
+    }
+
+    .pass-qr-lbl {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #64748b;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 480px) {
+      .pass-body-wrap {
+        grid-template-columns: 1fr;
+      }
+      .pass-qr-box {
+        margin: 10px auto 0;
+        width: fit-content;
+      }
+    }
+
     .pass-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      flex: 1;
     }
 
     .pass-grid-item {
@@ -1422,30 +1469,36 @@
           <div class="pass-id-badge" id="passBadgeCode">TAT-001</div>
         </div>
 
-        <div class="pass-grid">
-          <div class="pass-grid-item">
-            <span class="label">Attendee Name</span>
-            <span class="value" id="passName">-</span>
+        <div class="pass-body-wrap">
+          <div class="pass-grid">
+            <div class="pass-grid-item">
+              <span class="label">Attendee Name</span>
+              <span class="value" id="passName">-</span>
+            </div>
+            <div class="pass-grid-item">
+              <span class="label">Mobile Number</span>
+              <span class="value" id="passPhone">-</span>
+            </div>
+            <div class="pass-grid-item">
+              <span class="label">City / Location</span>
+              <span class="value" id="passCity">-</span>
+            </div>
+            <div class="pass-grid-item">
+              <span class="label">Reporting Time</span>
+              <span class="value" style="color: #b45309;">10:00 AM Sharp</span>
+            </div>
+            <div class="pass-grid-item full-width" style="grid-column: span 2;">
+              <span class="label">College / Organization</span>
+              <span class="value" id="passCollege">-</span>
+            </div>
+            <div class="pass-grid-item full-width" style="grid-column: span 2;">
+              <span class="label">Venue &amp; Entry</span>
+              <span class="value">Dr. A.P.J. Abdul Kalam Auditorium Hall</span>
+            </div>
           </div>
-          <div class="pass-grid-item">
-            <span class="label">Mobile Number</span>
-            <span class="value" id="passPhone">-</span>
-          </div>
-          <div class="pass-grid-item">
-            <span class="label">City / Location</span>
-            <span class="value" id="passCity">-</span>
-          </div>
-          <div class="pass-grid-item">
-            <span class="label">Reporting Time</span>
-            <span class="value" style="color: #b45309;">10:00 AM Sharp</span>
-          </div>
-          <div class="pass-grid-item full-width" style="grid-column: span 2;">
-            <span class="label">College / Organization</span>
-            <span class="value" id="passCollege">-</span>
-          </div>
-          <div class="pass-grid-item full-width" style="grid-column: span 2;">
-            <span class="label">Venue &amp; Entry</span>
-            <span class="value">Dr. A.P.J. Abdul Kalam Auditorium Hall</span>
+          <div class="pass-qr-box">
+            <div id="passQrCode"></div>
+            <span class="pass-qr-lbl">ENTRY VERIFY</span>
           </div>
         </div>
 
@@ -1728,6 +1781,35 @@
     });
   });
 
+  function generatePassQrCode(passCode, name, phone) {
+    const qrContainer = document.getElementById('passQrCode');
+    if (!qrContainer) return;
+    qrContainer.innerHTML = '';
+
+    const qrData = `THE ASIF TALKS • EP #1\nPASS: ${passCode}\nNAME: ${name || 'Attendee'}\nPHONE: ${phone || '-'}\nVENUE: Dr. A.P.J. Abdul Kalam Auditorium Hall\nSTATUS: OFFICIAL PASS`;
+
+    try {
+      if (typeof QRCode !== 'undefined') {
+        new QRCode(qrContainer, {
+          text: qrData,
+          width: 78,
+          height: 78,
+          colorDark: "#0f172a",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } else {
+        const img = document.createElement('img');
+        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
+        img.crossOrigin = "anonymous";
+        img.alt = "Pass QR Code";
+        qrContainer.appendChild(img);
+      }
+    } catch(e) {
+      console.warn("QR code generation fallback", e);
+    }
+  }
+
   function showSuccessPass(name, phone, email, college, city) {
     currentPassCode = getNextPassCode();
     
@@ -1736,6 +1818,8 @@
     document.getElementById('passPhone').innerText = phone ? '+91 ' + phone : '-';
     document.getElementById('passCollege').innerText = college || '-';
     document.getElementById('passCity').innerText = city || '-';
+
+    generatePassQrCode(currentPassCode, name, phone);
 
     form.style.display = 'none';
     successCard.style.display = 'block';
