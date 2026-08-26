@@ -817,6 +817,29 @@
       transform: translateY(-1px);
     }
 
+    .whatsapp-share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      margin-top: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .whatsapp-share-btn:hover, .whatsapp-share-btn:active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
     /* Digital Boarding Pass */
     .pass-ticket {
       background: #ffffff;
@@ -1364,7 +1387,7 @@
         </span>
       </div>
 
-      <!-- WhatsApp Group Join Card -->
+      <!-- WhatsApp Group Join & Share Card -->
       <div class="whatsapp-card">
         <div class="whatsapp-card-content">
           <div class="whatsapp-icon-circle">
@@ -1379,6 +1402,10 @@
           <i data-lucide="users" style="width: 16px; height: 16px;"></i>
           <span>Join Audience WhatsApp Group</span>
           <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+        </a>
+        <a href="https://api.whatsapp.com/send?text=%F0%9F%8E%99%EF%B8%8F%20*THE%20ASIF%20TALKS%20%E2%80%94%20LIVE%20EPISODE%20%231*%20%F0%9F%8E%99%EF%B8%8F%0A%0AHey!%20I%20just%20claimed%20my%20Live%20Audience%20Pass%20for%20*The%20Asif%20Talks*%20with%20Distinguished%20Guest%20*Shri%20Sanjaysinh%20Chavan%20(IAS)*,%20District%20Collector%20%26%20DM,%20Parbhani.%0A%0A%F0%9F%93%85%20*Date:*%20Mon,%20Aug%2031,%202026%20%7C%2010:00%20AM%0A%F0%9F%93%8D%20*Venue:*%20Dr.%20A.P.J.%20Abdul%20Kalam%20Auditorium%20Hall%0A%0A%F0%9F%8E%9F%EF%B8%8F%20*Limited%20200%20Seats!%20Claim%20your%20free%20pass%20now:*%0A%F0%9F%91%89%20https://syedasif7.github.io/The-Asif-Talks-Registration-Form/" target="_blank" rel="noopener noreferrer" class="whatsapp-share-btn">
+          <i data-lucide="share-2" style="width: 15px; height: 15px;"></i>
+          <span>Share / Invite Friends on WhatsApp</span>
         </a>
       </div>
 
