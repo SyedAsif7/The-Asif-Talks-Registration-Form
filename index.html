@@ -1776,25 +1776,22 @@
     if (!qrContainer) return;
     
     const qrLines = [
-      "╔════════════════════════════════════╗",
-      "║   THE ASIF TALKS • OFFICIAL PASS   ║",
-      "╚════════════════════════════════════╝",
-      `🎫 PASS ID   : ${passCode || 'TAT-001'}`,
-      `👤 ATTENDEE  : ${name || 'Attendee'}`,
-      `📞 MOBILE    : ${phone ? '+91 ' + phone : '-'}`,
-      email ? `✉️ EMAIL     : ${email}` : null,
-      `🏛️ COLLEGE   : ${college || '-'}`,
-      `📍 CITY      : ${city || '-'}`,
-      "──────────────────────────────────────",
-      "🎙️ EVENT     : The Asif Talks (Live Ep #1)",
-      "👑 GUEST     : Shri Sanjaysinh Chavan (IAS)",
-      "               District Collector & DM, Parbhani",
-      "📅 DATE/TIME : Mon, Aug 31, 2026 | 10:00 AM",
-      "📍 VENUE     : Dr. A.P.J. Abdul Kalam Auditorium Hall",
-      "──────────────────────────────────────",
-      "✅ STATUS    : OFFICIAL VERIFIED PASS",
-      "⚠️ NOTE      : Valid with physical College/Govt Photo ID",
-      "🌐 OFFICIAL  : https://www.dcode.club"
+      "THE ASIF TALKS — LIVE EPISODE #1",
+      "Official Live Audience Pass",
+      "----------------------------------------",
+      `Pass ID :- ${passCode || 'TAT-001'}`,
+      `Attendee Name :- ${name || '-'}`,
+      `Mobile Number :- ${phone ? '+91 ' + phone : '-'}`,
+      email ? `Email Address :- ${email}` : null,
+      `City / Location :- ${city || '-'}`,
+      `College / Organization :- ${college || '-'}`,
+      `Reporting Time :- 10:00 AM Sharp`,
+      `Venue & Entry :- Dr. A.P.J. Abdul Kalam Auditorium Hall`,
+      `Distinguished Guest :- Shri Sanjaysinh Chavan (IAS), District Collector & DM, Parbhani`,
+      `Host & Creator :- Syed Asif (The Asif Talks)`,
+      `Pass Status :- Official Verified Pass (Valid with Photo ID)`,
+      "----------------------------------------",
+      `Official Website :- https://www.dcode.club`
     ].filter(Boolean).join('\n');
 
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrLines)}&color=0f172a&bgcolor=ffffff&qzone=1`;
