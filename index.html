@@ -1784,30 +1784,11 @@
   function generatePassQrCode(passCode, name, phone) {
     const qrContainer = document.getElementById('passQrCode');
     if (!qrContainer) return;
-    qrContainer.innerHTML = '';
+    
+    const qrData = `THE ASIF TALKS | PASS: ${passCode} | ${name || 'Attendee'} | ${phone || ''} | Kalam Auditorium | STATUS: VERIFIED`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrData)}&color=0f172a&bgcolor=ffffff&qzone=1`;
 
-    const qrData = `THE ASIF TALKS • EP #1\nPASS: ${passCode}\nNAME: ${name || 'Attendee'}\nPHONE: ${phone || '-'}\nVENUE: Dr. A.P.J. Abdul Kalam Auditorium Hall\nSTATUS: OFFICIAL PASS`;
-
-    try {
-      if (typeof QRCode !== 'undefined') {
-        new QRCode(qrContainer, {
-          text: qrData,
-          width: 78,
-          height: 78,
-          colorDark: "#0f172a",
-          colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.M
-        });
-      } else {
-        const img = document.createElement('img');
-        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
-        img.crossOrigin = "anonymous";
-        img.alt = "Pass QR Code";
-        qrContainer.appendChild(img);
-      }
-    } catch(e) {
-      console.warn("QR code generation fallback", e);
-    }
+    qrContainer.innerHTML = `<img src="${qrUrl}" alt="Pass QR Code" width="80" height="80" style="display:block; width:80px; height:80px; border-radius:4px;" crossOrigin="anonymous" />`;
   }
 
   function showSuccessPass(name, phone, email, college, city) {
@@ -1819,10 +1800,11 @@
     document.getElementById('passCollege').innerText = college || '-';
     document.getElementById('passCity').innerText = city || '-';
 
-    generatePassQrCode(currentPassCode, name, phone);
-
     form.style.display = 'none';
     successCard.style.display = 'block';
+
+    // Generate QR code after successCard is visible
+    generatePassQrCode(currentPassCode, name, phone);
     
     // Scroll to top of pass card on mobile
     window.scrollTo({ top: 0, behavior: 'smooth' });
