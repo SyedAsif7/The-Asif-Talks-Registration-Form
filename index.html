@@ -322,7 +322,7 @@
     }
 
     /* ==========================================================================
-       Event Quick Details Ribbon
+       Event Quick Details Ribbon & Countdown
        ========================================================================== */
     .event-ribbon {
       background: #f1f5f9;
@@ -357,6 +357,90 @@
       font-weight: 700;
       color: #0f172a;
       line-height: 1.2;
+    }
+
+    /* Live Countdown Bar */
+    .countdown-bar {
+      background: linear-gradient(135deg, #091a2f 0%, #0e294b 100%);
+      border-bottom: 1px solid #1e3a5f;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .countdown-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .countdown-grid {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .countdown-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(147, 197, 253, 0.25);
+      border-radius: 6px;
+      min-width: 42px;
+      padding: 3px 5px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .cd-num {
+      font-family: 'Outfit', monospace;
+      font-size: 14px;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1.1;
+    }
+
+    .cd-lbl {
+      font-size: 8px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-top: 1px;
+    }
+
+    .cd-sep {
+      font-size: 13px;
+      font-weight: 800;
+      color: #64748b;
+      margin-bottom: 3px;
+    }
+
+    .countdown-live-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #ef4444;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      animation: pulseLive 1.5s infinite;
+    }
+
+    @media (max-width: 480px) {
+      .countdown-bar {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+      }
     }
 
     /* ==========================================================================
@@ -1002,7 +1086,7 @@
         margin: 0 auto !important;
         padding: 0 !important;
       }
-      .header, form, .top-partner-bar, .pass-actions, .event-ribbon, .partner-section, .success-icon-wrap, .screenshot-tip, .whatsapp-card, h2, p {
+      .header, form, .top-partner-bar, .pass-actions, .event-ribbon, .countdown-bar, .partner-section, .success-icon-wrap, .screenshot-tip, .whatsapp-card, h2, p {
         display: none !important;
       }
       #passSuccessCard {
@@ -1105,6 +1189,35 @@
       <div class="ribbon-item">
         <span class="ribbon-label"><i data-lucide="map-pin" style="width: 11px; height: 11px;"></i> Venue</span>
         <span class="ribbon-value">Dr. A.P.J. Abdul Kalam Auditorium Hall</span>
+      </div>
+    </div>
+
+    <!-- Live Countdown Section -->
+    <div class="countdown-bar" id="countdownSection">
+      <div class="countdown-title">
+        <i data-lucide="timer" style="width: 14px; height: 14px; color: #f59e0b;"></i>
+        <span>Live Episode Starts In</span>
+      </div>
+      <div class="countdown-grid">
+        <div class="countdown-box">
+          <span class="cd-num" id="cdDays">00</span>
+          <span class="cd-lbl">Days</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="countdown-box">
+          <span class="cd-num" id="cdHours">00</span>
+          <span class="cd-lbl">Hours</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="countdown-box">
+          <span class="cd-num" id="cdMins">00</span>
+          <span class="cd-lbl">Mins</span>
+        </div>
+        <span class="cd-sep">:</span>
+        <div class="countdown-box">
+          <span class="cd-num" id="cdSecs">00</span>
+          <span class="cd-lbl">Secs</span>
+        </div>
       </div>
     </div>
 
@@ -1390,6 +1503,44 @@
 
   // Initial clean display: 200 / 200
   updateSeatsUI(0);
+
+  // Live Event Countdown Timer (Aug 31, 2026, 10:00 AM IST)
+  const eventTargetDate = new Date("2026-08-31T10:00:00+05:30").getTime();
+
+  function updateEventCountdown() {
+    const now = new Date().getTime();
+    const distance = eventTargetDate - now;
+
+    if (distance <= 0) {
+      const cdSection = document.getElementById('countdownSection');
+      if (cdSection) {
+        cdSection.innerHTML = `
+          <div class="countdown-live-badge">
+            <span class="pulse-dot" style="background:#ef4444;"></span>
+            <span>EVENT IS NOW LIVE AT THE AUDITORIUM!</span>
+          </div>`;
+      }
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const dElem = document.getElementById('cdDays');
+    const hElem = document.getElementById('cdHours');
+    const mElem = document.getElementById('cdMins');
+    const sElem = document.getElementById('cdSecs');
+
+    if (dElem) dElem.innerText = String(days).padStart(2, '0');
+    if (hElem) hElem.innerText = String(hours).padStart(2, '0');
+    if (mElem) mElem.innerText = String(minutes).padStart(2, '0');
+    if (sElem) sElem.innerText = String(seconds).padStart(2, '0');
+  }
+
+  setInterval(updateEventCountdown, 1000);
+  updateEventCountdown();
 
   // Sync pass count and remaining seats from Google Sheets
   async function syncPassCount() {
