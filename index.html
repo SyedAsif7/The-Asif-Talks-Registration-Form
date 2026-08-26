@@ -30,8 +30,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons -->
+  <!-- Lucide Icons & html2canvas for Pass Download -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
     /* ==========================================================================
@@ -842,6 +843,30 @@
       margin-top: 16px;
     }
 
+    .btn-download {
+      flex: 1.3;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: none;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      font-weight: 800;
+      font-size: 13.5px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-download:active {
+      transform: scale(0.98);
+      background: #1d4ed8;
+    }
+
     .btn-secondary {
       flex: 1;
       min-height: 48px;
@@ -948,21 +973,48 @@
     }
 
     @media print {
+      @page {
+        margin: 0;
+        size: auto;
+      }
       body {
-        background: white;
-        padding: 0;
+        background: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 100vh !important;
+      }
+      .wrapper {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+      }
+      .container {
+        box-shadow: none !important;
+        border: none !important;
+        background: white !important;
       }
       .header, form, .top-partner-bar, .pass-actions, .event-ribbon, .partner-section, .success-icon-wrap, .screenshot-tip, .whatsapp-card, h2, p {
         display: none !important;
       }
       #passSuccessCard {
-        display: block !important;
-        padding: 0;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
       }
       .pass-ticket {
-        border: 2px solid #000;
-        box-shadow: none;
-        margin: 0;
+        border: 2px solid #0f172a !important;
+        box-shadow: none !important;
+        margin: 30px auto !important;
+        max-width: 480px !important;
+        width: 90% !important;
+        page-break-inside: avoid !important;
       }
     }
   </style>
@@ -1258,8 +1310,9 @@
       </div>
 
       <div class="pass-actions">
-        <button type="button" class="btn-secondary" onclick="window.print()">
-          <i data-lucide="printer" style="width: 15px; height: 15px;"></i> Save / Print PDF Pass
+        <button type="button" class="btn-download" id="downloadPassBtn" onclick="downloadPassAsImage()">
+          <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+          <span id="downloadBtnText">Download Official Pass</span>
         </button>
         <button type="button" class="btn-secondary" onclick="resetFormForNew()">
           <i data-lucide="user-plus" style="width: 15px; height: 15px;"></i> Register Another
@@ -1316,6 +1369,7 @@
 
   const TOTAL_SEATS = 200;
   let registeredPassNumber = 1;
+  let currentPassCode = 'TAT-001';
 
   function updateSeatsUI(regCount) {
     const remaining = Math.max(0, TOTAL_SEATS - (regCount || 0));
@@ -1491,9 +1545,9 @@
   });
 
   function showSuccessPass(name, phone, email, college, city) {
-    const passCode = getNextPassCode();
+    currentPassCode = getNextPassCode();
     
-    document.getElementById('passBadgeCode').innerText = passCode;
+    document.getElementById('passBadgeCode').innerText = currentPassCode;
     document.getElementById('passName').innerText = name || '-';
     document.getElementById('passPhone').innerText = phone ? '+91 ' + phone : '-';
     document.getElementById('passCollege').innerText = college || '-';
@@ -1505,6 +1559,45 @@
     // Scroll to top of pass card on mobile
     window.scrollTo({ top: 0, behavior: 'smooth' });
     lucide.createIcons();
+  }
+
+  async function downloadPassAsImage() {
+    const passElem = document.getElementById('printablePass');
+    const dlBtn = document.getElementById('downloadPassBtn');
+    const dlText = document.getElementById('downloadBtnText');
+    
+    if (!passElem) return;
+
+    try {
+      if (dlBtn) dlBtn.disabled = true;
+      if (dlText) dlText.innerText = 'Generating Pass...';
+
+      const canvas = await html2canvas(passElem, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        logging: false
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = `The-Asif-Talks-Pass-${currentPassCode || 'TAT-001'}.png`;
+      link.href = imgData;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      if (dlText) dlText.innerText = 'Pass Downloaded! ✓';
+      setTimeout(() => {
+        if (dlText) dlText.innerText = 'Download Official Pass';
+        if (dlBtn) dlBtn.disabled = false;
+      }, 2000);
+    } catch (err) {
+      console.error('Download error:', err);
+      window.print();
+      if (dlText) dlText.innerText = 'Download Official Pass';
+      if (dlBtn) dlBtn.disabled = false;
+    }
   }
 
   function resetFormForNew() {
