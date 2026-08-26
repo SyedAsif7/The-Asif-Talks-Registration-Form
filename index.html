@@ -12,9 +12,9 @@
   <meta name="title" content="The Asif Talks — Live Episode #1 Pass Registration" />
   <meta name="description" content="Register for official live studio audience passes for The Asif Talks with Syed Asif and Distinguished Guest Shri Sanjaysinh Chavan (IAS), District Collector & DM, Parbhani." />
 
-  <!-- Open Graph / Facebook / WhatsApp Preview -->
+  <!-- Open Graph / WhatsApp Preview -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://syedasif7.github.io/The-Asif-Talks-Registration-Form/" />
+  <meta property="og:url" content="https://www.dcode.club" />
   <meta property="og:title" content="The Asif Talks — Live Episode #1 Pass Registration" />
   <meta property="og:description" content="Join Syed Asif in dialogue with Shri Sanjaysinh Chavan (IAS), District Collector & DM, Parbhani. Claim your live audience pass now!" />
   <meta property="og:image" content="assets/asif_talks_host.jpg" />
@@ -30,14 +30,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons, html2canvas & QRCode.js -->
+  <!-- Icons & Helper Libraries -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     /* ==========================================================================
-       CSS Variables & Global Reset
+       1. CSS Variables & Reset
        ========================================================================== */
     :root {
       --bg-dark: #060d17;
@@ -90,7 +89,7 @@
     }
 
     /* ==========================================================================
-       Top Partner Bar
+       2. Top Partner Bar
        ========================================================================== */
     .top-partner-bar {
       display: flex;
@@ -135,7 +134,7 @@
     }
 
     /* ==========================================================================
-       Main Card Container
+       3. Main Container & Header
        ========================================================================== */
     .container {
       background: var(--card-bg);
@@ -145,9 +144,6 @@
       width: 100%;
     }
 
-    /* ==========================================================================
-       Header & Speaker Showcase
-       ========================================================================== */
     .header {
       background: linear-gradient(135deg, #06111f 0%, #0d213a 45%, #18375c 100%);
       color: #fff;
@@ -223,7 +219,7 @@
       font-weight: 800;
     }
 
-    /* Dual Speaker Showcase (Mobile Optimized) */
+    /* Dual Speaker Spotlight */
     .speaker-showcase {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -323,7 +319,7 @@
     }
 
     /* ==========================================================================
-       Event Quick Details Ribbon & Countdown
+       4. Event Ribbon & Live Countdown
        ========================================================================== */
     .event-ribbon {
       background: #f1f5f9;
@@ -360,7 +356,6 @@
       line-height: 1.2;
     }
 
-    /* Live Countdown Bar */
     .countdown-bar {
       background: linear-gradient(135deg, #091a2f 0%, #0e294b 100%);
       border-bottom: 1px solid #1e3a5f;
@@ -436,16 +431,8 @@
       animation: pulseLive 1.5s infinite;
     }
 
-    @media (max-width: 480px) {
-      .countdown-bar {
-        flex-direction: column;
-        gap: 6px;
-        text-align: center;
-      }
-    }
-
     /* ==========================================================================
-       Notice Banner & Form Styling
+       5. Registration Form
        ========================================================================== */
     .notice {
       background: #fffbeb;
@@ -575,7 +562,7 @@
       line-height: 1.35;
     }
 
-    /* Consent Checkbox Card (100% Reliable Native Checkbox) */
+    /* Photo & Video Consent Card */
     .consent-card {
       display: flex;
       align-items: flex-start;
@@ -621,7 +608,7 @@
       line-height: 1.45;
     }
 
-    /* Submit Button (Big Touch Target) */
+    /* Submit Button */
     .submit-btn {
       width: 100%;
       min-height: 52px;
@@ -666,9 +653,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* ==========================================================================
-       Status & Validation Messages
-       ========================================================================== */
     .input-error {
       border-color: #ef4444 !important;
       background-color: #fffbfb !important;
@@ -713,7 +697,7 @@
     }
 
     /* ==========================================================================
-       Success Card & Digital Pass
+       6. Confirmation Screen & Digital Pass
        ========================================================================== */
     #passSuccessCard {
       display: none;
@@ -752,7 +736,7 @@
       margin-top: 8px;
     }
 
-    /* WhatsApp Group Join Card */
+    /* WhatsApp Join & Share Card */
     .whatsapp-card {
       background: linear-gradient(135deg, #052e16 0%, #064e3b 100%);
       border: 1.5px solid #22c55e;
@@ -841,7 +825,7 @@
       transform: translateY(-1px);
     }
 
-    /* Digital Boarding Pass */
+    /* Digital Boarding Pass Ticket */
     .pass-ticket {
       background: #ffffff;
       border: 2px dashed #93c5fd;
@@ -927,10 +911,11 @@
       flex-shrink: 0;
     }
 
-    .pass-qr-box canvas, .pass-qr-box img {
-      width: 78px !important;
-      height: 78px !important;
+    .pass-qr-box img {
+      width: 80px !important;
+      height: 80px !important;
       display: block;
+      border-radius: 4px;
     }
 
     .pass-qr-lbl {
@@ -940,16 +925,6 @@
       letter-spacing: 0.5px;
       margin-top: 4px;
       text-transform: uppercase;
-    }
-
-    @media (max-width: 480px) {
-      .pass-body-wrap {
-        grid-template-columns: 1fr;
-      }
-      .pass-qr-box {
-        margin: 10px auto 0;
-        width: fit-content;
-      }
     }
 
     .pass-grid {
@@ -1044,7 +1019,7 @@
     }
 
     /* ==========================================================================
-       Partner Logos Showcase in Footer
+       7. Footer & Credits
        ========================================================================== */
     .partner-section {
       background: #fafafa;
@@ -1101,7 +1076,7 @@
     }
 
     /* ==========================================================================
-       Responsive & Print Styles
+       8. Responsive & Print Styles
        ========================================================================== */
     @media (max-width: 520px) {
       .form-grid {
@@ -1120,6 +1095,18 @@
       }
       .speaker-desc {
         font-size: 9.5px;
+      }
+      .countdown-bar {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+      }
+      .pass-body-wrap {
+        grid-template-columns: 1fr;
+      }
+      .pass-qr-box {
+        margin: 10px auto 0;
+        width: fit-content;
       }
       .pass-actions {
         flex-direction: column;
@@ -1864,6 +1851,5 @@
     lucide.createIcons();
   }
 </script>
-
 </body>
 </html>
