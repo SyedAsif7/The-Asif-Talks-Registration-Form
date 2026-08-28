@@ -1245,7 +1245,7 @@
       </div>
       <div class="ribbon-item">
         <span class="ribbon-label"><i data-lucide="clock" style="width: 11px; height: 11px;"></i> Time</span>
-        <span class="ribbon-value">10:00 AM</span>
+        <span class="ribbon-value">10:30 AM – 12:30 PM</span>
       </div>
       <div class="ribbon-item">
         <span class="ribbon-label"><i data-lucide="map-pin" style="width: 11px; height: 11px;"></i> Venue</span>
@@ -1441,7 +1441,7 @@
           <span>Join Audience WhatsApp Group</span>
           <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
         </a>
-        <a href="https://api.whatsapp.com/send?text=%F0%9F%8E%99%EF%B8%8F%20*THE%20ASIF%20TALKS%20%E2%80%94%20LIVE%20EPISODE%20%231*%20%F0%9F%8E%99%EF%B8%8F%0A%0AHey%2C%20I%20just%20claimed%20my%20Live%20Audience%20Pass%20for%20*The%20Asif%20Talks*%20with%20Distinguished%20Guest%20*Shri%20Sanjaysinh%20Chavan%20(IAS)*%2C%20District%20Collector%20%26%20DM%2C%20Parbhani.%0A%0A%F0%9F%93%85%20*Date%3A*%20Mon%2C%20Aug%2031%2C%202026%20%7C%2010%3A00%20AM%0A%F0%9F%93%8D%20*Venue%3A*%20Dr.%20A.P.J.%20Abdul%20Kalam%20Auditorium%20Hall%0A%0A%F0%9F%8E%9F%EF%B8%8F%20*Limited%20Seats...%21%21%21%20Claim%20your%20free%20pass%20now%3A*%0A%F0%9F%91%89%20https%3A%2F%2Fwww.dcode.club" target="_blank" rel="noopener noreferrer" class="whatsapp-share-btn">
+        <a href="https://api.whatsapp.com/send?text=%F0%9F%8E%99%EF%B8%8F%20*THE%20ASIF%20TALKS%20%E2%80%94%20LIVE%20EPISODE%20%231*%20%F0%9F%8E%99%EF%B8%8F%0A%0AHey%2C%20I%20just%20claimed%20my%20Live%20Audience%20Pass%20for%20*The%20Asif%20Talks*%20with%20Distinguished%20Guest%20*Shri%20Sanjaysinh%20Chavan%20(IAS)*%2C%20District%20Collector%20%26%20DM%2C%20Parbhani.%0A%0A%F0%9F%93%85%20*Date%3A*%20Mon%2C%20Aug%2031%2C%202026%20%7C%2010%3A30%20AM%20%E2%80%93%2012%3A30%20PM%0A%F0%9F%93%8D%20*Venue%3A*%20Dr.%20A.P.J.%20Abdul%20Kalam%20Auditorium%20Hall%0A%0A%F0%9F%8E%9F%EF%B8%8F%20*Limited%20Seats...%21%21%21%20Claim%20your%20free%20pass%20now%3A*%0A%F0%9F%91%89%20https%3A%2F%2Fwww.dcode.club" target="_blank" rel="noopener noreferrer" class="whatsapp-share-btn">
           <i data-lucide="share-2" style="width: 15px; height: 15px;"></i>
           <span>Share / Invite Friends on WhatsApp</span>
         </a>
@@ -1475,8 +1475,8 @@
               <span class="value" id="passCity">-</span>
             </div>
             <div class="pass-grid-item">
-              <span class="label">Reporting Time</span>
-              <span class="value" style="color: #b45309;">10:00 AM Sharp</span>
+              <span class="label">Event Time</span>
+              <span class="value" style="color: #b45309;">10:30 AM – 12:30 PM</span>
             </div>
             <div class="pass-grid-item full-width" style="grid-column: span 2;">
               <span class="label">College / Organization</span>
@@ -1572,8 +1572,8 @@
   // Initial clean display: 200 / 200
   updateSeatsUI(0);
 
-  // Live Event Countdown Timer (Aug 31, 2026, 10:00 AM IST)
-  const eventTargetDate = new Date("2026-08-31T10:00:00+05:30").getTime();
+  // Live Event Countdown Timer (Aug 31, 2026, 10:30 AM IST)
+  const eventTargetDate = new Date("2026-08-31T10:30:00+05:30").getTime();
 
   function updateEventCountdown() {
     const now = new Date().getTime();
@@ -1786,7 +1786,7 @@
       email ? `Email Address :- ${email}` : null,
       `City / Location :- ${city || '-'}`,
       `College / Organization :- ${college || '-'}`,
-      `Reporting Time :- 10:00 AM Sharp`,
+      `Event Time :- 10:30 AM to 12:30 PM`,
       `Venue & Entry :- Dr. A.P.J. Abdul Kalam Auditorium Hall`,
       `Distinguished Guest :- Shri Sanjaysinh Chavan (IAS), District Collector & DM, Parbhani`,
       `Host & Creator :- Syed Asif (The Asif Talks)`,
