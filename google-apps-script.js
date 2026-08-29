@@ -123,21 +123,24 @@ function doGet(e) {
   var remainingSeats = Math.max(0, totalSeats - count);
   var nextPassId = "TAT-" + ("000" + (count + 1)).slice(-3);
 
-  // Check if a specific mobile number already exists
+  // Check if a specific mobile number already exists & collect all registered phones
+  var phoneList = [];
   var checkPhone = e && e.parameter && (e.parameter.checkPhone || e.parameter.phone) ? normalizePhone(e.parameter.checkPhone || e.parameter.phone) : "";
   var isDuplicate = false;
   var duplicatePassId = "";
 
-  if (checkPhone && checkPhone.length === 10 && lastRow > 1) {
+  if (lastRow > 1) {
     var phoneValues = sheet.getRange(2, 4, lastRow - 1, 1).getValues();
     var passIdValues = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
 
     for (var i = 0; i < phoneValues.length; i++) {
       var existingClean = normalizePhone(phoneValues[i][0]);
-      if (existingClean && existingClean === checkPhone) {
-        isDuplicate = true;
-        duplicatePassId = passIdValues[i][0] || ("TAT-" + ("000" + (i + 1)).slice(-3));
-        break;
+      if (existingClean) {
+        phoneList.push(existingClean);
+        if (checkPhone && existingClean === checkPhone) {
+          isDuplicate = true;
+          duplicatePassId = passIdValues[i][0] || ("TAT-" + ("000" + (i + 1)).slice(-3));
+        }
       }
     }
   }
@@ -149,7 +152,8 @@ function doGet(e) {
     remainingSeats: remainingSeats,
     nextPassId: nextPassId,
     isDuplicate: isDuplicate,
-    duplicatePassId: duplicatePassId
+    duplicatePassId: duplicatePassId,
+    registeredPhones: phoneList
   };
 
   return ContentService

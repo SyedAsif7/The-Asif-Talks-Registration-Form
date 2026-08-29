@@ -1560,6 +1560,7 @@
   const TOTAL_SEATS = 200;
   let registeredPassNumber = 1;
   let currentPassCode = 'TAT-001';
+  let registeredPhonesSet = new Set();
 
   function updateSeatsUI(regCount) {
     const remaining = Math.max(0, TOTAL_SEATS - (regCount || 0));
@@ -1621,6 +1622,9 @@
       } else {
         updateSeatsUI(0);
       }
+      if (data && data.registeredPhones && Array.isArray(data.registeredPhones)) {
+        registeredPhonesSet = new Set(data.registeredPhones);
+      }
     } catch(err) {
       const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '0', 10);
       registeredPassNumber = savedCount + 1;
@@ -1663,7 +1667,10 @@
     }
 
     const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(phoneInput.value.trim())) {
+    const rawPhone = phoneInput.value.trim();
+    const cleanPhone = rawPhone.replace(/[^0-9]/g, '').slice(-10);
+
+    if (!phoneRegex.test(cleanPhone)) {
       phoneInput.classList.add('input-error');
       missingFields.push('10-digit Mobile Number');
       if (!firstInvalid) firstInvalid = phoneInput;
@@ -1708,26 +1715,35 @@
     btn.disabled = true;
     btnSpinner.style.display = 'inline-block';
     btnIcon.style.display = 'none';
-    btnText.innerText = 'Checking Registration...';
+    btnText.innerText = 'Verifying Pass Eligibility...';
 
-    const submittedName = nameInput.value.trim();
-    const submittedPhone = phoneInput.value.trim();
-    const submittedEmail = document.getElementById('email').value.trim();
-    const submittedCollege = collegeInput.value.trim();
-    const submittedCity = cityInput.value.trim();
-    const submittedQuestion = document.getElementById('question').value.trim();
+    // 1. Instant check against local registered phone database
+    if (registeredPhonesSet.has(cleanPhone)) {
+      phoneInput.classList.add('input-error');
+      msg.style.display = 'block';
+      msg.className = 'error';
+      msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass has already been issued for <strong>+91 ${cleanPhone}</strong>. Duplicate registrations are not permitted.`;
+      
+      btn.disabled = false;
+      btnSpinner.style.display = 'none';
+      btnIcon.style.display = 'inline-block';
+      btnText.innerText = 'Claim Your Live Audience Pass';
+      phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
-    // Check for duplicate mobile number against Google Sheets database
+    // 2. Real-time check against live Google Sheet database
     try {
-      const checkRes = await fetch(scriptURL + '?checkPhone=' + encodeURIComponent(submittedPhone));
+      const checkRes = await fetch(scriptURL + '?checkPhone=' + encodeURIComponent(cleanPhone));
       const checkData = await checkRes.json();
 
       if (checkData && checkData.isDuplicate) {
+        registeredPhonesSet.add(cleanPhone);
         phoneInput.classList.add('input-error');
         msg.style.display = 'block';
         msg.className = 'error';
         const passText = checkData.duplicatePassId ? ` (Pass ID: <strong>${checkData.duplicatePassId}</strong>)` : '';
-        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${submittedPhone}</strong>. Duplicate registrations are not permitted.`;
+        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${cleanPhone}</strong>. Duplicate registrations are not permitted.`;
         
         btn.disabled = false;
         btnSpinner.style.display = 'none';
@@ -1737,10 +1753,17 @@
         return;
       }
     } catch(checkErr) {
-      console.warn("Pre-check error or offline, proceeding to submission:", checkErr);
+      console.warn("Server duplicate check warning:", checkErr);
     }
 
     btnText.innerText = 'Issuing Official Pass...';
+
+    const submittedName = nameInput.value.trim();
+    const submittedPhone = cleanPhone;
+    const submittedEmail = document.getElementById('email').value.trim();
+    const submittedCollege = collegeInput.value.trim();
+    const submittedCity = cityInput.value.trim();
+    const submittedQuestion = document.getElementById('question').value.trim();
 
     // Use URLSearchParams for 100% reliable field delivery to Google Sheets
     const params = new URLSearchParams();
@@ -1762,6 +1785,7 @@
         mode: 'no-cors'
       });
 
+      registeredPhonesSet.add(submittedPhone);
       showSuccessPass(submittedName, submittedPhone, submittedEmail, submittedCollege, submittedCity);
     } catch (error) {
       console.error('Submission Error:', error);
@@ -1777,22 +1801,40 @@
     }
   });
 
-  // Check duplicate on phone input blur
-  document.getElementById('phone').addEventListener('blur', async () => {
-    const phoneInput = document.getElementById('phone');
-    const val = phoneInput.value.trim();
-    if (/^[0-9]{10}$/.test(val)) {
+  // Live duplicate check on phone input blur & 10-digit input
+  const phoneInputField = document.getElementById('phone');
+  async function checkPhoneDuplicateLive() {
+    const val = phoneInputField.value.trim().replace(/[^0-9]/g, '').slice(-10);
+    if (val.length === 10) {
+      if (registeredPhonesSet.has(val)) {
+        phoneInputField.classList.add('input-error');
+        msg.style.display = 'block';
+        msg.className = 'error';
+        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass has already been issued for <strong>+91 ${val}</strong>. Duplicate registrations are not permitted.`;
+        return true;
+      }
       try {
         const res = await fetch(scriptURL + '?checkPhone=' + encodeURIComponent(val));
         const data = await res.json();
         if (data && data.isDuplicate) {
-          phoneInput.classList.add('input-error');
+          registeredPhonesSet.add(val);
+          phoneInputField.classList.add('input-error');
           msg.style.display = 'block';
           msg.className = 'error';
           const passText = data.duplicatePassId ? ` (Pass ID: <strong>${data.duplicatePassId}</strong>)` : '';
           msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${val}</strong>. Duplicate registrations are not permitted.`;
+          return true;
         }
       } catch(e) {}
+    }
+    return false;
+  }
+
+  phoneInputField.addEventListener('blur', checkPhoneDuplicateLive);
+  phoneInputField.addEventListener('input', () => {
+    const val = phoneInputField.value.trim().replace(/[^0-9]/g, '').slice(-10);
+    if (val.length === 10) {
+      checkPhoneDuplicateLive();
     }
   });
 
