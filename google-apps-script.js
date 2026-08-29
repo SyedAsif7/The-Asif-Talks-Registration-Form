@@ -17,35 +17,67 @@
  * ---------------------------------------------------------------------------------------------------------------------------------
  */
 
+// Helper to normalize phone number to last 10 digits
+function normalizePhone(num) {
+  if (!num) return "";
+  var cleaned = String(num).replace(/[^0-9]/g, "");
+  if (cleaned.length > 10) {
+    cleaned = cleaned.slice(-10); // Take last 10 digits
+  }
+  return cleaned;
+}
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.tryLock(10000); // Prevent concurrent write collisions
 
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
-    // Auto-calculate sequential Pass ID (TAT-001, TAT-002, etc.)
     var lastRow = sheet.getLastRow();
-    var passCount = Math.max(1, lastRow); // Row 1 is header
-    var passId = "TAT-" + ("000" + passCount).slice(-3);
 
     // Extract POST parameters
     var p = e.parameter || {};
-    var name = p.name || "";
-    var phone = p.phone || "";
-    var email = p.email || "";
-    var gender = p.gender || "";
-    var college = p.college || "";
-    var city = p.city || "";
-    var source = p.source || "";
-    var question = p.question || "";
+    var name = (p.name || "").trim();
+    var rawPhone = (p.phone || "").trim();
+    var cleanPhone = normalizePhone(rawPhone);
+    var email = (p.email || "").trim();
+    var gender = (p.gender || "").trim();
+    var college = (p.college || "").trim();
+    var city = (p.city || "").trim();
+    var source = (p.source || "").trim();
+    var question = (p.question || "").trim();
     var consent = p.consent || "Agreed";
+
+    // Check for duplicate mobile number in Column D (Rows 2 to lastRow)
+    if (cleanPhone && cleanPhone.length === 10 && lastRow > 1) {
+      var phoneValues = sheet.getRange(2, 4, lastRow - 1, 1).getValues();
+      var passIdValues = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+      
+      for (var i = 0; i < phoneValues.length; i++) {
+        var existingClean = normalizePhone(phoneValues[i][0]);
+        if (existingClean && existingClean === cleanPhone) {
+          var existingPassId = passIdValues[i][0] || ("TAT-" + ("000" + (i + 1)).slice(-3));
+          return ContentService
+            .createTextOutput(JSON.stringify({ 
+              result: "duplicate",
+              error: "DUPLICATE_PHONE",
+              passId: existingPassId,
+              message: "This mobile number is already registered for The Asif Talks! Pass ID: " + existingPassId 
+            }))
+            .setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+    }
+
+    // Auto-calculate sequential Pass ID (TAT-001, TAT-002, etc.)
+    var passCount = Math.max(1, lastRow); // Row 1 is header
+    var passId = "TAT-" + ("000" + passCount).slice(-3);
 
     var rowData = [
       new Date(),
       passId,
       name,
-      phone,
+      rawPhone,
       email,
       gender,
       college,
@@ -91,12 +123,33 @@ function doGet(e) {
   var remainingSeats = Math.max(0, totalSeats - count);
   var nextPassId = "TAT-" + ("000" + (count + 1)).slice(-3);
 
+  // Check if a specific mobile number already exists
+  var checkPhone = e && e.parameter && (e.parameter.checkPhone || e.parameter.phone) ? normalizePhone(e.parameter.checkPhone || e.parameter.phone) : "";
+  var isDuplicate = false;
+  var duplicatePassId = "";
+
+  if (checkPhone && checkPhone.length === 10 && lastRow > 1) {
+    var phoneValues = sheet.getRange(2, 4, lastRow - 1, 1).getValues();
+    var passIdValues = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+
+    for (var i = 0; i < phoneValues.length; i++) {
+      var existingClean = normalizePhone(phoneValues[i][0]);
+      if (existingClean && existingClean === checkPhone) {
+        isDuplicate = true;
+        duplicatePassId = passIdValues[i][0] || ("TAT-" + ("000" + (i + 1)).slice(-3));
+        break;
+      }
+    }
+  }
+
   var responseData = {
     status: "live",
     totalSeats: totalSeats,
     registeredCount: count,
     remainingSeats: remainingSeats,
-    nextPassId: nextPassId
+    nextPassId: nextPassId,
+    isDuplicate: isDuplicate,
+    duplicatePassId: duplicatePassId
   };
 
   return ContentService

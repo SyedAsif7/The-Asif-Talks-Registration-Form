@@ -1708,7 +1708,7 @@
     btn.disabled = true;
     btnSpinner.style.display = 'inline-block';
     btnIcon.style.display = 'none';
-    btnText.innerText = 'Submitting Pass Request...';
+    btnText.innerText = 'Checking Registration...';
 
     const submittedName = nameInput.value.trim();
     const submittedPhone = phoneInput.value.trim();
@@ -1716,6 +1716,31 @@
     const submittedCollege = collegeInput.value.trim();
     const submittedCity = cityInput.value.trim();
     const submittedQuestion = document.getElementById('question').value.trim();
+
+    // Check for duplicate mobile number against Google Sheets database
+    try {
+      const checkRes = await fetch(scriptURL + '?checkPhone=' + encodeURIComponent(submittedPhone));
+      const checkData = await checkRes.json();
+
+      if (checkData && checkData.isDuplicate) {
+        phoneInput.classList.add('input-error');
+        msg.style.display = 'block';
+        msg.className = 'error';
+        const passText = checkData.duplicatePassId ? ` (Pass ID: <strong>${checkData.duplicatePassId}</strong>)` : '';
+        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${submittedPhone}</strong>. Duplicate registrations are not permitted.`;
+        
+        btn.disabled = false;
+        btnSpinner.style.display = 'none';
+        btnIcon.style.display = 'inline-block';
+        btnText.innerText = 'Claim Your Live Audience Pass';
+        phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+    } catch(checkErr) {
+      console.warn("Pre-check error or offline, proceeding to submission:", checkErr);
+    }
+
+    btnText.innerText = 'Issuing Official Pass...';
 
     // Use URLSearchParams for 100% reliable field delivery to Google Sheets
     const params = new URLSearchParams();
@@ -1749,6 +1774,25 @@
       btnIcon.style.display = 'inline-block';
       btnText.innerText = 'Claim Your Live Audience Pass';
       msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  // Check duplicate on phone input blur
+  document.getElementById('phone').addEventListener('blur', async () => {
+    const phoneInput = document.getElementById('phone');
+    const val = phoneInput.value.trim();
+    if (/^[0-9]{10}$/.test(val)) {
+      try {
+        const res = await fetch(scriptURL + '?checkPhone=' + encodeURIComponent(val));
+        const data = await res.json();
+        if (data && data.isDuplicate) {
+          phoneInput.classList.add('input-error');
+          msg.style.display = 'block';
+          msg.className = 'error';
+          const passText = data.duplicatePassId ? ` (Pass ID: <strong>${data.duplicatePassId}</strong>)` : '';
+          msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${val}</strong>. Duplicate registrations are not permitted.`;
+        }
+      } catch(e) {}
     }
   });
 
