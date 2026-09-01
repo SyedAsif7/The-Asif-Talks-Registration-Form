@@ -21,17 +21,18 @@
 // Helper to get or create the Episode 2 sheet tab
 function getEpisodeSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheetName = "Episode 2";
-  var sheet = ss.getSheetByName(sheetName);
+  var primarySheetName = "The-Asif-Talks-Registration-Form-Episode-2";
+  var fallbackSheetName = "Episode 2";
+  
+  var sheet = ss.getSheetByName(primarySheetName) || ss.getSheetByName(fallbackSheetName);
   
   if (!sheet) {
-    // If "Episode 2" tab doesn't exist, check if active sheet is empty or create "Episode 2"
     var activeSheet = ss.getActiveSheet();
     if (activeSheet.getLastRow() === 0) {
       sheet = activeSheet;
-      sheet.setName(sheetName);
+      sheet.setName(primarySheetName);
     } else {
-      sheet = ss.insertSheet(sheetName);
+      sheet = ss.insertSheet(primarySheetName);
     }
     
     // Set headers
