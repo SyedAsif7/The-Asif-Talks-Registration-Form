@@ -201,3 +201,11 @@ function doGet(e) {
     .createTextOutput(JSON.stringify(responseData))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * Run this test function in Apps Script to verify permissions and initialize the sheet tab!
+ */
+function testSetup() {
+  var sheet = getEpisodeSheet();
+  Logger.log("Episode 2 Sheet successfully connected: " + sheet.getName());
+}
