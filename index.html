@@ -214,6 +214,35 @@
       box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
     }
 
+    .event-concluded-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(34, 197, 94, 0.18);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.25);
+    }
+
+    .badge-closed {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(239, 68, 68, 0.18);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      padding: 4px 11px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
     .badge-seats strong {
       color: #ffffff;
       font-weight: 800;
@@ -695,6 +724,133 @@
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
       color: #15803d;
+    }
+
+    /* ==========================================================================
+       5b. Event Concluded / Registrations Closed Card
+       ========================================================================== */
+    .closed-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 30px 20px 26px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      margin: 10px 0;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .closed-icon-badge {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+      border: 2px solid #fecaca;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(239, 68, 68, 0.15);
+    }
+
+    .closed-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .closed-desc {
+      font-size: 13.5px;
+      color: #475569;
+      line-height: 1.6;
+      max-width: 490px;
+      margin: 0 auto 20px auto;
+    }
+
+    .closed-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+      text-align: left;
+    }
+
+    @media (max-width: 480px) {
+      .closed-highlights {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .highlight-item {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .highlight-item strong {
+      display: block;
+      font-size: 13px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .highlight-item span {
+      display: block;
+      font-size: 11.5px;
+      color: #64748b;
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    .closed-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .closed-btn-whatsapp {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: white;
+      text-decoration: none;
+      padding: 13px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .closed-btn-whatsapp:active {
+      transform: scale(0.98);
+    }
+
+    .closed-btn-website {
+      background: #0f172a;
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .closed-btn-website:hover {
+      background: #1e293b;
     }
 
     /* ==========================================================================
@@ -1196,12 +1352,11 @@
     <div class="header">
       
       <div class="badge-row">
-        <span class="badge-live">
-          <span class="pulse-dot"></span> Live Studio • Ep #1
+        <span class="event-concluded-badge">
+          <i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Ep #1 • Grand Success
         </span>
-        <span class="badge-seats" id="seatsBadge">
-          <i data-lucide="ticket" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
-          <strong id="remainingSeatsCount">200</strong> / 200 Seats Left
+        <span class="badge-closed">
+          <i data-lucide="lock" style="width: 11px; height: 11px;"></i> Registrations Closed
         </span>
       </div>
 
@@ -1253,163 +1408,55 @@
       </div>
     </div>
 
-    <!-- Live Countdown Section -->
-    <div class="countdown-bar" id="countdownSection">
-      <div class="countdown-title">
-        <i data-lucide="timer" style="width: 14px; height: 14px; color: #f59e0b;"></i>
-        <span>Live Episode Starts In</span>
+    <!-- Event Concluded Ribbon -->
+    <div class="countdown-bar" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 14px 16px;">
+      <div class="countdown-title" style="color: #4ade80; font-size: 13px; font-weight: 700;">
+        <i data-lucide="award" style="width: 15px; height: 15px; color: #4ade80;"></i>
+        <span>Episode #1 Recorded Live on Mon, Aug 31, 2026</span>
       </div>
-      <div class="countdown-grid">
-        <div class="countdown-box">
-          <span class="cd-num" id="cdDays">00</span>
-          <span class="cd-lbl">Days</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="countdown-box">
-          <span class="cd-num" id="cdHours">00</span>
-          <span class="cd-lbl">Hours</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="countdown-box">
-          <span class="cd-num" id="cdMins">00</span>
-          <span class="cd-lbl">Mins</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="countdown-box">
-          <span class="cd-num" id="cdSecs">00</span>
-          <span class="cd-lbl">Secs</span>
-        </div>
+      <div style="font-size: 11.5px; color: #94a3b8; margin-top: 3px; font-weight: 500;">
+        Dr. A.P.J. Abdul Kalam Auditorium Hall, Parbhani
       </div>
     </div>
 
-    <!-- Registration Form -->
-    <form id="regForm">
-      <div class="notice">
-        <i data-lucide="alert-circle" class="notice-icon" style="width: 16px; height: 16px;"></i>
-        <div>
-          <strong>Notice:</strong> Strictly <strong>First-Come, First-Served</strong>. Attendees must carry a physical College ID or Govt Photo ID card. 📸 <em>Photos and videos are allowed (without original audio).</em>
+    <!-- Event Concluded / Registrations Closed Card -->
+    <div class="closed-card">
+      <div class="closed-icon-badge">
+        <i data-lucide="lock" style="width: 26px; height: 26px; color: #dc2626;"></i>
+      </div>
+      <h3 class="closed-title">Registrations Are Now Closed</h3>
+      <p class="closed-desc">
+        <em>The Asif Talks — Live Episode #1</em> with Distinguished Guest <strong>Shri Sanjaysinh Chavan (IAS)</strong>, District Collector &amp; DM Parbhani, has successfully concluded with tremendous audience energy!
+      </p>
+
+      <div class="closed-highlights">
+        <div class="highlight-item">
+          <i data-lucide="users" style="width: 18px; height: 18px; color: #2563eb; flex-shrink: 0; margin-top: 2px;"></i>
+          <div>
+            <strong>Full House Audience</strong>
+            <span>Over 200+ registered attendees &amp; students attended</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <i data-lucide="video" style="width: 18px; height: 18px; color: #ea580c; flex-shrink: 0; margin-top: 2px;"></i>
+          <div>
+            <strong>Episode Premiere Coming Soon</strong>
+            <span>Full video podcast will release on YouTube</span>
+          </div>
         </div>
       </div>
 
-      <div class="form-grid">
-        
-        <!-- 1. Student Name -->
-        <div class="form-group">
-          <label for="name">Student Name <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="user" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name" />
-          </div>
-        </div>
-
-        <!-- 2. Mobile Number -->
-        <div class="form-group">
-          <label for="phone">Mobile Number <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="phone" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel" />
-          </div>
-          <div class="helper-text">For pass confirmation &amp; updates</div>
-        </div>
-
-        <!-- 3. Email Address (Optional) -->
-        <div class="form-group">
-          <label for="email">
-            <span>Email Address</span>
-            <span class="opt">(Optional)</span>
-          </label>
-          <div class="input-wrapper">
-            <i data-lucide="mail" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="email" id="email" name="email" inputmode="email" placeholder="abc@gmail.com" autocomplete="email" />
-          </div>
-        </div>
-
-        <!-- 4. Gender -->
-        <div class="form-group">
-          <label for="gender">Gender <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="user-check" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <select id="gender" name="gender" required>
-              <option value="" disabled selected>-- Select Gender --</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-              <option value="Prefer not to say">Prefer not to say</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- 5. College / Institute / Organization Name (Optional) -->
-        <div class="form-group">
-          <label for="college">
-            <span>College / Institute / Organization</span>
-            <span class="opt">(Optional)</span>
-          </label>
-          <div class="input-wrapper">
-            <i data-lucide="building-2" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="text" id="college" name="college" placeholder="College / Institute / Organization Name" />
-          </div>
-        </div>
-
-        <!-- 6. City / Location -->
-        <div class="form-group">
-          <label for="city">City / Location <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="map-pin" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="text" id="city" name="city" placeholder="e.g. Parbhani, Nanded, Jalna..." required />
-          </div>
-        </div>
-
-        <!-- 7. How did you hear about this event? -->
-        <div class="form-group full-width">
-          <label for="source">How did you hear about this event? <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="megaphone" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <select id="source" name="source" required>
-              <option value="" disabled selected>--Select--</option>
-              <option value="WhatsApp">WhatsApp</option>
-              <option value="Instagram">Instagram</option>
-              <option value="College/School">College/School</option>
-              <option value="Friend">Friend</option>
-              <option value="Event Team">Event Team</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- 8. Question for District Collector (Optional) -->
-        <div class="form-group full-width">
-          <label for="question">
-            <span>Question for Shri Sanjaysinh Chavan (IAS)</span>
-            <span class="opt">(Optional)</span>
-          </label>
-          <div class="input-wrapper">
-            <i data-lucide="mic" class="input-icon" style="width: 15px; height: 15px; top: 14px; transform: none;"></i>
-            <textarea id="question" name="question" rows="3" placeholder="What key question or inquiry would you like to ask the Collector?"></textarea>
-          </div>
-        </div>
-
-        <!-- 9. Photo/Video Consent -->
-        <div class="form-group full-width">
-          <label class="consent-card" for="consent">
-            <input type="checkbox" id="consent" name="consent" value="Agreed" required />
-            <span class="consent-text">
-              <strong>Photo &amp; Video Consent <span class="req">*</span>:</strong> Photos and videos are allowed during the session (without original audio). I agree that photos/videos taken may also be used for event documentation and promotional purposes.
-            </span>
-          </label>
-        </div>
-
+      <div class="closed-actions">
+        <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="closed-btn-whatsapp">
+          <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i>
+          <span>Join WhatsApp Community for Ep #2 Alerts</span>
+        </a>
+        <a href="https://www.dcode.club" target="_blank" rel="noopener noreferrer" class="closed-btn-website">
+          <i data-lucide="globe" style="width: 15px; height: 15px;"></i>
+          <span>Visit Official Website (dcode.club)</span>
+        </a>
       </div>
-
-      <!-- Submit Action Button -->
-      <button type="submit" id="submitBtn" class="submit-btn">
-        <span class="spinner" id="btnSpinner"></span>
-        <span id="btnText">Claim Your Live Audience Pass</span>
-        <i data-lucide="arrow-right" id="btnIcon" style="width: 16px; height: 16px;"></i>
-      </button>
-
-      <div id="statusMsg"></div>
-    </form>
+    </div>
 
     <!-- Success Pass Confirmation Card -->
     <div id="passSuccessCard">
@@ -1557,351 +1604,12 @@
   const msg = document.getElementById('statusMsg');
   const successCard = document.getElementById('passSuccessCard');
 
-  const TOTAL_SEATS = 200;
-  let registeredPassNumber = 1;
   let currentPassCode = 'TAT-001';
-  let registeredPhonesSet = new Set();
 
-  function updateSeatsUI(regCount) {
-    const remaining = Math.max(0, TOTAL_SEATS - (regCount || 0));
-    const countElem = document.getElementById('remainingSeatsCount');
-    if (countElem) {
-      countElem.innerText = remaining;
-    }
-  }
-
-  // Initial clean display: 200 / 200
-  updateSeatsUI(0);
-
-  // Live Event Countdown Timer (Aug 31, 2026, 12:30 PM IST)
-  const eventTargetDate = new Date("2026-08-31T12:30:00+05:30").getTime();
-
-  function updateEventCountdown() {
-    const now = new Date().getTime();
-    const distance = eventTargetDate - now;
-
-    if (distance <= 0) {
-      const cdSection = document.getElementById('countdownSection');
-      if (cdSection) {
-        cdSection.innerHTML = `
-          <div class="countdown-live-badge">
-            <span class="pulse-dot" style="background:#ef4444;"></span>
-            <span>EVENT IS NOW LIVE AT THE AUDITORIUM!</span>
-          </div>`;
-      }
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    const dElem = document.getElementById('cdDays');
-    const hElem = document.getElementById('cdHours');
-    const mElem = document.getElementById('cdMins');
-    const sElem = document.getElementById('cdSecs');
-
-    if (dElem) dElem.innerText = String(days).padStart(2, '0');
-    if (hElem) hElem.innerText = String(hours).padStart(2, '0');
-    if (mElem) mElem.innerText = String(minutes).padStart(2, '0');
-    if (sElem) sElem.innerText = String(seconds).padStart(2, '0');
-  }
-
-  setInterval(updateEventCountdown, 1000);
-  updateEventCountdown();
-
-  // Sync pass count and remaining seats from Google Sheets
-  async function syncPassCount() {
-    try {
-      const response = await fetch(scriptURL);
-      const data = await response.json();
-      if (data && data.registeredCount !== undefined) {
-        registeredPassNumber = data.registeredCount + 1;
-        updateSeatsUI(data.registeredCount);
-      } else {
-        updateSeatsUI(0);
-      }
-      if (data && data.registeredPhones && Array.isArray(data.registeredPhones)) {
-        registeredPhonesSet = new Set(data.registeredPhones);
-      }
-    } catch(err) {
-      const savedCount = parseInt(localStorage.getItem('tat_last_pass_num') || '0', 10);
-      registeredPassNumber = savedCount + 1;
-      updateSeatsUI(savedCount);
-    }
-  }
-  syncPassCount();
-
-  function getNextPassCode() {
-    const code = "TAT-" + String(registeredPassNumber).padStart(3, '0');
-    localStorage.setItem('tat_last_pass_num', registeredPassNumber);
-    updateSeatsUI(registeredPassNumber);
-    registeredPassNumber++;
-    return code;
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Clear previous error states
-    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-    msg.style.display = 'none';
-    msg.className = '';
-
-    const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
-    const genderInput = document.getElementById('gender');
-    const collegeInput = document.getElementById('college');
-    const cityInput = document.getElementById('city');
-    const sourceInput = document.getElementById('source');
-    const consentInput = document.getElementById('consent');
-
-    let firstInvalid = null;
-    const missingFields = [];
-
-    if (!nameInput.value.trim()) {
-      nameInput.classList.add('input-error');
-      missingFields.push('Full Name');
-      if (!firstInvalid) firstInvalid = nameInput;
-    }
-
-    const phoneRegex = /^[0-9]{10}$/;
-    const rawPhone = phoneInput.value.trim();
-    const cleanPhone = rawPhone.replace(/[^0-9]/g, '').slice(-10);
-
-    if (!phoneRegex.test(cleanPhone)) {
-      phoneInput.classList.add('input-error');
-      missingFields.push('10-digit Mobile Number');
-      if (!firstInvalid) firstInvalid = phoneInput;
-    }
-
-    if (!genderInput.value) {
-      genderInput.classList.add('input-error');
-      missingFields.push('Gender');
-      if (!firstInvalid) firstInvalid = genderInput;
-    }
-
-    if (!cityInput.value.trim()) {
-      cityInput.classList.add('input-error');
-      missingFields.push('City / Location');
-      if (!firstInvalid) firstInvalid = cityInput;
-    }
-
-    if (!sourceInput.value) {
-      sourceInput.classList.add('input-error');
-      missingFields.push('How you heard about event');
-      if (!firstInvalid) firstInvalid = sourceInput;
-    }
-
-    if (!consentInput.checked) {
-      consentInput.closest('.consent-card').classList.add('input-error');
-      missingFields.push('Photo & Video Consent');
-      if (!firstInvalid) firstInvalid = consentInput.closest('.consent-card');
-    }
-
-    if (missingFields.length > 0) {
-      msg.style.display = 'block';
-      msg.className = 'warning';
-      msg.innerHTML = `⚠️ <strong>Please complete required field(s):</strong><br>${missingFields.join(', ')}`;
-      if (firstInvalid) {
-        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        if (typeof firstInvalid.focus === 'function') firstInvalid.focus();
-      }
-      return;
-    }
-
-    // UI Loading state
-    btn.disabled = true;
-    btnSpinner.style.display = 'inline-block';
-    btnIcon.style.display = 'none';
-    btnText.innerText = 'Verifying Pass Eligibility...';
-
-    // 1. Instant check against local registered phone database
-    if (registeredPhonesSet.has(cleanPhone)) {
-      phoneInput.classList.add('input-error');
-      msg.style.display = 'block';
-      msg.className = 'error';
-      msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass has already been issued for <strong>+91 ${cleanPhone}</strong>. Duplicate registrations are not permitted.`;
-      
-      btn.disabled = false;
-      btnSpinner.style.display = 'none';
-      btnIcon.style.display = 'inline-block';
-      btnText.innerText = 'Claim Your Live Audience Pass';
-      phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    // 2. Real-time check against live Google Sheet database
-    try {
-      const checkRes = await fetch(scriptURL + '?checkPhone=' + encodeURIComponent(cleanPhone));
-      const checkData = await checkRes.json();
-
-      if (checkData && checkData.isDuplicate) {
-        registeredPhonesSet.add(cleanPhone);
-        phoneInput.classList.add('input-error');
-        msg.style.display = 'block';
-        msg.className = 'error';
-        const passText = checkData.duplicatePassId ? ` (Pass ID: <strong>${checkData.duplicatePassId}</strong>)` : '';
-        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${cleanPhone}</strong>. Duplicate registrations are not permitted.`;
-        
-        btn.disabled = false;
-        btnSpinner.style.display = 'none';
-        btnIcon.style.display = 'inline-block';
-        btnText.innerText = 'Claim Your Live Audience Pass';
-        phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
-    } catch(checkErr) {
-      console.warn("Server duplicate check warning:", checkErr);
-    }
-
-    btnText.innerText = 'Issuing Official Pass...';
-
-    const submittedName = nameInput.value.trim();
-    const submittedPhone = cleanPhone;
-    const submittedEmail = document.getElementById('email').value.trim();
-    const submittedCollege = collegeInput.value.trim();
-    const submittedCity = cityInput.value.trim();
-    const submittedQuestion = document.getElementById('question').value.trim();
-
-    // Use URLSearchParams for 100% reliable field delivery to Google Sheets
-    const params = new URLSearchParams();
-    params.append('name', submittedName);
-    params.append('phone', submittedPhone);
-    params.append('email', submittedEmail);
-    params.append('gender', genderInput.value);
-    params.append('college', submittedCollege);
-    params.append('city', submittedCity);
-    params.append('source', sourceInput.value);
-    params.append('question', submittedQuestion);
-    params.append('consent', consentInput.checked ? 'Agreed' : 'Agreed');
-
-    try {
-      // Send directly to Google Sheet
-      await fetch(scriptURL, {
-        method: 'POST',
-        body: params,
-        mode: 'no-cors'
-      });
-
-      registeredPhonesSet.add(submittedPhone);
-      showSuccessPass(submittedName, submittedPhone, submittedEmail, submittedCollege, submittedCity);
-    } catch (error) {
-      console.error('Submission Error:', error);
-      msg.style.display = 'block';
-      msg.className = 'error';
-      msg.innerHTML = '❌ <strong>Submission Failed:</strong> Could not connect to registration server. Please check your internet connection and try again.';
-      
-      btn.disabled = false;
-      btnSpinner.style.display = 'none';
-      btnIcon.style.display = 'inline-block';
-      btnText.innerText = 'Claim Your Live Audience Pass';
-      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  });
-
-  // Live duplicate check on phone input blur & 10-digit input
-  const phoneInputField = document.getElementById('phone');
-  async function checkPhoneDuplicateLive() {
-    const val = phoneInputField.value.trim().replace(/[^0-9]/g, '').slice(-10);
-    if (val.length === 10) {
-      if (registeredPhonesSet.has(val)) {
-        phoneInputField.classList.add('input-error');
-        msg.style.display = 'block';
-        msg.className = 'error';
-        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass has already been issued for <strong>+91 ${val}</strong>. Duplicate registrations are not permitted.`;
-        return true;
-      }
-      try {
-        const res = await fetch(scriptURL + '?checkPhone=' + encodeURIComponent(val));
-        const data = await res.json();
-        if (data && data.isDuplicate) {
-          registeredPhonesSet.add(val);
-          phoneInputField.classList.add('input-error');
-          msg.style.display = 'block';
-          msg.className = 'error';
-          const passText = data.duplicatePassId ? ` (Pass ID: <strong>${data.duplicatePassId}</strong>)` : '';
-          msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${val}</strong>. Duplicate registrations are not permitted.`;
-          return true;
-        }
-      } catch(e) {}
-    }
-    return false;
-  }
-
-  phoneInputField.addEventListener('blur', checkPhoneDuplicateLive);
-  phoneInputField.addEventListener('input', () => {
-    const val = phoneInputField.value.trim().replace(/[^0-9]/g, '').slice(-10);
-    if (val.length === 10) {
-      checkPhoneDuplicateLive();
-    }
-  });
-
-  // Remove error highlight as user types/changes fields
-  form.querySelectorAll('input, select, textarea').forEach(input => {
-    input.addEventListener('input', () => {
-      input.classList.remove('input-error');
-      const consentCard = input.closest('.consent-card');
-      if (consentCard) consentCard.classList.remove('input-error');
-      if (document.querySelectorAll('.input-error').length === 0) {
-        msg.style.display = 'none';
-      }
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
     });
-    input.addEventListener('change', () => {
-      input.classList.remove('input-error');
-      const consentCard = input.closest('.consent-card');
-      if (consentCard) consentCard.classList.remove('input-error');
-      if (document.querySelectorAll('.input-error').length === 0) {
-        msg.style.display = 'none';
-      }
-    });
-  });
-
-  function generatePassQrCode(passCode, name, phone, email, college, city) {
-    const qrContainer = document.getElementById('passQrCode');
-    if (!qrContainer) return;
-    
-    const qrLines = [
-      "THE ASIF TALKS — LIVE EPISODE #1",
-      "Official Live Audience Pass",
-      "----------------------------------------",
-      `Pass ID :- ${passCode || 'TAT-001'}`,
-      `Attendee Name :- ${name || '-'}`,
-      `Mobile Number :- ${phone ? '+91 ' + phone : '-'}`,
-      email ? `Email Address :- ${email}` : null,
-      `City / Location :- ${city || '-'}`,
-      `College / Organization :- ${college || '-'}`,
-      `Reporting Time :- 12:30 PM Sharp`,
-      `Venue & Entry :- Dr. A.P.J. Abdul Kalam Auditorium Hall`,
-      `Distinguished Guest :- Shri Sanjaysinh Chavan (IAS), District Collector & DM, Parbhani`,
-      `Host & Creator :- Syed Asif (The Asif Talks)`,
-      "----------------------------------------"
-    ].filter(Boolean).join('\n');
-
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrLines)}&color=0f172a&bgcolor=ffffff&qzone=1`;
-
-    qrContainer.innerHTML = `<img src="${qrUrl}" alt="Official Pass QR Code" width="88" height="88" style="display:block; width:88px; height:88px; border-radius:4px;" crossOrigin="anonymous" />`;
-  }
-
-  function showSuccessPass(name, phone, email, college, city) {
-    currentPassCode = getNextPassCode();
-    
-    document.getElementById('passBadgeCode').innerText = currentPassCode;
-    document.getElementById('passName').innerText = name || '-';
-    document.getElementById('passPhone').innerText = phone ? '+91 ' + phone : '-';
-    document.getElementById('passCollege').innerText = college || '-';
-    document.getElementById('passCity').innerText = city || '-';
-
-    form.style.display = 'none';
-    successCard.style.display = 'block';
-
-    // Generate QR code with full attendee & event details
-    generatePassQrCode(currentPassCode, name, phone, email, college, city);
-    
-    // Scroll to top of pass card on mobile
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    lucide.createIcons();
   }
 
   async function downloadPassAsImage() {
@@ -1941,20 +1649,6 @@
       if (dlText) dlText.innerText = 'Download Official Pass';
       if (dlBtn) dlBtn.disabled = false;
     }
-  }
-
-  function resetFormForNew() {
-    form.reset();
-    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-    msg.style.display = 'none';
-    form.style.display = 'block';
-    successCard.style.display = 'none';
-    btn.disabled = false;
-    btnSpinner.style.display = 'none';
-    btnIcon.style.display = 'inline-block';
-    btnText.innerText = 'Claim Your Live Audience Pass';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    lucide.createIcons();
   }
 </script>
 </body>
