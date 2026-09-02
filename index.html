@@ -225,6 +225,142 @@
       font-weight: 800;
     }
 
+    .event-concluded-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+      color: #ffffff;
+      padding: 4px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.4);
+    }
+
+    .badge-closed {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      padding: 4px 11px;
+      font-size: 10.5px;
+      font-weight: 700;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+    }
+
+    .closed-card {
+      padding: 28px 18px;
+      text-align: center;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .closed-icon-badge {
+      width: 54px;
+      height: 54px;
+      background: #fef2f2;
+      border: 2px solid #fecaca;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .closed-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .closed-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+      max-width: 460px;
+      margin: 0 auto 18px;
+    }
+
+    .closed-highlights {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 12px;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    .highlight-item strong {
+      display: block;
+      color: #0f172a;
+      font-size: 12.5px;
+    }
+
+    .highlight-item span {
+      color: #64748b;
+      font-size: 11.5px;
+    }
+
+    .closed-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .closed-btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+      transition: all 0.2s;
+    }
+
+    .closed-btn-whatsapp:active {
+      transform: scale(0.98);
+    }
+
+    .closed-btn-website {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: #0f172a;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
     /* Dual Speaker Spotlight */
     .speaker-showcase {
       display: grid;
@@ -1448,6 +1584,45 @@
       <div id="statusMsg"></div>
     </form>
 
+    <!-- Event Closed Card (Displayed automatically on Sep 4 at 11:00 AM) -->
+    <div class="closed-card" id="closedCard" style="display: none;">
+      <div class="closed-icon-badge">
+        <i data-lucide="lock" style="width: 24px; height: 24px; color: #dc2626;"></i>
+      </div>
+      <h3 class="closed-title">Registrations Are Now Closed</h3>
+      <p class="closed-desc">
+        Online registrations for <em>The Asif Talks — Live Episode #2</em> closed automatically at <strong>11:00 AM on Sep 4, 2026</strong> as the live recording session has commenced with <strong>Hon. Mayor Syed Iqbal Syed Khwaja</strong>.
+      </p>
+
+      <div class="closed-highlights">
+        <div class="highlight-item">
+          <i data-lucide="users" style="width: 18px; height: 18px; color: #2563eb; flex-shrink: 0; margin-top: 2px;"></i>
+          <div>
+            <strong>Full House Audience</strong>
+            <span>Auditorium gates are closed for live studio recording</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <i data-lucide="video" style="width: 18px; height: 18px; color: #ea580c; flex-shrink: 0; margin-top: 2px;"></i>
+          <div>
+            <strong>Episode Premiere Coming Soon</strong>
+            <span>Full video podcast will release on YouTube</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="closed-actions">
+        <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="closed-btn-whatsapp">
+          <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i>
+          <span>Join WhatsApp Community for Ep #3 Alerts</span>
+        </a>
+        <a href="https://www.dcode.club" target="_blank" rel="noopener noreferrer" class="closed-btn-website">
+          <i data-lucide="globe" style="width: 15px; height: 15px;"></i>
+          <span>Visit Official Website (dcode.club)</span>
+        </a>
+      </div>
+    </div>
+
     <!-- Success Pass Confirmation Card -->
     <div id="passSuccessCard">
       <div class="success-icon-wrap">
@@ -1621,7 +1796,51 @@
   // Live Event Countdown Timer (Fri, Sep 4, 2026, 10:30 AM IST)
   const eventTargetDate = new Date("2026-09-04T10:30:00+05:30").getTime();
 
+  // Automatic Registration Cutoff Deadline: Friday, September 4, 2026 at 11:00 AM IST
+  const registrationDeadline = new Date("2026-09-04T11:00:00+05:30").getTime();
+
+  function checkRegistrationCutoff() {
+    const now = new Date().getTime();
+    if (now >= registrationDeadline) {
+      const formElem = document.getElementById("regForm");
+      const closedElem = document.getElementById("closedCard");
+      const badgeRow = document.querySelector(".badge-row");
+      const cdSection = document.getElementById("countdownSection");
+
+      if (formElem && closedElem && formElem.style.display !== "none" && (!successCard || successCard.style.display !== "block")) {
+        formElem.style.display = "none";
+        closedElem.style.display = "block";
+      }
+
+      if (badgeRow && !badgeRow.querySelector(".badge-closed")) {
+        badgeRow.innerHTML = `
+          <span class="event-concluded-badge">
+            <i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Live at Auditorium
+          </span>
+          <span class="badge-closed">
+            <i data-lucide="lock" style="width: 11px; height: 11px;"></i> Registrations Closed
+          </span>`;
+      }
+
+      if (cdSection && !cdSection.querySelector(".cd-closed-banner")) {
+        cdSection.innerHTML = `
+          <div class="cd-closed-banner" style="font-size: 13px; font-weight: 800; color: #4ade80; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 4px 0;">
+            <i data-lucide="award" style="width: 15px; height: 15px; color: #4ade80;"></i>
+            <span>Episode #2 Live in Session • Dr. A.P.J. Abdul Kalam Auditorium</span>
+          </div>`;
+      }
+
+      lucide.createIcons();
+      return true;
+    }
+    return false;
+  }
+
   function updateEventCountdown() {
+    if (checkRegistrationCutoff()) {
+      return;
+    }
+
     const now = new Date().getTime();
     const distance = eventTargetDate - now;
 
@@ -1631,7 +1850,7 @@
         cdSection.innerHTML = `
           <div style="font-size: 13px; font-weight: 800; color: #4ade80; display: flex; align-items: center; justify-content: center; gap: 6px;">
             <span class="pulse-dot" style="background:#ef4444;"></span>
-            <span>EPISODE #2 IS NOW LIVE AT THE AUDITORIUM!</span>
+            <span>REPORTING TIME IS LIVE • SESSION STARTS AT 11:00 AM!</span>
           </div>`;
       }
       return;
@@ -1655,12 +1874,16 @@
 
   setInterval(updateEventCountdown, 1000);
   updateEventCountdown();
+  checkRegistrationCutoff();
 
   // Sync pass count and remaining seats from Google Sheets
   async function syncPassCount() {
     try {
       const response = await fetch(scriptURL);
       const data = await response.json();
+      if (data && data.isClosed) {
+        checkRegistrationCutoff();
+      }
       if (data && data.registeredCount !== undefined) {
         registeredPassNumber = data.registeredCount + 1;
         updateSeatsUI(data.registeredCount);
@@ -1688,6 +1911,10 @@
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    if (checkRegistrationCutoff()) {
+      return;
+    }
 
     // Clear previous error states
     document.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
