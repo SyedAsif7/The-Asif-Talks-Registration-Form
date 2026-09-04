@@ -71,15 +71,15 @@ function doPost(e) {
   lock.tryLock(10000); // Prevent concurrent write collisions
 
   try {
-    // Automatic cutoff on Friday, September 4, 2026 at 11:00 AM IST
-    var deadline = new Date("2026-09-04T11:00:00+05:30").getTime();
+    // Automatic cutoff on Friday, September 4, 2026 at 02:00 PM IST
+    var deadline = new Date("2026-09-04T14:00:00+05:30").getTime();
     var nowTime = new Date().getTime();
     if (nowTime >= deadline) {
       return ContentService
         .createTextOutput(JSON.stringify({ 
           result: "closed",
           error: "REGISTRATIONS_CLOSED",
-          message: "Registrations for The Asif Talks (Episode #2) closed automatically on Sep 4 at 11:00 AM." 
+          message: "Registrations for The Asif Talks (Episode #2) closed automatically on Sep 4 at 02:00 PM." 
         }))
         .setMimeType(ContentService.MimeType.JSON);
     }
@@ -197,7 +197,7 @@ function doGet(e) {
     }
   }
 
-  var deadline = new Date("2026-09-04T11:00:00+05:30").getTime();
+  var deadline = new Date("2026-09-04T14:00:00+05:30").getTime();
   var isClosed = new Date().getTime() >= deadline;
 
   var responseData = {
