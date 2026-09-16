@@ -1354,12 +1354,11 @@
     <div class="header">
       
       <div class="badge-row">
-        <span class="badge-live">
-          <span class="pulse-dot"></span> Live Studio • Ep #2
+        <span class="event-concluded-badge">
+          <i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Ep #2 • Grand Success
         </span>
-        <span class="badge-seats" id="seatsBadge">
-          <i data-lucide="ticket" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
-          <strong id="remainingSeatsCount">200</strong> / 200 Seats Left
+        <span class="badge-closed">
+          <i data-lucide="lock" style="width: 11px; height: 11px;"></i> Registrations Closed
         </span>
       </div>
 
@@ -1402,8 +1401,8 @@
         <span class="ribbon-value">Fri, Sep 4, 2026</span>
       </div>
       <div class="ribbon-item">
-        <span class="ribbon-label"><i data-lucide="clock" style="width: 11px; height: 11px;"></i> Reporting Time</span>
-        <span class="ribbon-value">10:30 AM (Live 11:00 AM)</span>
+        <span class="ribbon-label"><i data-lucide="clock" style="width: 11px; height: 11px;"></i> Time</span>
+        <span class="ribbon-value">11:00 AM</span>
       </div>
       <div class="ribbon-item">
         <span class="ribbon-label"><i data-lucide="map-pin" style="width: 11px; height: 11px;"></i> Venue</span>
@@ -1411,32 +1410,14 @@
       </div>
     </div>
 
-    <!-- Live Countdown Section -->
-    <div class="countdown-bar" id="countdownSection">
-      <div class="countdown-title">
-        <i data-lucide="timer" style="width: 13px; height: 13px; color: #f59e0b;"></i>
-        <span>Episode #2 Starts In</span>
+    <!-- Event Concluded Ribbon -->
+    <div class="countdown-bar" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 14px 16px;">
+      <div class="countdown-title" style="color: #4ade80; font-size: 13px; font-weight: 700;">
+        <i data-lucide="award" style="width: 15px; height: 15px; color: #4ade80;"></i>
+        <span>Episode #2 Recorded Live on Fri, Sep 4, 2026</span>
       </div>
-      <div class="countdown-grid">
-        <div class="countdown-box">
-          <span class="cd-num" id="cdDays">00</span>
-          <span class="cd-lbl">Days</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="countdown-box">
-          <span class="cd-num" id="cdHours">00</span>
-          <span class="cd-lbl">Hours</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="countdown-box">
-          <span class="cd-num" id="cdMins">00</span>
-          <span class="cd-lbl">Mins</span>
-        </div>
-        <span class="cd-sep">:</span>
-        <div class="countdown-box">
-          <span class="cd-num" id="cdSecs">00</span>
-          <span class="cd-lbl">Secs</span>
-        </div>
+      <div style="font-size: 11.5px; color: #94a3b8; margin-top: 3px; font-weight: 500;">
+        Dr. A.P.J. Abdul Kalam Auditorium, SSIEMS, Parbhani
       </div>
     </div>
 
@@ -1455,158 +1436,29 @@
       </div>
     </div>
 
-    <!-- Registration Form -->
-    <form id="regForm">
-      <div class="notice">
-        <i data-lucide="alert-circle" class="notice-icon" style="width: 15px; height: 15px;"></i>
-        <div>
-          <strong>Notice:</strong> Limited 200 Free Passes (First-Come, First-Served). Attendees must carry a physical College ID or Govt Photo ID card. 📸 <em>Photos and videos allowed (without original audio).</em>
-        </div>
-      </div>
-
-      <div class="form-grid">
-        
-        <!-- 1. Student Name -->
-        <div class="form-group">
-          <label for="name">Student Name <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="user" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name" />
-          </div>
-        </div>
-
-        <!-- 2. Mobile Number -->
-        <div class="form-group">
-          <label for="phone">Mobile Number <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="phone" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel" />
-          </div>
-          <div class="helper-text">For official pass confirmation</div>
-        </div>
-
-        <!-- 3. Email Address (Optional) -->
-        <div class="form-group">
-          <label for="email">
-            <span>Email Address</span>
-            <span class="opt">(Optional)</span>
-          </label>
-          <div class="input-wrapper">
-            <i data-lucide="mail" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="email" id="email" name="email" inputmode="email" placeholder="abc@gmail.com" autocomplete="email" />
-          </div>
-        </div>
-
-        <!-- 4. Gender -->
-        <div class="form-group">
-          <label for="gender">Gender <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="user-check" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <select id="gender" name="gender" required>
-              <option value="" disabled selected>-- Select Gender --</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-              <option value="Prefer not to say">Prefer not to say</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- 5. College / Institute / Organization Name (Optional) -->
-        <div class="form-group">
-          <label for="college">
-            <span>College / Institute / Organization</span>
-            <span class="opt">(Optional)</span>
-          </label>
-          <div class="input-wrapper">
-            <i data-lucide="building-2" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="text" id="college" name="college" placeholder="College / Institute Name" />
-          </div>
-        </div>
-
-        <!-- 6. City / Location -->
-        <div class="form-group">
-          <label for="city">City / Location <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="map-pin" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <input type="text" id="city" name="city" placeholder="e.g. Parbhani, Nanded, Jalna..." required />
-          </div>
-        </div>
-
-        <!-- 7. How did you hear about this event? -->
-        <div class="form-group full-width">
-          <label for="source">How did you hear about this event? <span class="req">*</span></label>
-          <div class="input-wrapper">
-            <i data-lucide="megaphone" class="input-icon" style="width: 15px; height: 15px;"></i>
-            <select id="source" name="source" required>
-              <option value="" disabled selected>--Select--</option>
-              <option value="WhatsApp">WhatsApp</option>
-              <option value="Instagram">Instagram</option>
-              <option value="College/School">College/School</option>
-              <option value="Friend">Friend</option>
-              <option value="Event Team">Event Team</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- 8. Question for Hon. Mayor (Optional) -->
-        <div class="form-group full-width">
-          <label for="question">
-            <span>Question for Hon. Mayor Syed Iqbal Syed Khwaja</span>
-            <span class="opt">(Optional)</span>
-          </label>
-          <div class="input-wrapper">
-            <i data-lucide="mic" class="input-icon" style="width: 15px; height: 15px; top: 14px; transform: none;"></i>
-            <textarea id="question" name="question" rows="3" placeholder="What key question or inquiry would you like to ask the Mayor regarding Parbhani city development?"></textarea>
-          </div>
-        </div>
-
-        <!-- 9. Photo/Video Consent -->
-        <div class="form-group full-width">
-          <label class="consent-card" for="consent">
-            <input type="checkbox" id="consent" name="consent" value="Agreed" required />
-            <span class="consent-text">
-              <strong>Photo &amp; Video Consent <span class="req">*</span>:</strong> Photos and videos are allowed during the session (without original audio). I agree that photos/videos taken may also be used for official event documentation and promotional releases.
-            </span>
-          </label>
-        </div>
-
-      </div>
-
-      <!-- Submit Action Button -->
-      <button type="submit" id="submitBtn" class="submit-btn">
-        <span class="spinner" id="btnSpinner"></span>
-        <span id="btnText">Claim Your Live Audience Pass</span>
-        <i data-lucide="arrow-right" id="btnIcon" style="width: 16px; height: 16px;"></i>
-      </button>
-
-      <div id="statusMsg"></div>
-    </form>
-
-    <!-- Event Closed Card (Displayed automatically on Sep 4 at 02:00 PM) -->
-    <div class="closed-card" id="closedCard" style="display: none;">
+    <!-- Event Closed & Concluded Card -->
+    <div class="closed-card" id="closedCard" style="display: block;">
       <div class="closed-icon-badge">
         <i data-lucide="lock" style="width: 24px; height: 24px; color: #dc2626;"></i>
       </div>
-      <h3 class="closed-title">Registrations Are Now Closed</h3>
+      <h3 class="closed-title">Registrations Are Closed</h3>
       <p class="closed-desc">
-        Online registrations for <em>The Asif Talks — Live Episode #2</em> closed automatically at <strong>02:00 PM on Sep 4, 2026</strong> as the live recording session has commenced with <strong>Hon. Mayor Syed Iqbal Syed Khwaja</strong>.
+        <em>The Asif Talks — Live Episode #2</em> with <strong>Hon. Mayor Syed Iqbal Syed Khwaja</strong> (Mayor, Parbhani Municipal Corporation) was successfully recorded live with a full-house audience!
       </p>
 
       <div class="closed-highlights">
         <div class="highlight-item">
           <i data-lucide="users" style="width: 18px; height: 18px; color: #2563eb; flex-shrink: 0; margin-top: 2px;"></i>
           <div>
-            <strong>Full House Audience</strong>
-            <span>Auditorium gates are closed for live studio recording</span>
+            <strong>Full House Audience • Grand Success</strong>
+            <span>Recorded at Dr. A.P.J. Abdul Kalam Auditorium Hall</span>
           </div>
         </div>
         <div class="highlight-item">
           <i data-lucide="video" style="width: 18px; height: 18px; color: #ea580c; flex-shrink: 0; margin-top: 2px;"></i>
           <div>
             <strong>Episode Premiere Coming Soon</strong>
-            <span>Full video podcast will release on YouTube</span>
+            <span>The full video podcast will be released on YouTube</span>
           </div>
         </div>
       </div>
@@ -1614,7 +1466,7 @@
       <div class="closed-actions">
         <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="closed-btn-whatsapp">
           <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i>
-          <span>Join WhatsApp Community for Ep #3 Alerts</span>
+          <span>Join WhatsApp Community for Ep #3 Updates</span>
         </a>
         <a href="https://www.dcode.club" target="_blank" rel="noopener noreferrer" class="closed-btn-website">
           <i data-lucide="globe" style="width: 15px; height: 15px;"></i>
