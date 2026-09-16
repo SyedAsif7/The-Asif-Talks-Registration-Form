@@ -8,21 +8,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   
   <!-- Primary Meta Tags -->
-  <title>The Asif Talks — Live Episode #2 | Hon. Mayor Syed Iqbal Syed Khwaja</title>
-  <meta name="title" content="The Asif Talks — Live Episode #2 | Hon. Mayor Syed Iqbal Syed Khwaja" />
-  <meta name="description" content="Register for official live studio audience passes for The Asif Talks (Ep #2) with Syed Asif and Distinguished Guest Hon. Mayor Syed Iqbal Syed Khwaja, Mayor, Parbhani Municipal Corporation." />
+  <title>The Asif Talks — Episode #3 | Coming Soon</title>
+  <meta name="title" content="The Asif Talks — Episode #3 | Coming Soon" />
+  <meta name="description" content="Get ready for Episode #3 of The Asif Talks with Syed Asif. Exclusive live podcast recording coming soon. Join the official WhatsApp community for instant pass drop alerts and guest reveal." />
 
   <!-- Open Graph / WhatsApp Preview -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.dcode.club" />
-  <meta property="og:title" content="The Asif Talks — Live Episode #2 Pass Registration" />
-  <meta property="og:description" content="Join Syed Asif in dialogue with Hon. Mayor Syed Iqbal Syed Khwaja, Mayor, Parbhani Municipal Corporation. Claim your free live audience pass now!" />
+  <meta property="og:title" content="The Asif Talks — Episode #3 | Coming Soon" />
+  <meta property="og:description" content="Something big is brewing! Get ready for Episode #3 of The Asif Talks with Syed Asif and a Special Distinguished Guest. Free audience passes dropping soon." />
   <meta property="og:image" content="assets/asif_talks_host.jpg" />
 
   <!-- Twitter Meta -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:title" content="The Asif Talks — Live Episode #2 Pass Registration" />
-  <meta property="twitter:description" content="Join Syed Asif in dialogue with Hon. Mayor Syed Iqbal Syed Khwaja, Mayor, Parbhani Municipal Corporation." />
+  <meta property="twitter:title" content="The Asif Talks — Episode #3 | Coming Soon" />
+  <meta property="twitter:description" content="Get ready for Episode #3 of The Asif Talks with Syed Asif. Free live audience passes dropping soon." />
   <meta property="twitter:image" content="assets/asif_talks_host.jpg" />
 
   <!-- Google Fonts: Inter & Outfit -->
@@ -30,14 +30,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Icons & Helper Libraries -->
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
-    /* ==========================================================================
-       1. CSS Variables & Reset
-       ========================================================================== */
     :root {
       --bg-dark: #060d17;
       --bg-surface: #0f172a;
@@ -69,9 +65,9 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(at 10% 10%, rgba(37, 99, 235, 0.22) 0px, transparent 50%),
-        radial-gradient(at 90% 90%, rgba(245, 158, 11, 0.15) 0px, transparent 50%),
-        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.9) 0px, transparent 100%);
+        radial-gradient(at 10% 10%, rgba(37, 99, 235, 0.25) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(245, 158, 11, 0.18) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.92) 0px, transparent 100%);
       color: var(--text-main);
       min-height: 100vh;
       min-height: 100dvh;
@@ -79,32 +75,23 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 16px 12px 36px;
+      padding: 18px 12px 36px;
     }
 
     .wrapper {
       width: 100%;
-      max-width: 620px;
+      max-width: 600px;
       margin: 0 auto;
     }
 
-    /* ==========================================================================
-       2. Top Partner & Sponsor Bar
-       ========================================================================== */
+    /* Top Partner Bar */
     .top-partner-bar {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 7px;
       margin-bottom: 12px;
-      overflow-x: auto;
-      padding: 4px 2px;
-      scrollbar-width: none;
       flex-wrap: wrap;
-    }
-
-    .top-partner-bar::-webkit-scrollbar {
-      display: none;
     }
 
     .partner-pill {
@@ -115,7 +102,7 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 999px;
       padding: 4px 10px;
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 700;
       color: #e2e8f0;
       letter-spacing: 0.2px;
@@ -124,8 +111,8 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
-    .partner-pill.sponsor-pill {
-      border-color: rgba(245, 158, 11, 0.4);
+    .partner-pill.highlight-pill {
+      border-color: rgba(245, 158, 11, 0.45);
       background: rgba(245, 158, 11, 0.12);
       color: #fef08a;
     }
@@ -138,9 +125,7 @@
       display: block;
     }
 
-    /* ==========================================================================
-       3. Main Container & Header
-       ========================================================================== */
+    /* Main Container */
     .container {
       background: var(--card-bg);
       border-radius: var(--radius-lg);
@@ -149,10 +134,11 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    /* Header */
     .header {
       background: linear-gradient(180deg, #0f2744 0%, #081426 100%);
       color: white;
-      padding: 22px 16px 18px;
+      padding: 24px 18px 20px;
       text-align: center;
       position: relative;
     }
@@ -172,201 +158,62 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
-    .badge-live {
+    .badge-ep {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      background: #ef4444;
-      color: #fff;
+      gap: 6px;
+      background: rgba(37, 99, 235, 0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.4);
       padding: 4px 12px;
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 800;
       border-radius: 50px;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      box-shadow: 0 0 16px rgba(239, 68, 68, 0.6);
-      animation: pulseLive 2s infinite;
     }
 
-    .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background-color: white;
-      border-radius: 50%;
-    }
-
-    @keyframes pulseLive {
-      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-      70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-    }
-
-    .badge-seats {
+    .badge-coming {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(245, 158, 11, 0.15);
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.2);
       color: #fef08a;
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      padding: 4px 11px;
-      font-size: 10.5px;
-      font-weight: 700;
-      border-radius: 50px;
-      letter-spacing: 0.3px;
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
-    }
-
-    .badge-seats strong {
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    .event-concluded-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
-      color: #ffffff;
+      border: 1px solid rgba(245, 158, 11, 0.45);
       padding: 4px 12px;
       font-size: 10.5px;
       font-weight: 800;
       border-radius: 50px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 14px rgba(34, 197, 94, 0.4);
+      letter-spacing: 0.6px;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);
     }
 
-    .badge-closed {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(239, 68, 68, 0.15);
-      color: #fca5a5;
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      padding: 4px 11px;
-      font-size: 10.5px;
-      font-weight: 700;
-      border-radius: 50px;
-      letter-spacing: 0.3px;
-    }
-
-    .closed-card {
-      padding: 28px 18px;
-      text-align: center;
-      animation: fadeIn 0.4s ease forwards;
-    }
-
-    .closed-icon-badge {
-      width: 54px;
-      height: 54px;
-      background: #fef2f2;
-      border: 2px solid #fecaca;
+    .pulse-dot-gold {
+      width: 6px;
+      height: 6px;
+      background-color: #f59e0b;
       border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
+      box-shadow: 0 0 8px #f59e0b;
+      animation: pulseGold 1.5s infinite;
     }
 
-    .closed-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 8px;
+    @keyframes pulseGold {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
     }
 
-    .closed-desc {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.5;
-      max-width: 460px;
-      margin: 0 auto 18px;
-    }
-
-    .closed-highlights {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      margin-bottom: 18px;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .highlight-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      font-size: 12px;
-      color: #334155;
-      line-height: 1.35;
-    }
-
-    .highlight-item strong {
-      display: block;
-      color: #0f172a;
-      font-size: 12.5px;
-    }
-
-    .highlight-item span {
-      color: #64748b;
-      font-size: 11.5px;
-    }
-
-    .closed-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-
-    .closed-btn-whatsapp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 700;
-      padding: 12px 16px;
-      border-radius: var(--radius-sm);
-      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
-      transition: all 0.2s;
-    }
-
-    .closed-btn-whatsapp:active {
-      transform: scale(0.98);
-    }
-
-    .closed-btn-website {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      background: #0f172a;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 11px 16px;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-    }
-
-    /* Dual Speaker Spotlight */
+    /* Dual Speaker Showcase (Host & Mystery Guest) */
     .speaker-showcase {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
       margin-top: 6px;
     }
 
@@ -378,20 +225,15 @@
     }
 
     .speaker-img-wrap {
-      width: 76px;
-      height: 76px;
+      width: 82px;
+      height: 82px;
       border-radius: 50%;
       padding: 3px;
       background: linear-gradient(135deg, #2563eb, #60a5fa);
       box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
-      margin-bottom: 7px;
+      margin-bottom: 8px;
       flex-shrink: 0;
       position: relative;
-    }
-
-    .speaker-img-wrap.guest-wrap {
-      background: linear-gradient(135deg, #f59e0b, #ef4444);
-      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.45);
     }
 
     .speaker-img-wrap img {
@@ -399,20 +241,23 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center 15%;
       display: block;
       background: #0f172a;
     }
 
-    .speaker-img-wrap.guest-wrap img {
-      object-position: center 20%;
+    .speaker-img-wrap.mystery-wrap {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .speaker-avatar-fallback {
+    .mystery-inner {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      background: #0f172a;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -420,12 +265,16 @@
       color: #f59e0b;
     }
 
-    .speaker-avatar-fallback span {
-      font-size: 10px;
-      font-weight: 900;
-      color: #fef08a;
-      letter-spacing: 0.5px;
-      margin-top: 2px;
+    .mystery-inner i {
+      width: 32px;
+      height: 32px;
+      stroke-width: 2.5;
+      animation: bounceGentle 2s infinite ease-in-out;
+    }
+
+    @keyframes bounceGentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
     }
 
     .speaker-role {
@@ -433,7 +282,7 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 4px;
       margin-bottom: 4px;
       display: inline-block;
@@ -442,30 +291,29 @@
     .role-host {
       background: rgba(37, 99, 235, 0.35);
       color: #93c5fd;
-      border: 1px solid rgba(96, 165, 250, 0.4);
+      border: 1px solid rgba(59, 130, 246, 0.4);
     }
 
     .role-guest {
-      background: rgba(245, 158, 11, 0.35);
-      color: #fde68a;
-      border: 1px solid rgba(251, 191, 36, 0.4);
+      background: rgba(245, 158, 11, 0.3);
+      color: #fef08a;
+      border: 1px solid rgba(245, 158, 11, 0.45);
     }
 
     .speaker-name {
       font-family: 'Outfit', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       color: #ffffff;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
+      line-height: 1.2;
     }
 
     .speaker-desc {
-      font-size: 9.5px;
+      font-size: 10.5px;
       color: #94a3b8;
       margin-top: 2px;
       line-height: 1.3;
-      max-width: 145px;
+      max-width: 150px;
     }
 
     .speaker-divider {
@@ -473,743 +321,204 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0 2px;
     }
 
     .speaker-divider span {
-      font-size: 9.5px;
-      font-weight: 900;
-      color: #64748b;
-      letter-spacing: 1px;
-      background: rgba(15, 23, 42, 0.8);
-      padding: 3px 6px;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* ==========================================================================
-       4. Event Ribbon & Live Countdown
-       ========================================================================== */
-    .event-ribbon {
-      background: #f1f5f9;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 10px 14px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1.3fr;
-      gap: 6px;
-      text-align: center;
-    }
-
-    .ribbon-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-
-    .ribbon-label {
-      font-size: 9.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #64748b;
-      letter-spacing: 0.4px;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-    }
-
-    .ribbon-value {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: #0f172a;
-      line-height: 1.2;
-    }
-
-    .countdown-bar {
-      background: linear-gradient(135deg, #0a1829 0%, #0f2744 100%);
-      color: white;
-      padding: 10px 14px;
-      text-align: center;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .countdown-title {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #94a3b8;
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .countdown-grid {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .countdown-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 6px;
-      padding: 3px 7px;
-      min-width: 44px;
-    }
-
-    .cd-num {
-      font-family: 'Outfit', monospace;
-      font-size: 15px;
-      font-weight: 800;
-      color: #fde047;
-      line-height: 1.1;
-    }
-
-    .cd-lbl {
-      font-size: 8px;
-      text-transform: uppercase;
-      color: #94a3b8;
-      letter-spacing: 0.4px;
-      margin-top: 1px;
-    }
-
-    .cd-sep {
-      font-weight: 900;
-      color: #64748b;
-      font-size: 13px;
-    }
-
-    /* Core Themes Box */
-    .themes-banner {
-      background: #f8fafc;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 12px 14px;
-    }
-
-    .themes-title {
-      font-size: 10.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #0f172a;
-      letter-spacing: 0.5px;
-      margin-bottom: 7px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .themes-pills-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .theme-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      padding: 3px 7px;
-      font-size: 10px;
-      font-weight: 600;
-      color: #334155;
-      line-height: 1.2;
-    }
-
-    /* ==========================================================================
-       5. Registration Form
-       ========================================================================== */
-    form {
-      padding: 18px 16px 20px;
-    }
-
-    .notice {
-      background: #fffbeb;
-      border-left: 3.5px solid #f59e0b;
-      padding: 9px 11px;
-      margin-bottom: 15px;
-      border-radius: 4px;
-      font-size: 11.5px;
-      color: #78350f;
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      line-height: 1.4;
-    }
-
-    .notice-icon {
-      color: #f59e0b;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px 10px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group.full-width {
-      grid-column: span 2;
-    }
-
-    label {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: #334155;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .req {
-      color: var(--accent-red);
-      font-weight: 800;
-    }
-
-    .opt {
-      font-size: 10px;
-      font-weight: 500;
-      color: #94a3b8;
-    }
-
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .input-icon {
-      position: absolute;
-      left: 11px;
-      color: #94a3b8;
-      pointer-events: none;
-      transition: color 0.2s;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 10px 10px 10px 34px;
-      border: 1.5px solid #cbd5e1;
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      color: var(--text-main);
-      background-color: #fff;
-      outline: none;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
-
-    select {
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 11px center;
-      padding-right: 30px;
-      cursor: pointer;
-    }
-
-    textarea {
-      padding: 10px 10px 10px 34px;
-      resize: vertical;
-      min-height: 65px;
-      line-height: 1.45;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--primary-accent);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-      background-color: #fff;
-    }
-
-    .input-wrapper:focus-within .input-icon {
-      color: var(--primary-accent);
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: #94a3b8;
-      font-size: 12.5px;
-    }
-
-    .helper-text {
-      font-size: 10.5px;
-      color: #64748b;
-      margin-top: 3px;
-      line-height: 1.3;
-    }
-
-    /* Consent Card */
-    .consent-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: #f8fafc;
-      border: 1.5px solid #e2e8f0;
-      border-radius: var(--radius-sm);
-      padding: 12px;
-      margin-top: 2px;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      transition: all 0.2s;
-    }
-
-    .consent-card:hover {
-      border-color: #93c5fd;
-      background: #f0f7ff;
-    }
-
-    .consent-card input[type="checkbox"] {
-      width: 20px !important;
-      min-width: 20px !important;
-      height: 20px !important;
-      min-height: 20px !important;
-      margin: 2px 0 0 0 !important;
-      padding: 0 !important;
-      accent-color: var(--primary-accent) !important;
-      cursor: pointer !important;
-      flex-shrink: 0 !important;
-      display: inline-block !important;
-      opacity: 1 !important;
-      position: relative !important;
-    }
-
-    .consent-text {
-      font-size: 11.5px;
-      font-weight: 500;
-      color: #334155;
-      line-height: 1.4;
-    }
-
-    /* Submit Button */
-    .submit-btn {
-      width: 100%;
-      min-height: 48px;
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-      color: white;
-      padding: 13px 18px;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
-      transition: all 0.2s ease;
-      margin-top: 10px;
-    }
-
-    .submit-btn:active:not(:disabled) {
-      transform: scale(0.98);
-      background: #1d4ed8;
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.75;
-      cursor: not-allowed;
-    }
-
-    .spinner {
-      display: none;
-      width: 17px;
-      height: 17px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .input-error {
-      border-color: #ef4444 !important;
-      background-color: #fffbfb !important;
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
-      animation: shakeField 0.3s ease-in-out;
-    }
-
-    @keyframes shakeField {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-4px); }
-      40%, 80% { transform: translateX(4px); }
-    }
-
-    #statusMsg {
-      display: none;
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 12.5px;
-      font-weight: 600;
-      text-align: center;
-      line-height: 1.4;
-      animation: fadeIn 0.3s ease;
-    }
-
-    #statusMsg.error {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #b91c1c;
-    }
-
-    #statusMsg.warning {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      color: #b45309;
-    }
-
-    #statusMsg.success {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      color: #15803d;
-    }
-
-    /* ==========================================================================
-       6. Confirmation Screen & Digital Pass
-       ========================================================================== */
-    #passSuccessCard {
-      display: none;
-      padding: 22px 16px;
-      text-align: center;
-      animation: fadeIn 0.35s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .success-icon-wrap {
-      width: 48px;
-      height: 48px;
-      background: #dcfce7;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-    }
-
-    .screenshot-tip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1d4ed8;
-      padding: 5px 11px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      margin-top: 6px;
-    }
-
-    /* WhatsApp Join & Share Card */
-    .whatsapp-card {
-      background: linear-gradient(135deg, #052e16 0%, #064e3b 100%);
-      border: 1.5px solid #22c55e;
-      border-radius: var(--radius-md);
-      padding: 14px;
-      margin: 14px 0;
-      text-align: left;
-      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
-    }
-
-    .whatsapp-card-content {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .whatsapp-icon-circle {
-      width: 38px;
-      height: 38px;
-      background: #22c55e;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    .whatsapp-card-title {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.2;
-    }
-
-    .whatsapp-card-sub {
-      font-size: 11px;
-      color: #86efac;
-      margin-top: 2px;
-      line-height: 1.3;
-    }
-
-    .whatsapp-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: #22c55e;
-      color: #052e16;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
-      box-shadow: 0 3px 10px rgba(34, 197, 94, 0.4);
-      transition: all 0.2s;
-    }
-
-    .whatsapp-btn:active {
-      transform: scale(0.98);
-      background: #16a34a;
-      color: white;
-    }
-
-    .whatsapp-share-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 9px 14px;
-      border-radius: var(--radius-sm);
-      margin-top: 8px;
-      transition: all 0.2s;
-    }
-
-    .whatsapp-share-btn:active {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Digital Boarding Pass Ticket */
-    .pass-ticket {
-      background: #ffffff;
-      border: 2px solid #0f172a;
-      border-radius: var(--radius-md);
-      margin: 14px 0;
-      text-align: left;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-      position: relative;
-    }
-
-    .pass-ticket-header {
-      background: linear-gradient(135deg, #0f2744 0%, #060d17 100%);
-      color: white;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 2px dashed #334155;
-    }
-
-    .pass-brand-lockup {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .pass-brand-lockup img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1.5px solid #60a5fa;
-      object-fit: cover;
-    }
-
-    .pass-title-main {
       font-family: 'Outfit', sans-serif;
-      font-size: 12.5px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      color: #fff;
-    }
-
-    .pass-title-sub {
-      font-size: 9.5px;
-      color: #94a3b8;
-    }
-
-    .pass-id-badge {
-      background: #f59e0b;
-      color: #0f172a;
-      padding: 4px 9px;
-      border-radius: 6px;
-      font-family: 'Outfit', monospace;
+      font-size: 11px;
       font-weight: 900;
-      font-size: 12.5px;
-      letter-spacing: 0.5px;
+      color: #f59e0b;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 3px 8px;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
     }
 
-    .pass-body-wrap {
+    /* Ribbon */
+    .event-ribbon {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px 14px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px;
-      background: #ffffff;
-    }
-
-    .pass-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 8px;
-      flex: 1;
-    }
-
-    .pass-grid-item {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .pass-grid-item .label {
-      font-size: 9.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #64748b;
-      letter-spacing: 0.3px;
-    }
-
-    .pass-grid-item .value {
-      font-size: 12px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 1px;
-      word-break: break-word;
-    }
-
-    .pass-qr-box {
-      display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #f8fafc;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 6px;
-      flex-shrink: 0;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       text-align: center;
-      min-width: 96px;
     }
 
-    .pass-qr-box img {
+    .event-ribbon i {
+      color: #f59e0b;
+    }
+
+    /* Body Card */
+    .teaser-body {
+      padding: 30px 22px;
+      text-align: center;
+    }
+
+    .teaser-hero-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(245, 158, 11, 0.15));
+      border: 2px solid rgba(37, 99, 235, 0.25);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: #2563eb;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+    }
+
+    .teaser-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 23px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .teaser-subtitle {
+      font-size: 13.5px;
+      color: #64748b;
+      line-height: 1.55;
+      max-width: 480px;
+      margin: 0 auto 22px;
+    }
+
+    /* Highlight Cards */
+    .highlights-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .highlight-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .highlight-card:hover {
+      border-color: #cbd5e1;
+      transform: translateY(-1px);
+    }
+
+    .highlight-card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-pass { background: #eff6ff; color: #2563eb; }
+    .icon-mic { background: #fef3c7; color: #d97706; }
+    .icon-qa { background: #f0fdf4; color: #16a34a; }
+
+    .highlight-card-text strong {
       display: block;
-      width: 84px;
-      height: 84px;
-      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 2px;
     }
 
-    .pass-qr-label {
-      font-size: 8.5px;
+    .highlight-card-text span {
+      font-size: 11.5px;
+      color: #64748b;
+      line-height: 1.35;
+      display: block;
+    }
+
+    /* Actions */
+    .action-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-whatsapp-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
       font-weight: 800;
-      color: #475569;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      padding: 13px 18px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-whatsapp-primary:active {
+      transform: scale(0.98);
+      background: #15803d;
+    }
+
+    .btn-share-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #0f172a;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
+    .btn-share-whatsapp:active {
+      background: #1e293b;
+      transform: scale(0.98);
+    }
+
+    .btn-website-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 700;
       margin-top: 4px;
     }
 
-    .pass-footer-banner {
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      padding: 9px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 10.5px;
-      color: #475569;
+    .btn-website-link:hover {
+      text-decoration: underline;
     }
 
-    .pass-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .action-btn-primary {
-      background: linear-gradient(135deg, #0f2744 0%, #1e3a8a 100%);
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      box-shadow: 0 4px 12px rgba(15, 39, 68, 0.3);
-      transition: all 0.2s;
-    }
-
-    .action-btn-primary:active {
-      transform: scale(0.98);
-    }
-
-    .action-btn-secondary {
-      background: #f1f5f9;
-      color: #334155;
-      border: 1px solid #cbd5e1;
-      padding: 10px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 12.5px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-
-    .action-btn-secondary:hover {
-      background: #e2e8f0;
-    }
-
-    /* ==========================================================================
-       7. Footer Partners & Credits
-       ========================================================================== */
+    /* Footer */
     .footer-credits {
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      padding: 14px 16px;
+      margin-top: 18px;
       text-align: center;
+      padding: 0 10px;
     }
 
     .footer-title {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
       text-transform: uppercase;
       color: #64748b;
@@ -1254,68 +563,26 @@
       font-weight: 600;
     }
 
-    /* ==========================================================================
-       8. Responsive Tweaks & Print
-       ========================================================================== */
     @media (max-width: 520px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-      .form-group.full-width {
-        grid-column: span 1;
-      }
       .speaker-showcase {
-        gap: 4px;
+        gap: 6px;
       }
       .speaker-img-wrap {
-        width: 66px;
-        height: 66px;
+        width: 70px;
+        height: 70px;
       }
       .speaker-name {
-        font-size: 12px;
+        font-size: 12.5px;
       }
       .speaker-desc {
         font-size: 9.5px;
-        max-width: 125px;
+        max-width: 120px;
       }
-      .event-ribbon {
-        grid-template-columns: 1fr 1fr 1fr;
-        padding: 8px 10px;
+      .teaser-title {
+        font-size: 20px;
       }
-      .ribbon-value {
-        font-size: 10px;
-      }
-      .pass-body-wrap {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .pass-qr-box {
-        margin-top: 6px;
-        padding: 10px;
-      }
-      .pass-qr-box img {
-        width: 110px;
-        height: 110px;
-      }
-    }
-
-    @media print {
-      body {
-        background: #ffffff !important;
-        padding: 0 !important;
-      }
-      .top-partner-bar, .header, .event-ribbon, .countdown-bar, .themes-banner, form, .whatsapp-card, .pass-actions, .screenshot-tip, .footer-credits {
-        display: none !important;
-      }
-      #passSuccessCard {
-        display: block !important;
-        padding: 0 !important;
-      }
-      .pass-ticket {
-        border: 2px solid #000 !important;
-        box-shadow: none !important;
-        margin: 40px auto !important;
-        max-width: 480px !important;
+      .teaser-body {
+        padding: 24px 16px;
       }
     }
   </style>
@@ -1338,13 +605,9 @@
       <img src="assets/vertex_logo.jpg" alt="Vertex Tech" />
       <span>Vertex Tech</span>
     </div>
-    <div class="partner-pill sponsor-pill">
-      <i data-lucide="utensils" style="width: 11px; height: 11px; color: #f59e0b;"></i>
-      <span>Hotel Venkatesha (Sponsor)</span>
-    </div>
-    <div class="partner-pill sponsor-pill">
-      <i data-lucide="zap" style="width: 11px; height: 11px; color: #f59e0b;"></i>
-      <span>Tulsi Furniture &amp; Elec</span>
+    <div class="partner-pill highlight-pill">
+      <i data-lucide="sparkles" style="width: 11px; height: 11px; color: #f59e0b;"></i>
+      <span>Official Podcast</span>
     </div>
   </div>
 
@@ -1354,15 +617,15 @@
     <div class="header">
       
       <div class="badge-row">
-        <span class="event-concluded-badge">
-          <i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Ep #2 • Grand Success
+        <span class="badge-ep">
+          <i data-lucide="mic" style="width: 11px; height: 11px;"></i> The Asif Talks • Ep #3
         </span>
-        <span class="badge-closed">
-          <i data-lucide="lock" style="width: 11px; height: 11px;"></i> Registrations Closed
+        <span class="badge-coming">
+          <span class="pulse-dot-gold"></span> Coming Soon
         </span>
       </div>
 
-      <!-- Dual Spotlight: Host & Distinguished Guest -->
+      <!-- Dual Spotlight: Host & Mystery Guest -->
       <div class="speaker-showcase">
         
         <!-- Host: Syed Asif -->
@@ -1380,14 +643,16 @@
           <span>WITH</span>
         </div>
 
-        <!-- Guest: Hon. Mayor Syed Iqbal Syed Khwaja -->
+        <!-- Mystery Guest: To Be Revealed -->
         <div class="speaker-box">
-          <div class="speaker-img-wrap guest-wrap">
-            <img src="assets/mayor_iqbal.jpg" alt="Hon. Mayor Syed Iqbal Syed Khwaja" />
+          <div class="speaker-img-wrap mystery-wrap">
+            <div class="mystery-inner">
+              <i data-lucide="help-circle"></i>
+            </div>
           </div>
           <span class="speaker-role role-guest">Distinguished Guest</span>
-          <div class="speaker-name">Hon. Mayor Syed Iqbal</div>
-          <div class="speaker-desc">Mayor, Parbhani Municipal Corporation</div>
+          <div class="speaker-name">To Be Revealed</div>
+          <div class="speaker-desc">Guest Announcement Soon</div>
         </div>
 
       </div>
@@ -1396,199 +661,81 @@
 
     <!-- Event Quick Details Ribbon -->
     <div class="event-ribbon">
-      <div class="ribbon-item">
-        <span class="ribbon-label"><i data-lucide="calendar" style="width: 11px; height: 11px;"></i> Date</span>
-        <span class="ribbon-value">Fri, Sep 4, 2026</span>
-      </div>
-      <div class="ribbon-item">
-        <span class="ribbon-label"><i data-lucide="clock" style="width: 11px; height: 11px;"></i> Time</span>
-        <span class="ribbon-value">11:00 AM</span>
-      </div>
-      <div class="ribbon-item">
-        <span class="ribbon-label"><i data-lucide="map-pin" style="width: 11px; height: 11px;"></i> Venue</span>
-        <span class="ribbon-value">Dr. A.P.J. Kalam Auditorium, SSIEMS</span>
-      </div>
+      <i data-lucide="podcast" style="width: 15px; height: 15px;"></i>
+      <span>Live Studio Recording • Passes &amp; Guest Announcement Coming Soon</span>
     </div>
 
-    <!-- Event Concluded Ribbon -->
-    <div class="countdown-bar" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 14px 16px;">
-      <div class="countdown-title" style="color: #4ade80; font-size: 13px; font-weight: 700;">
-        <i data-lucide="award" style="width: 15px; height: 15px; color: #4ade80;"></i>
-        <span>Episode #2 Recorded Live on Fri, Sep 4, 2026</span>
+    <!-- Teaser Card Body -->
+    <div class="teaser-body">
+      
+      <div class="teaser-hero-icon">
+        <i data-lucide="sparkles" style="width: 30px; height: 30px;"></i>
       </div>
-      <div style="font-size: 11.5px; color: #94a3b8; margin-top: 3px; font-weight: 500;">
-        Dr. A.P.J. Abdul Kalam Auditorium, SSIEMS, Parbhani
-      </div>
-    </div>
 
-    <!-- Core Discussion Themes Banner -->
-    <div class="themes-banner">
-      <div class="themes-title">
-        <i data-lucide="sparkles" style="width: 13px; height: 13px; color: #2563eb;"></i>
-        <span>Episode #2 Discussion Themes</span>
-      </div>
-      <div class="themes-pills-wrap">
-        <span class="theme-pill">🏛️ Local Governance &amp; Leadership</span>
-        <span class="theme-pill">🏗️ City Infrastructure &amp; Projects</span>
-        <span class="theme-pill">💡 Smart City &amp; Tech Services</span>
-        <span class="theme-pill">🌳 Youth, Sports &amp; Public Parks</span>
-        <span class="theme-pill">🤝 Student Civic Responsibility</span>
-      </div>
-    </div>
-
-    <!-- Event Closed & Concluded Card -->
-    <div class="closed-card" id="closedCard" style="display: block;">
-      <div class="closed-icon-badge">
-        <i data-lucide="lock" style="width: 24px; height: 24px; color: #dc2626;"></i>
-      </div>
-      <h3 class="closed-title">Registrations Are Closed</h3>
-      <p class="closed-desc">
-        <em>The Asif Talks — Live Episode #2</em> with <strong>Hon. Mayor Syed Iqbal Syed Khwaja</strong> (Mayor, Parbhani Municipal Corporation) was successfully recorded live with a full-house audience!
+      <h2 class="teaser-title">Episode #3 is Coming Soon!</h2>
+      <p class="teaser-subtitle">
+        Get ready for the next high-energy episode of <strong>The Asif Talks</strong>! An extraordinary guest speaker, deep unfiltered conversations, and limited free live studio audience passes will be revealed shortly.
       </p>
 
-      <div class="closed-highlights">
-        <div class="highlight-item">
-          <i data-lucide="users" style="width: 18px; height: 18px; color: #2563eb; flex-shrink: 0; margin-top: 2px;"></i>
-          <div>
-            <strong>Full House Audience • Grand Success</strong>
-            <span>Recorded at Dr. A.P.J. Abdul Kalam Auditorium Hall</span>
+      <!-- Highlight Cards -->
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-card-icon icon-pass">
+            <i data-lucide="ticket" style="width: 18px; height: 18px;"></i>
+          </div>
+          <div class="highlight-card-text">
+            <strong>Limited Free Audience Passes</strong>
+            <span>Exclusive early-access digital boarding passes will drop for community members.</span>
           </div>
         </div>
-        <div class="highlight-item">
-          <i data-lucide="video" style="width: 18px; height: 18px; color: #ea580c; flex-shrink: 0; margin-top: 2px;"></i>
-          <div>
-            <strong>Episode Premiere Coming Soon</strong>
-            <span>The full video podcast will be released on YouTube</span>
+
+        <div class="highlight-card">
+          <div class="highlight-card-icon icon-mic">
+            <i data-lucide="radio" style="width: 18px; height: 18px;"></i>
+          </div>
+          <div class="highlight-card-text">
+            <strong>Live Studio Audience Experience</strong>
+            <span>Witness the live podcast recording in-person at the auditorium hall.</span>
+          </div>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-card-icon icon-qa">
+            <i data-lucide="message-square-quote" style="width: 18px; height: 18px;"></i>
+          </div>
+          <div class="highlight-card-text">
+            <strong>Interactive Guest Q&amp;A Opportunity</strong>
+            <span>Submit your questions and engage directly with the distinguished guest speaker.</span>
           </div>
         </div>
       </div>
 
-      <div class="closed-actions">
-        <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="closed-btn-whatsapp">
-          <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i>
-          <span>Join WhatsApp Community for Ep #3 Updates</span>
+      <!-- Call-To-Action Buttons -->
+      <div class="action-group">
+        <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-primary">
+          <i data-lucide="message-circle" style="width: 18px; height: 18px;"></i>
+          <span>Join WhatsApp Group for Ep #3 Pass Alerts</span>
         </a>
-        <a href="https://www.dcode.club" target="_blank" rel="noopener noreferrer" class="closed-btn-website">
-          <i data-lucide="globe" style="width: 15px; height: 15px;"></i>
-          <span>Visit Official Website (dcode.club)</span>
-        </a>
-      </div>
-    </div>
 
-    <!-- Success Pass Confirmation Card -->
-    <div id="passSuccessCard">
-      <div class="success-icon-wrap">
-        <i data-lucide="check-circle-2" style="width: 28px; height: 28px; color: #16a34a;"></i>
-      </div>
-      <h2 style="font-size: 19px; font-weight: 800; color: #0f172a; margin-bottom: 2px;">Pass Confirmed!</h2>
-      <p style="font-size: 12px; color: #64748b;">Present this official boarding pass with your ID at the gate.</p>
-      
-      <div>
-        <span class="screenshot-tip">
-          <i data-lucide="camera" style="width: 12px; height: 12px;"></i> Take a screenshot of this pass
-        </span>
-      </div>
-
-      <!-- WhatsApp Group Join & Share Card -->
-      <div class="whatsapp-card">
-        <div class="whatsapp-card-content">
-          <div class="whatsapp-icon-circle">
-            <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
-          </div>
-          <div>
-            <div class="whatsapp-card-title">Join Audience WhatsApp Group</div>
-            <div class="whatsapp-card-sub">Get episode entry updates, seating instructions &amp; announcements</div>
-          </div>
-        </div>
-        <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-          <i data-lucide="users" style="width: 15px; height: 15px;"></i>
-          <span>Join Audience WhatsApp Group</span>
-          <i data-lucide="external-link" style="width: 13px; height: 13px;"></i>
-        </a>
-        <a href="https://api.whatsapp.com/send?text=%F0%9F%8E%99%EF%B8%8F%20*THE%20ASIF%20TALKS%20%E2%80%94%20LIVE%20EPISODE%20%232*%20%F0%9F%8E%99%EF%B8%8F%0A%0AHey%2C%20I%20just%20claimed%20my%20Live%20Audience%20Pass%20for%20*The%20Asif%20Talks*%20with%20Distinguished%20Guest%20*Hon.%20Mayor%20Syed%20Iqbal%20Syed%20Khwaja*%2C%20Mayor%2C%20Parbhani%20Municipal%20Corporation.%0A%0A%F0%9F%93%85%20*Date%3A*%20Fri%2C%20Sep%204%2C%202026%0A%E2%8F%B0%20*Reporting%20Time%3A*%2010%3A30%20AM%20%28Starts%2011%3A00%20AM%29%0A%F0%9F%93%8D%20*Venue%3A*%20Dr.%20A.P.J.%20Abdul%20Kalam%20Auditorium%2C%20SSIEMS%2C%20Parbhani%0A%0A%F0%9F%8E%9F%EF%B8%8F%20*Limited%20Seats...%21%21%21%20Claim%20your%20free%20pass%20now%3A*%0A%F0%9F%91%89%20https%3A%2F%2Fwww.dcode.club" target="_blank" rel="noopener noreferrer" class="whatsapp-share-btn">
-          <i data-lucide="share-2" style="width: 14px; height: 14px;"></i>
+        <a href="https://api.whatsapp.com/send?text=%F0%9F%8E%99%EF%B8%8F%20*THE%20ASIF%20TALKS%20%E2%80%94%20EPISODE%20%233%20COMING%20SOON%21*%20%F0%9F%9A%80%0A%0AGet%20ready%20for%20the%20next%20live%20studio%20podcast%20episode%20of%20*The%20Asif%20Talks*%20with%20Syed%20Asif%20and%20an%20exclusive%20Distinguished%20Guest%21%0A%0A%F0%9F%8E%9F%EF%B8%8F%20*Limited%20Free%20Live%20Audience%20Passes%20will%20drop%20soon.*%0A%F0%9F%91%89%20Stay%20tuned%20at%3A%20https%3A%2F%2Fwww.dcode.club" target="_blank" rel="noopener noreferrer" class="btn-share-whatsapp">
+          <i data-lucide="share-2" style="width: 15px; height: 15px;"></i>
           <span>Share / Invite Friends on WhatsApp</span>
         </a>
-      </div>
 
-      <!-- Digital Pass Card -->
-      <div class="pass-ticket" id="printablePass">
-        <div class="pass-ticket-header">
-          <div class="pass-brand-lockup">
-            <img src="assets/asif_talks_host.jpg" alt="The Asif Talks" />
-            <div>
-              <div class="pass-title-main">THE ASIF TALKS • EP #2</div>
-              <div class="pass-title-sub">Official Live Audience Pass</div>
-            </div>
-          </div>
-          <div class="pass-id-badge" id="passBadgeCode">TAT-001</div>
-        </div>
-
-        <div class="pass-body-wrap">
-          <div class="pass-grid">
-            <div class="pass-grid-item">
-              <span class="label">Attendee Name</span>
-              <span class="value" id="passName">-</span>
-            </div>
-            <div class="pass-grid-item">
-              <span class="label">Mobile Number</span>
-              <span class="value" id="passPhone">-</span>
-            </div>
-            <div class="pass-grid-item">
-              <span class="label">City / Location</span>
-              <span class="value" id="passCity">-</span>
-            </div>
-            <div class="pass-grid-item">
-              <span class="label">Reporting Time</span>
-              <span class="value" style="color: #b45309;">10:30 AM Sharp</span>
-            </div>
-            <div class="pass-grid-item full-width" style="grid-column: span 2;">
-              <span class="label">College / Organization</span>
-              <span class="value" id="passCollege">-</span>
-            </div>
-            <div class="pass-grid-item full-width" style="grid-column: span 2;">
-              <span class="label">Venue &amp; Entry</span>
-              <span class="value">Dr. A.P.J. Abdul Kalam Auditorium, SSIEMS</span>
-            </div>
-            <div class="pass-grid-item full-width" style="grid-column: span 2;">
-              <span class="label">Distinguished Guest</span>
-              <span class="value" style="color: #1d4ed8;">Hon. Mayor Syed Iqbal (Mayor, Parbhani Mahanagarpalika)</span>
-            </div>
-          </div>
-
-          <!-- Dynamic QR Code Container -->
-          <div class="pass-qr-box">
-            <div id="passQrCode"></div>
-            <span class="pass-qr-label">Official Pass</span>
-          </div>
-        </div>
-
-        <div class="pass-footer-banner">
-          <span>🏛️ Organized by <strong>DCode Club &amp; SSIEMS</strong></span>
-          <span style="font-weight: 700; color: #16a34a;">Valid with Photo ID</span>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="pass-actions">
-        <button type="button" id="downloadPassBtn" class="action-btn-primary" onclick="downloadPassAsImage()">
-          <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-          <span id="downloadBtnText">Download Official Pass</span>
-        </button>
-        <button type="button" class="action-btn-secondary" onclick="resetFormForNew()">
-          <i data-lucide="plus-circle" style="width: 15px; height: 15px;"></i>
-          <span>Register Another Attendee</span>
-        </button>
+        <a href="https://www.dcode.club" target="_blank" rel="noopener noreferrer" class="btn-website-link">
+          <i data-lucide="globe" style="width: 14px; height: 14px;"></i>
+          <span>Visit Official DCode Club Website</span>
+        </a>
       </div>
 
     </div>
 
-    <!-- Institutional & Production Partners Footer -->
-    <div class="footer-credits">
-      <div class="footer-title">Institutional &amp; Production Partners</div>
+    <!-- Footer Credits -->
+    <div class="footer-credits" style="padding-bottom: 18px;">
+      <div class="footer-title">Institutional &amp; Technical Partners</div>
       <div class="footer-logos">
         <div class="footer-partner-item">
-          <img src="assets/dcode_logo.jpg" alt="DCode Club" />
+          <img src="assets/dcode_logo.jpg" alt="DCode" />
           <span>DCode Developers Club</span>
         </div>
         <div class="footer-partner-item">
@@ -1599,9 +746,6 @@
           <img src="assets/vertex_logo.jpg" alt="Vertex" />
           <span>Vertex Institute</span>
         </div>
-      </div>
-      <div class="footer-text" style="margin-bottom: 4px;">
-        <strong>Faculty Coordinator:</strong> Prof. Snehal Shelke (SSIEMS) | <strong>Title Sponsors:</strong> Hotel Venkatesha &amp; Tulsi Furniture
       </div>
       <div class="footer-text">
         Official Website: <a href="https://www.dcode.club" target="_blank" rel="noopener noreferrer">www.dcode.club</a>
@@ -1615,472 +759,7 @@
 <script>
   // Initialize Lucide Icons
   lucide.createIcons();
-
-  /**
-   * Google Apps Script Web App URL (Google Sheets backend - Episode #2)
-   */
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyLpy-wplSd-_pYBa-pq12Ia1EUG747ki0LKqWnr2KOnBo1kg0l2oL8RAtEFVfXJzHYeg/exec";
-
-  const form = document.getElementById("regForm");
-  const btn = document.getElementById("submitBtn");
-  const btnText = document.getElementById("btnText");
-  const btnSpinner = document.getElementById("btnSpinner");
-  const btnIcon = document.getElementById("btnIcon");
-  const msg = document.getElementById("statusMsg");
-  const successCard = document.getElementById("passSuccessCard");
-
-  const TOTAL_SEATS = 200;
-  let registeredPassNumber = 1;
-  let currentPassCode = "TAT-001";
-  let registeredPhonesSet = new Set();
-
-  function updateSeatsUI(regCount) {
-    const remaining = Math.max(0, TOTAL_SEATS - (regCount || 0));
-    const countElem = document.getElementById("remainingSeatsCount");
-    if (countElem) {
-      countElem.innerText = remaining;
-    }
-  }
-
-  // Initial clean display: 200 / 200
-  updateSeatsUI(0);
-
-  // Live Event Countdown Timer (Fri, Sep 4, 2026, 10:30 AM IST)
-  const eventTargetDate = new Date("2026-09-04T10:30:00+05:30").getTime();
-
-  // Automatic Registration Cutoff Deadline: Friday, September 4, 2026 at 02:00 PM IST
-  const registrationDeadline = new Date("2026-09-04T14:00:00+05:30").getTime();
-
-  function checkRegistrationCutoff() {
-    const now = new Date().getTime();
-    if (now >= registrationDeadline) {
-      const formElem = document.getElementById("regForm");
-      const closedElem = document.getElementById("closedCard");
-      const badgeRow = document.querySelector(".badge-row");
-      const cdSection = document.getElementById("countdownSection");
-
-      if (formElem && closedElem && formElem.style.display !== "none" && (!successCard || successCard.style.display !== "block")) {
-        formElem.style.display = "none";
-        closedElem.style.display = "block";
-      }
-
-      if (badgeRow && !badgeRow.querySelector(".badge-closed")) {
-        badgeRow.innerHTML = `
-          <span class="event-concluded-badge">
-            <i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Live at Auditorium
-          </span>
-          <span class="badge-closed">
-            <i data-lucide="lock" style="width: 11px; height: 11px;"></i> Registrations Closed
-          </span>`;
-      }
-
-      if (cdSection && !cdSection.querySelector(".cd-closed-banner")) {
-        cdSection.innerHTML = `
-          <div class="cd-closed-banner" style="font-size: 13px; font-weight: 800; color: #4ade80; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 4px 0;">
-            <i data-lucide="award" style="width: 15px; height: 15px; color: #4ade80;"></i>
-            <span>Episode #2 Live in Session • Dr. A.P.J. Abdul Kalam Auditorium</span>
-          </div>`;
-      }
-
-      lucide.createIcons();
-      return true;
-    }
-    return false;
-  }
-
-  function updateEventCountdown() {
-    if (checkRegistrationCutoff()) {
-      return;
-    }
-
-    const now = new Date().getTime();
-    const distance = eventTargetDate - now;
-
-    if (distance <= 0) {
-      const cdSection = document.getElementById("countdownSection");
-      if (cdSection) {
-        cdSection.innerHTML = `
-          <div style="font-size: 13px; font-weight: 800; color: #4ade80; display: flex; align-items: center; justify-content: center; gap: 6px;">
-            <span class="pulse-dot" style="background:#ef4444;"></span>
-            <span>REPORTING TIME IS LIVE • SESSION STARTS AT 11:00 AM!</span>
-          </div>`;
-      }
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    const dElem = document.getElementById("cdDays");
-    const hElem = document.getElementById("cdHours");
-    const mElem = document.getElementById("cdMins");
-    const sElem = document.getElementById("cdSecs");
-
-    if (dElem) dElem.innerText = String(days).padStart(2, "0");
-    if (hElem) hElem.innerText = String(hours).padStart(2, "0");
-    if (mElem) mElem.innerText = String(minutes).padStart(2, "0");
-    if (sElem) sElem.innerText = String(seconds).padStart(2, "0");
-  }
-
-  setInterval(updateEventCountdown, 1000);
-  updateEventCountdown();
-  checkRegistrationCutoff();
-
-  // Sync pass count and remaining seats from Google Sheets
-  async function syncPassCount() {
-    try {
-      const response = await fetch(scriptURL);
-      const data = await response.json();
-      if (data && data.isClosed) {
-        checkRegistrationCutoff();
-      }
-      if (data && data.registeredCount !== undefined) {
-        registeredPassNumber = data.registeredCount + 1;
-        updateSeatsUI(data.registeredCount);
-      } else {
-        updateSeatsUI(0);
-      }
-      if (data && data.registeredPhones && Array.isArray(data.registeredPhones)) {
-        registeredPhonesSet = new Set(data.registeredPhones);
-      }
-    } catch(err) {
-      const savedCount = parseInt(localStorage.getItem("tat_ep2_last_pass_num") || "0", 10);
-      registeredPassNumber = savedCount + 1;
-      updateSeatsUI(savedCount);
-    }
-  }
-  syncPassCount();
-
-  function getNextPassCode() {
-    const code = "TAT-" + String(registeredPassNumber).padStart(3, "0");
-    localStorage.setItem("tat_ep2_last_pass_num", registeredPassNumber);
-    updateSeatsUI(registeredPassNumber);
-    registeredPassNumber++;
-    return code;
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    if (checkRegistrationCutoff()) {
-      return;
-    }
-
-    // Clear previous error states
-    document.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
-    msg.style.display = "none";
-    msg.className = "";
-
-    const nameInput = document.getElementById("name");
-    const phoneInput = document.getElementById("phone");
-    const genderInput = document.getElementById("gender");
-    const collegeInput = document.getElementById("college");
-    const cityInput = document.getElementById("city");
-    const sourceInput = document.getElementById("source");
-    const consentInput = document.getElementById("consent");
-
-    let firstInvalid = null;
-    const missingFields = [];
-
-    if (!nameInput.value.trim()) {
-      nameInput.classList.add("input-error");
-      missingFields.push("Full Name");
-      if (!firstInvalid) firstInvalid = nameInput;
-    }
-
-    const phoneRegex = /^[0-9]{10}$/;
-    const rawPhone = phoneInput.value.trim();
-    const cleanPhone = rawPhone.replace(/[^0-9]/g, "").slice(-10);
-
-    if (!phoneRegex.test(cleanPhone)) {
-      phoneInput.classList.add("input-error");
-      missingFields.push("10-digit Mobile Number");
-      if (!firstInvalid) firstInvalid = phoneInput;
-    }
-
-    if (!genderInput.value) {
-      genderInput.classList.add("input-error");
-      missingFields.push("Gender");
-      if (!firstInvalid) firstInvalid = genderInput;
-    }
-
-    if (!cityInput.value.trim()) {
-      cityInput.classList.add("input-error");
-      missingFields.push("City / Location");
-      if (!firstInvalid) firstInvalid = cityInput;
-    }
-
-    if (!sourceInput.value) {
-      sourceInput.classList.add("input-error");
-      missingFields.push("How you heard about event");
-      if (!firstInvalid) firstInvalid = sourceInput;
-    }
-
-    if (!consentInput.checked) {
-      consentInput.closest(".consent-card").classList.add("input-error");
-      missingFields.push("Photo & Video Consent");
-      if (!firstInvalid) firstInvalid = consentInput.closest(".consent-card");
-    }
-
-    if (missingFields.length > 0) {
-      msg.style.display = "block";
-      msg.className = "warning";
-      msg.innerHTML = `⚠️ <strong>Please complete required field(s):</strong><br>${missingFields.join(", ")}`;
-      if (firstInvalid) {
-        firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-        if (typeof firstInvalid.focus === "function") firstInvalid.focus();
-      }
-      return;
-    }
-
-    // UI Loading state
-    btn.disabled = true;
-    btnSpinner.style.display = "inline-block";
-    btnIcon.style.display = "none";
-    btnText.innerText = "Verifying Pass Eligibility...";
-
-    // 1. Instant check against local registered phone database
-    if (registeredPhonesSet.has(cleanPhone)) {
-      phoneInput.classList.add("input-error");
-      msg.style.display = "block";
-      msg.className = "error";
-      msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass has already been issued for <strong>+91 ${cleanPhone}</strong>. Duplicate registrations are not permitted.`;
-      
-      btn.disabled = false;
-      btnSpinner.style.display = "none";
-      btnIcon.style.display = "inline-block";
-      btnText.innerText = "Claim Your Live Audience Pass";
-      phoneInput.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
-    }
-
-    // 2. Real-time check against live Google Sheet database
-    try {
-      const checkRes = await fetch(scriptURL + "?checkPhone=" + encodeURIComponent(cleanPhone));
-      const checkData = await checkRes.json();
-
-      if (checkData && checkData.isDuplicate) {
-        registeredPhonesSet.add(cleanPhone);
-        phoneInput.classList.add("input-error");
-        msg.style.display = "block";
-        msg.className = "error";
-        const passText = checkData.duplicatePassId ? ` (Pass ID: <strong>${checkData.duplicatePassId}</strong>)` : "";
-        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${cleanPhone}</strong>. Duplicate registrations are not permitted.`;
-        
-        btn.disabled = false;
-        btnSpinner.style.display = "none";
-        btnIcon.style.display = "inline-block";
-        btnText.innerText = "Claim Your Live Audience Pass";
-        phoneInput.scrollIntoView({ behavior: "smooth", block: "center" });
-        return;
-      }
-    } catch(checkErr) {
-      console.warn("Server duplicate check warning:", checkErr);
-    }
-
-    btnText.innerText = "Issuing Official Pass...";
-
-    const submittedName = nameInput.value.trim();
-    const submittedPhone = cleanPhone;
-    const submittedEmail = document.getElementById("email").value.trim();
-    const submittedCollege = collegeInput.value.trim();
-    const submittedCity = cityInput.value.trim();
-    const submittedQuestion = document.getElementById("question").value.trim();
-
-    // Use URLSearchParams for 100% reliable field delivery to Google Sheets
-    const params = new URLSearchParams();
-    params.append("name", submittedName);
-    params.append("phone", submittedPhone);
-    params.append("email", submittedEmail);
-    params.append("gender", genderInput.value);
-    params.append("college", submittedCollege);
-    params.append("city", submittedCity);
-    params.append("source", sourceInput.value);
-    params.append("question", submittedQuestion);
-    params.append("consent", consentInput.checked ? "Agreed" : "Agreed");
-
-    try {
-      // Send directly to Google Sheet
-      await fetch(scriptURL, {
-        method: "POST",
-        body: params,
-        mode: "no-cors"
-      });
-
-      registeredPhonesSet.add(submittedPhone);
-      showSuccessPass(submittedName, submittedPhone, submittedEmail, submittedCollege, submittedCity);
-    } catch (error) {
-      console.error("Submission Error:", error);
-      msg.style.display = "block";
-      msg.className = "error";
-      msg.innerHTML = "❌ <strong>Submission Failed:</strong> Could not connect to registration server. Please check your internet connection and try again.";
-      
-      btn.disabled = false;
-      btnSpinner.style.display = "none";
-      btnIcon.style.display = "inline-block";
-      btnText.innerText = "Claim Your Live Audience Pass";
-      msg.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  });
-
-  // Live duplicate check on phone input blur & 10-digit input
-  const phoneInputField = document.getElementById("phone");
-  async function checkPhoneDuplicateLive() {
-    const val = phoneInputField.value.trim().replace(/[^0-9]/g, "").slice(-10);
-    if (val.length === 10) {
-      if (registeredPhonesSet.has(val)) {
-        phoneInputField.classList.add("input-error");
-        msg.style.display = "block";
-        msg.className = "error";
-        msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass has already been issued for <strong>+91 ${val}</strong>. Duplicate registrations are not permitted.`;
-        return true;
-      }
-      try {
-        const res = await fetch(scriptURL + "?checkPhone=" + encodeURIComponent(val));
-        const data = await res.json();
-        if (data && data.isDuplicate) {
-          registeredPhonesSet.add(val);
-          phoneInputField.classList.add("input-error");
-          msg.style.display = "block";
-          msg.className = "error";
-          const passText = data.duplicatePassId ? ` (Pass ID: <strong>${data.duplicatePassId}</strong>)` : "";
-          msg.innerHTML = `⚠️ <strong>Mobile Number Already Registered:</strong><br>An audience pass${passText} has already been issued for <strong>+91 ${val}</strong>. Duplicate registrations are not permitted.`;
-          return true;
-        }
-      } catch(e) {}
-    }
-    return false;
-  }
-
-  phoneInputField.addEventListener("blur", checkPhoneDuplicateLive);
-  phoneInputField.addEventListener("input", () => {
-    const val = phoneInputField.value.trim().replace(/[^0-9]/g, "").slice(-10);
-    if (val.length === 10) {
-      checkPhoneDuplicateLive();
-    }
-  });
-
-  // Remove error highlight as user types/changes fields
-  form.querySelectorAll("input, select, textarea").forEach(input => {
-    input.addEventListener("input", () => {
-      input.classList.remove("input-error");
-      const consentCard = input.closest(".consent-card");
-      if (consentCard) consentCard.classList.remove("input-error");
-      if (document.querySelectorAll(".input-error").length === 0) {
-        msg.style.display = "none";
-      }
-    });
-    input.addEventListener("change", () => {
-      input.classList.remove("input-error");
-      const consentCard = input.closest(".consent-card");
-      if (consentCard) consentCard.classList.remove("input-error");
-      if (document.querySelectorAll(".input-error").length === 0) {
-        msg.style.display = "none";
-      }
-    });
-  });
-
-  function generatePassQrCode(passCode, name, phone, email, college, city) {
-    const qrContainer = document.getElementById("passQrCode");
-    if (!qrContainer) return;
-    
-    const qrLines = [
-      "THE ASIF TALKS — LIVE EPISODE #2",
-      "Official Live Audience Pass",
-      "----------------------------------------",
-      `Pass ID :- ${passCode || "TAT-001"}`,
-      `Attendee Name :- ${name || "-"}`,
-      `Mobile Number :- ${phone ? "+91 " + phone : "-"}`,
-      email ? `Email Address :- ${email}` : null,
-      `City / Location :- ${city || "-"}`,
-      `College / Organization :- ${college || "-"}`,
-      `Event Date :- Friday, Sep 4, 2026`,
-      `Reporting Time :- 10:30 AM Sharp (Starts 11:00 AM)`,
-      `Venue & Entry :- Dr. A.P.J. Abdul Kalam Auditorium, SSIEMS, Parbhani`,
-      `Distinguished Guest :- Hon. Mayor Syed Iqbal Syed Khwaja (Mayor, Parbhani Municipal Corporation)`,
-      `Host & Creator :- Syed Asif (The Asif Talks)`,
-      "----------------------------------------"
-    ].filter(Boolean).join("\n");
-
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrLines)}&color=0f172a&bgcolor=ffffff&qzone=1`;
-
-    qrContainer.innerHTML = `<img src="${qrUrl}" alt="Official Pass QR Code" width="84" height="84" style="display:block; width:84px; height:84px; border-radius:4px;" crossOrigin="anonymous" />`;
-  }
-
-  function showSuccessPass(name, phone, email, college, city) {
-    currentPassCode = getNextPassCode();
-    
-    document.getElementById("passBadgeCode").innerText = currentPassCode;
-    document.getElementById("passName").innerText = name || "-";
-    document.getElementById("passPhone").innerText = phone ? "+91 " + phone : "-";
-    document.getElementById("passCollege").innerText = college || "-";
-    document.getElementById("passCity").innerText = city || "-";
-
-    form.style.display = "none";
-    successCard.style.display = "block";
-
-    // Generate QR code with full attendee & event details
-    generatePassQrCode(currentPassCode, name, phone, email, college, city);
-    
-    // Scroll to top of pass card on mobile
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    lucide.createIcons();
-  }
-
-  async function downloadPassAsImage() {
-    const passElem = document.getElementById("printablePass");
-    const dlBtn = document.getElementById("downloadPassBtn");
-    const dlText = document.getElementById("downloadBtnText");
-    
-    if (!passElem) return;
-
-    try {
-      if (dlBtn) dlBtn.disabled = true;
-      if (dlText) dlText.innerText = "Generating Pass...";
-
-      const canvas = await html2canvas(passElem, {
-        scale: 3,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-        logging: false
-      });
-
-      const imgData = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.download = `The-Asif-Talks-Ep2-Pass-${currentPassCode || "TAT-001"}.png`;
-      link.href = imgData;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      if (dlText) dlText.innerText = "Pass Downloaded! ✓";
-      setTimeout(() => {
-        if (dlText) dlText.innerText = "Download Official Pass";
-        if (dlBtn) dlBtn.disabled = false;
-      }, 2000);
-    } catch (err) {
-      console.error("Download error:", err);
-      window.print();
-      if (dlText) dlText.innerText = "Download Official Pass";
-      if (dlBtn) dlBtn.disabled = false;
-    }
-  }
-
-  function resetFormForNew() {
-    form.reset();
-    document.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
-    msg.style.display = "none";
-    form.style.display = "block";
-    successCard.style.display = "none";
-    btn.disabled = false;
-    btnSpinner.style.display = "none";
-    btnIcon.style.display = "inline-block";
-    btnText.innerText = "Claim Your Live Audience Pass";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    lucide.createIcons();
-  }
 </script>
+
 </body>
 </html>
