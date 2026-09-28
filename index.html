@@ -2742,76 +2742,41 @@
 
     </form>
 
-    <!-- Event Closed Card (Displayed automatically on Sep 4 at 02:00 PM) -->
-
+    <!-- Event Closed Card (Displayed automatically when 300 passes are filled or on event date) -->
     <div class="closed-card" id="closedCard" style="display: none;">
-
       <div class="closed-icon-badge">
-
         <i data-lucide="lock" style="width: 24px; height: 24px; color: #dc2626;"></i>
-
       </div>
-
       <h3 class="closed-title">Registrations Are Now Closed</h3>
-
       <p class="closed-desc">
-
-        Online registrations for <em>The Asif Talks ΓÇö Live Episode #2</em> closed automatically at <strong>02:00 PM on Sep 4, 2026</strong> as the live recording session has commenced with <strong>Hon. Mayor Syed Iqbal Syed Khwaja</strong>.
-
+        Online registrations for <em>The Asif Talks — Live Episode #3</em> are now closed as auditorium capacity (300 passes) has been reached or live recording has commenced with <strong>Hon. Smt. Meghana Sakore-Bordikar</strong>.
       </p>
-
       <div class="closed-highlights">
-
         <div class="highlight-item">
-
           <i data-lucide="users" style="width: 18px; height: 18px; color: #2563eb; flex-shrink: 0; margin-top: 2px;"></i>
-
           <div>
-
             <strong>Full House Audience</strong>
-
-            <span>Auditorium gates are closed for live studio recording</span>
-
+            <span>Dr. A.P.J. Abdul Kalam Auditorium, SSIEMS Parbhani</span>
           </div>
-
         </div>
-
         <div class="highlight-item">
-
           <i data-lucide="video" style="width: 18px; height: 18px; color: #ea580c; flex-shrink: 0; margin-top: 2px;"></i>
-
           <div>
-
             <strong>Episode Premiere Coming Soon</strong>
-
             <span>Full video podcast will release on YouTube</span>
-
           </div>
-
         </div>
-
       </div>
-
       <div class="closed-actions">
-
         <a href="https://chat.whatsapp.com/EnpTg11Zxot9y1c8WLXr3s" target="_blank" rel="noopener noreferrer" class="closed-btn-whatsapp">
-
           <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i>
-
-          <span>Join WhatsApp Community for Ep #3 Alerts</span>
-
+          <span>Join WhatsApp Community for Event Updates</span>
         </a>
-
         <a href="https://www.dcode.club" target="_blank" rel="noopener noreferrer" class="closed-btn-website">
-
           <i data-lucide="globe" style="width: 15px; height: 15px;"></i>
-
           <span>Visit Official Website (dcode.club)</span>
-
         </a>
-
       </div>
-
     </div>
 
     <!-- Success Pass Confirmation Card -->
@@ -3112,11 +3077,20 @@
 
     }
 
+  function checkRegistrationCutoff() {
+    const now = new Date().getTime();
+    const isPastCutoff = now >= eventTargetDate;
+    const isFull = registeredPassNumber > TOTAL_SEATS;
+    if (isPastCutoff || isFull) {
+      if (form) form.style.display = "none";
+      const closedCard = document.getElementById("closedCard");
+      if (closedCard) closedCard.style.display = "block";
+      return true;
+    }
+    return false;
   }
 
-  // Initial clean display: 200 / 200
-
-    // Initial clean display: 300 / 300
+  // Initial clean display: 300 / 300
   updateSeatsUI(0);
 
   // Live Event Countdown Timer (Thu, Oct 1, 2026, 10:30 AM IST)
