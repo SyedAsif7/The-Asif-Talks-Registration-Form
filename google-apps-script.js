@@ -1,5 +1,5 @@
 /**
- * Google Apps Script Backend for "The Asif Talks (Episode #3)" Registration
+ * Google Apps Script Backend for "The Asif Talks (Episode #3)" Registration & Gate Entry Check-in
  * Distinguished Guest: Hon. Smt. Meghana Sakore-Bordikar
  * (Minister of State, Government of Maharashtra | Guardian Minister, Parbhani District)
  *
@@ -16,6 +16,9 @@
  * Column I: How Heard
  * Column J: Question for Hon. Smt. Meghana Bordikar
  * Column K: Photo & Video Consent
+ * Column L: Check-in Status
+ * Column M: Check-in Time
+ * Column N: Gate Volunteer
  * ---------------------------------------------------------------------------------------------------------------------------------
  */
 
@@ -27,6 +30,23 @@ function getEpisodeSheet() {
   
   var sheet = ss.getSheetByName(primarySheetName) || ss.getSheetByName(fallbackSheetName);
   
+  var headers = [
+    "Timestamp",
+    "Pass ID",
+    "Student Name",
+    "Mobile Number",
+    "Email Address",
+    "Gender",
+    "College / Institute / Organization",
+    "City / Location",
+    "How Heard",
+    "Question for Hon. Smt. Meghana Bordikar",
+    "Photo & Video Consent",
+    "Check-in Status",
+    "Check-in Time",
+    "Gate Volunteer"
+  ];
+
   if (!sheet) {
     var activeSheet = ss.getActiveSheet();
     if (activeSheet.getLastRow() === 0) {
@@ -35,24 +55,17 @@ function getEpisodeSheet() {
     } else {
       sheet = ss.insertSheet(primarySheetName);
     }
-    
-    // Set headers
-    var headers = [
-      "Timestamp",
-      "Pass ID",
-      "Student Name",
-      "Mobile Number",
-      "Email Address",
-      "Gender",
-      "College / Institute / Organization",
-      "City / Location",
-      "How Heard",
-      "Question for Hon. Smt. Meghana Bordikar",
-      "Photo & Video Consent"
-    ];
     sheet.appendRow(headers);
     sheet.getRange(1, 1, 1, headers.length).setFontWeight("bold").setBackground("#0f2744").setFontColor("#ffffff");
     sheet.setFrozenRows(1);
+  } else {
+    // If headers exist, ensure check-in columns (L, M, N) are present
+    var lastCol = sheet.getLastColumn();
+    if (lastCol < headers.length) {
+      for (var col = lastCol + 1; col <= headers.length; col++) {
+        sheet.getRange(1, col).setValue(headers[col - 1]).setFontWeight("bold").setBackground("#0f2744").setFontColor("#ffffff");
+      }
+    }
   }
   return sheet;
 }
@@ -153,9 +166,98 @@ function doPost(e) {
   try {
     var sheet = getEpisodeSheet();
     var lastRow = sheet.getLastRow();
-
-    // Extract POST parameters
     var p = e.parameter || {};
+
+    // -------------------------------------------------------------
+    // GATE SCANNER CHECK-IN ACTION
+    // -------------------------------------------------------------
+    if (p.action === "checkin") {
+      var searchPass = (p.passId || "").trim().toUpperCase();
+      var searchPhone = normalizePhone(p.phone || "");
+      var volunteerName = (p.volunteer || "Gate Entry Volunteer").trim();
+
+      if (!searchPass && !searchPhone) {
+        return ContentService.createTextOutput(JSON.stringify({
+          result: "error",
+          message: "Pass ID or Mobile Number is required for check-in."
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      if (lastRow <= 1) {
+        return ContentService.createTextOutput(JSON.stringify({
+          result: "not_found",
+          message: "No registrations recorded in the database yet."
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      var maxCols = Math.max(14, sheet.getLastColumn());
+      var data = sheet.getRange(2, 1, lastRow - 1, maxCols).getValues();
+      var targetRow = -1;
+      var matchedRecord = null;
+
+      for (var i = 0; i < data.length; i++) {
+        var rowPass = String(data[i][1] || "").trim().toUpperCase();
+        var rowPhone = normalizePhone(data[i][3]);
+
+        var isMatch = false;
+        if (searchPass && rowPass === searchPass) isMatch = true;
+        if (!isMatch && searchPhone && rowPhone === searchPhone) isMatch = true;
+
+        if (isMatch) {
+          targetRow = i + 2; // Row index (1-based, 2 is first data row)
+          matchedRecord = {
+            passId: rowPass,
+            name: String(data[i][2] || "").trim(),
+            phone: String(data[i][3] || "").trim(),
+            email: String(data[i][4] || "").trim(),
+            gender: String(data[i][5] || "").trim(),
+            college: String(data[i][6] || "").trim(),
+            city: String(data[i][7] || "").trim(),
+            question: String(data[i][9] || "").trim(),
+            currentStatus: String(data[i][11] || "Pending").trim(),
+            checkInTime: String(data[i][12] || "").trim(),
+            volunteer: String(data[i][13] || "").trim()
+          };
+          break;
+        }
+      }
+
+      if (targetRow === -1) {
+        return ContentService.createTextOutput(JSON.stringify({
+          result: "not_found",
+          message: "Pass ID (" + (searchPass || searchPhone) + ") not found in registered attendees list!"
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      // Check if already checked in
+      if (p.force !== "true" && matchedRecord.currentStatus === "Checked In") {
+        return ContentService.createTextOutput(JSON.stringify({
+          result: "already_checked_in",
+          attendee: matchedRecord,
+          message: "ALREADY CHECKED IN: " + matchedRecord.name + " (" + matchedRecord.passId + ") was already admitted at " + (matchedRecord.checkInTime || "earlier today") + "!"
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      // Mark Checked In in sheet
+      var nowStr = Utilities.formatDate(new Date(), "GMT+5:30", "dd MMM yyyy, hh:mm:ss a");
+      sheet.getRange(targetRow, 12).setValue("Checked In").setBackground("#dcfce7").setFontColor("#15803d").setFontWeight("bold");
+      sheet.getRange(targetRow, 13).setValue(nowStr);
+      sheet.getRange(targetRow, 14).setValue(volunteerName);
+
+      matchedRecord.currentStatus = "Checked In";
+      matchedRecord.checkInTime = nowStr;
+      matchedRecord.volunteer = volunteerName;
+
+      return ContentService.createTextOutput(JSON.stringify({
+        result: "success",
+        attendee: matchedRecord,
+        message: "Entry Confirmed! Welcome " + matchedRecord.name + " (" + matchedRecord.passId + ")."
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // -------------------------------------------------------------
+    // REGULAR ATTENDEE REGISTRATION
+    // -------------------------------------------------------------
     var name = (p.name || "").trim();
     var rawPhone = (p.phone || "").trim();
     var cleanPhone = normalizePhone(rawPhone);
@@ -225,7 +327,10 @@ function doPost(e) {
       city,
       source,
       question,
-      consent
+      consent,
+      "Pending", // Check-in Status
+      "",        // Check-in Time
+      ""         // Gate Volunteer
     ];
 
     sheet.appendRow(rowData);
@@ -271,7 +376,57 @@ function doGet(e) {
   var remainingSeats = Math.max(0, totalSeats - count);
   var nextPassId = "TAT-" + ("000" + (count + 1)).slice(-3);
 
-  // Check if a specific mobile number already exists & collect all registered phones for Ep 3
+  // -------------------------------------------------------------
+  // SCANNER SYNC / ATTENDEES LIST
+  // -------------------------------------------------------------
+  if (e && e.parameter && (e.parameter.action === "scanner_sync" || e.parameter.action === "get_attendees")) {
+    var attendeeList = [];
+    var checkedInCount = 0;
+
+    if (lastRow > 1) {
+      var maxCols = Math.max(14, sheet.getLastColumn());
+      var allRows = sheet.getRange(2, 1, lastRow - 1, maxCols).getValues();
+
+      for (var j = 0; j < allRows.length; j++) {
+        var rPass = String(allRows[j][1] || "").trim();
+        var rName = String(allRows[j][2] || "").trim();
+        var rPhone = normalizePhone(allRows[j][3]);
+        var rCollege = String(allRows[j][6] || "").trim();
+        var rCity = String(allRows[j][7] || "").trim();
+        var rQuestion = String(allRows[j][9] || "").trim();
+        var rStatus = String(allRows[j][11] || "Pending").trim();
+        var rTime = String(allRows[j][12] || "").trim();
+
+        if (rStatus === "Checked In") checkedInCount++;
+
+        attendeeList.push({
+          passId: rPass,
+          name: rName,
+          phone: rPhone,
+          college: rCollege,
+          city: rCity,
+          question: rQuestion,
+          status: rStatus === "Checked In" ? "Checked In" : "Pending",
+          checkInTime: rTime
+        });
+      }
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "ok",
+      episode: "Episode #3",
+      guest: "Hon. Smt. Meghana Sakore-Bordikar",
+      totalSeats: totalSeats,
+      registeredCount: attendeeList.length,
+      checkedInCount: checkedInCount,
+      pendingCount: Math.max(0, attendeeList.length - checkedInCount),
+      attendees: attendeeList
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // -------------------------------------------------------------
+  // DEFAULT REGISTRATION STATUS & DUPLICATE PHONE CHECK
+  // -------------------------------------------------------------
   var phoneList = [];
   var checkPhone = e && e.parameter && (e.parameter.checkPhone || e.parameter.phone) ? normalizePhone(e.parameter.checkPhone || e.parameter.phone) : "";
   var isDuplicate = false;

@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Gate Entry Scanner • The Asif Talks Ep #3</title>
+  <meta name="description" content="Official Volunteer Gate Entry Scanner & Live Auditorium Attendance for The Asif Talks (Episode #3) featuring Hon. Smt. Meghana Sakore-Bordikar." />
+  <link rel="icon" type="image/x-icon" href="assets/dcode_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+  <style>
+    :root {
+      --bg: #060d17;
+      --card-bg: rgba(15, 29, 48, 0.75);
+      --card-border: rgba(59, 130, 246, 0.22);
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-amber: #f59e0b;
+      --accent-blue: #38bdf8;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #0d233e 0%, var(--bg) 70%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 40px;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      background: rgba(6, 13, 23, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: #0f172a;
+      padding: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      line-height: 1.2;
+    }
+
+    .nav-sub {
+      font-size: 11px;
+      color: var(--accent-blue);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-nav-icon {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-nav-icon:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .status-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-online {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-offline {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+      width: 100%;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .stat-registered::after { background: var(--primary); }
+    .stat-checked::after { background: var(--accent-green); }
+    .stat-pending::after { background: var(--accent-amber); }
+    .stat-capacity::after { background: #8b5cf6; }
+
+    .stat-val {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.1;
+      margin-top: 4px;
+    }
+
+    .stat-val.checked { color: #4ade80; }
+    .stat-val.pending { color: #fbbf24; }
+    .stat-val.registered { color: #60a5fa; }
+    .stat-val.capacity { color: #c084fc; }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #10b981);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* Main Scanner Layout */
+    .scanner-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .scanner-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    /* Viewfinder Container */
+    #reader {
+      width: 100% !important;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px dashed rgba(59, 130, 246, 0.4);
+      background: #09131f;
+      min-height: 260px;
+      position: relative;
+    }
+
+    #reader video {
+      border-radius: 10px;
+      object-fit: cover !important;
+      width: 100% !important;
+    }
+
+    .scanner-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .btn-green {
+      background: #16a34a;
+    }
+
+    .btn-green:hover {
+      background: #15803d;
+    }
+
+    .btn-red {
+      background: #dc2626;
+    }
+
+    .btn-red:hover {
+      background: #b91c1c;
+    }
+
+    /* Scan Settings Toggles */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 38px;
+      height: 22px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: .3s;
+      border-radius: 22px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2563eb;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(16px);
+    }
+
+    /* Manual Search Box */
+    .search-box {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .search-input {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Scan Result Card */
+    .result-container {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .result-placeholder {
+      text-align: center;
+      padding: 30px 10px;
+      color: var(--text-muted);
+    }
+
+    .result-placeholder i {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+      opacity: 0.4;
+    }
+
+    .result-box {
+      border-radius: 12px;
+      padding: 16px;
+      animation: fadeIn 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-valid {
+      background: rgba(16, 185, 129, 0.12);
+      border: 2px solid #10b981;
+    }
+
+    .result-warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 2px solid #f59e0b;
+    }
+
+    .result-invalid {
+      background: rgba(239, 68, 68, 0.12);
+      border: 2px solid #ef4444;
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .badge-valid { background: #16a34a; color: #fff; }
+    .badge-warning { background: #d97706; color: #fff; }
+    .badge-invalid { background: #dc2626; color: #fff; }
+
+    .result-pass-code {
+      font-size: 26px;
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 0.5px;
+      color: #93c5fd;
+    }
+
+    .result-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .result-meta {
+      font-size: 12px;
+      color: #cbd5e1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+    }
+
+    .result-meta-item strong {
+      color: #94a3b8;
+    }
+
+    .result-question {
+      background: rgba(0, 0, 0, 0.25);
+      border-left: 3px solid #3b82f6;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      color: #e2e8f0;
+      font-style: italic;
+    }
+
+    /* Attendees List Section */
+    .roster-card {
+      margin-top: 16px;
+    }
+
+    .roster-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+      border-radius: 8px;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .roster-table-wrap {
+      max-height: 400px;
+      overflow-y: auto;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .roster-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    .roster-table th {
+      background: #0f1d30;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+      color: #93c5fd;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .roster-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+    }
+
+    .roster-table tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tag-status {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .tag-checked {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .tag-pending {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    /* Volunteer Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: #0d1e34;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 14px;
+      padding: 24px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .modal-box h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .modal-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <img src="assets/dcode_logo.png" alt="DCode Club" class="nav-logo" />
+      <div>
+        <div class="nav-title">THE ASIF TALKS • EP #3</div>
+        <div class="nav-sub">
+          <i data-lucide="shield-check" style="width: 13px; height: 13px;"></i>
+          <span>Auditorium Gate Entry Portal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <span class="status-badge status-online" id="networkStatus">
+        <span class="pulse-dot"></span> Live
+      </span>
+      <button class="btn-nav-icon" id="btnRefresh" title="Sync Latest Registrations">
+        <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i>
+      </button>
+      <button class="btn-nav-icon" id="btnVolunteer" title="Change Volunteer">
+        <i data-lucide="user-check" style="width: 16px; height: 16px;"></i>
+      </button>
+      <a href="index.html" class="btn-nav-icon" title="View Public Registration Form">
+        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Live Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card stat-registered">
+        <div class="stat-label">Registered</div>
+        <div class="stat-val registered" id="statRegistered">0 / 300</div>
+      </div>
+      <div class="stat-card stat-checked">
+        <div class="stat-label">Admitted Inside</div>
+        <div class="stat-val checked" id="statChecked">0</div>
+      </div>
+      <div class="stat-card stat-pending">
+        <div class="stat-label">Yet to Arrive</div>
+        <div class="stat-val pending" id="statPending">0</div>
+      </div>
+      <div class="stat-card stat-capacity">
+        <div class="stat-label">Hall Fullness</div>
+        <div class="stat-val capacity" id="statCapacity">0%</div>
+      </div>
+    </div>
+
+    <!-- Capacity Progress Meter -->
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span>Auditorium Capacity Meter (Dr. A.P.J. Abdul Kalam Auditorium, SSIEMS)</span>
+        <span id="capacityPercentText">0 / 300 Seats</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="capacityFill"></div>
+      </div>
+    </div>
+
+    <!-- Scanner & Result Two-Column Layout -->
+    <div class="scanner-grid">
+
+      <!-- Left Column: Camera Scanner -->
+      <div class="glass-card">
+        <div class="card-title">
+          <i data-lucide="scan" style="width: 16px; height: 16px;"></i>
+          <span>Live QR Camera Scanner</span>
+        </div>
+
+        <div id="reader"></div>
+
+        <div class="scanner-controls">
+          <button class="btn" id="btnStartScan">
+            <i data-lucide="camera" style="width: 15px; height: 15px;"></i>
+            <span id="scanBtnText">Start Camera</span>
+          </button>
+          <button class="btn btn-secondary" id="btnSwitchCamera" title="Switch Front/Back Camera">
+            <i data-lucide="switch-camera" style="width: 15px; height: 15px;"></i>
+            <span>Flip</span>
+          </button>
+          <button class="btn btn-secondary" id="btnTorch" title="Toggle Flashlight / Torch">
+            <i data-lucide="zap" style="width: 15px; height: 15px;"></i>
+            <span>Torch</span>
+          </button>
+        </div>
+
+        <!-- Toggles -->
+        <div class="toggle-row">
+          <span>⚡ Auto-Admit on Scan (Fast Queue)</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="autoAdmitToggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>🔊 Sound & Vibration Feedback</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="soundToggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Right Column: Verification Result & Manual Lookup -->
+      <div class="glass-card">
+        <div class="card-title">
+          <i data-lucide="user-check" style="width: 16px; height: 16px;"></i>
+          <span>Pass Verification & Lookup</span>
+        </div>
+
+        <!-- Manual Search Input for dead phone/damaged screen -->
+        <form id="manualSearchForm" class="search-box">
+          <input type="text" id="manualInput" class="search-input" placeholder="Search Pass ID (e.g. TAT-001) or Mobile..." autocomplete="off" />
+          <button type="submit" class="btn" style="flex: 0 0 auto; padding: 0 16px;">
+            <i data-lucide="search" style="width: 15px; height: 15px;"></i>
+            <span>Verify</span>
+          </button>
+        </form>
+
+        <!-- Result Box Container -->
+        <div class="result-container" id="resultContainer">
+          <div class="result-placeholder" id="resultPlaceholder">
+            <i data-lucide="qr-code"></i>
+            <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">Ready to Scan Attendee Pass</div>
+            <div style="font-size: 12px;">Point camera at attendee's QR code or enter Pass ID / Phone above</div>
+          </div>
+
+          <div class="result-box result-valid" id="resultBox" style="display: none;">
+            <div class="result-header">
+              <span class="result-badge badge-valid" id="resultStatusBadge">
+                <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>
+                <span id="resultStatusText">ENTRY ALLOWED</span>
+              </span>
+              <span class="result-pass-code" id="resultPassCode">TAT-001</span>
+            </div>
+
+            <div>
+              <div class="result-name" id="resultName">Student Name</div>
+              <div style="font-size: 12px; color: #93c5fd; margin-top: 2px;" id="resultCollege">SSIEMS Parbhani</div>
+            </div>
+
+            <div class="result-meta">
+              <div class="result-meta-item"><strong>Mobile:</strong> <span id="resultPhone">+91 -</span></div>
+              <div class="result-meta-item"><strong>City:</strong> <span id="resultCity">Parbhani</span></div>
+            </div>
+
+            <div class="result-question" id="resultQuestionWrap">
+              <strong>Question for Hon. Meghana Bordikar:</strong><br />
+              <span id="resultQuestion">"..."</span>
+            </div>
+
+            <div id="checkInTimestampBox" style="font-size: 11px; color: #f59e0b; display: none;">
+              <i data-lucide="clock" style="width: 12px; height: 12px; vertical-align: middle;"></i>
+              <span id="checkInTimestampText">Checked in at 10:14 AM</span>
+            </div>
+
+            <div style="display: flex; gap: 8px; margin-top: 6px;">
+              <button class="btn btn-green" id="btnAdmitPass">
+                <i data-lucide="check" style="width: 15px; height: 15px;"></i>
+                <span>Confirm Check-In</span>
+              </button>
+              <button class="btn btn-secondary" id="btnDismissResult">
+                <i data-lucide="x" style="width: 15px; height: 15px;"></i>
+                <span>Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Section: Attendees Master Roster & Search -->
+    <div class="glass-card roster-card">
+      <div class="roster-header">
+        <div class="card-title" style="margin-bottom: 0;">
+          <i data-lucide="users" style="width: 16px; height: 16px;"></i>
+          <span>Live Audience Directory (<span id="rosterCount">0</span>)</span>
+        </div>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="checked">Inside</button>
+            <button class="filter-btn" data-filter="pending">Pending</button>
+          </div>
+          <button class="btn btn-secondary" id="btnExportCsv" style="padding: 4px 10px; font-size: 12px; flex: 0 0 auto;">
+            <i data-lucide="download" style="width: 13px; height: 13px;"></i>
+            <span>Export CSV</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <input type="text" id="rosterSearchInput" class="search-input" placeholder="Filter by Name, Pass ID, College, or City..." style="width: 100%;" />
+      </div>
+
+      <div class="roster-table-wrap">
+        <table class="roster-table">
+          <thead>
+            <tr>
+              <th>Pass ID</th>
+              <th>Student Name</th>
+              <th>Mobile</th>
+              <th>College</th>
+              <th>City</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="rosterTableBody">
+            <tr>
+              <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                Connecting to Google Sheet backend...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Volunteer Name Modal -->
+  <div class="modal-overlay" id="volunteerModal">
+    <div class="modal-box">
+      <i data-lucide="user-check" style="width: 38px; height: 38px; color: #3b82f6; margin-bottom: 8px;"></i>
+      <h3>Gate Volunteer Setup</h3>
+      <p>Enter your name so check-ins are logged under your badge in the Google Sheet.</p>
+      <input type="text" id="volunteerInput" class="search-input" placeholder="e.g. Asif / Snehal / DCode Volunteer" style="width: 100%; margin-bottom: 16px;" />
+      <div style="display: flex; gap: 8px;">
+        <button class="btn" id="btnSaveVolunteer">Save & Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // Configuration
+    const TOTAL_CAPACITY = 300;
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu4GLO6WVTskcvL6EGnMgoquCW7zkRNLApj9zZw66gwJ1ZRVNubZChY8tTgOOd8y5OqQ/exec";
+
+    // State
+    let attendees = [];
+    let currentFilter = "all";
+    let html5QrCode = null;
+    let isScanning = false;
+    let currentFacingMode = "environment";
+    let isTorchOn = false;
+    let activeAttendee = null;
+    let volunteerName = localStorage.getItem("tat_volunteer_name") || "Gate Volunteer";
+
+    // Audio Synthesizer (No external sound files required)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(type) {
+      if (!document.getElementById("soundToggle").checked) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === "success") {
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+          osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.15); // A6
+          gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.2);
+        } else if (type === "warning") {
+          osc.type = "square";
+          osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+          osc.frequency.setValueAtTime(330, audioCtx.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.25);
+        } else {
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+          osc.frequency.setValueAtTime(160, audioCtx.currentTime + 0.15);
+          gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.3);
+        }
+
+        if (navigator.vibrate) {
+          if (type === "success") navigator.vibrate(100);
+          else navigator.vibrate([100, 80, 150]);
+        }
+      } catch (e) {
+        console.warn("Audio play error", e);
+      }
+    }
+
+    // Load Cached Attendees from localStorage
+    function loadCachedAttendees() {
+      const cached = localStorage.getItem("tat_ep3_attendees_cache");
+      if (cached) {
+        try {
+          attendees = JSON.parse(cached);
+          updateStats();
+          renderRoster();
+        } catch (e) {}
+      }
+    }
+
+    // Fetch live data from Google Apps Script
+    async function syncAttendees() {
+      const refreshBtn = document.getElementById("btnRefresh");
+      refreshBtn.classList.add("spin");
+      try {
+        const res = await fetch(SCRIPT_URL + "?action=scanner_sync&t=" + Date.now());
+        const data = await res.json();
+        if (data && data.attendees) {
+          attendees = data.attendees;
+          localStorage.setItem("tat_ep3_attendees_cache", JSON.stringify(attendees));
+          updateStats();
+          renderRoster();
+          document.getElementById("networkStatus").className = "status-badge status-online";
+          document.getElementById("networkStatus").innerHTML = '<span class="pulse-dot"></span> Live';
+        }
+      } catch (err) {
+        console.warn("Sync error, using cache", err);
+        document.getElementById("networkStatus").className = "status-badge status-offline";
+        document.getElementById("networkStatus").innerHTML = '⚠️ Offline Sync';
+      } finally {
+        refreshBtn.classList.remove("spin");
+      }
+    }
+
+    // Update Statistics
+    function updateStats() {
+      const regCount = attendees.length;
+      const checkedCount = attendees.filter(a => a.status === "Checked In").length;
+      const pendingCount = Math.max(0, regCount - checkedCount);
+      const percent = Math.min(100, Math.round((checkedCount / TOTAL_CAPACITY) * 100));
+
+      document.getElementById("statRegistered").innerText = `${regCount} / ${TOTAL_CAPACITY}`;
+      document.getElementById("statChecked").innerText = checkedCount;
+      document.getElementById("statPending").innerText = pendingCount;
+      document.getElementById("statCapacity").innerText = `${percent}%`;
+
+      document.getElementById("capacityPercentText").innerText = `${checkedCount} / ${TOTAL_CAPACITY} Passes Admitted (${percent}%)`;
+      document.getElementById("capacityFill").style.width = `${percent}%`;
+    }
+
+    // Extract Pass ID or Mobile from QR Code String
+    function parseQrPayload(text) {
+      if (!text) return null;
+      // 1. Check for explicit Pass ID: TAT-001 or TAT-XXX
+      const passMatch = text.match(/TAT-\d{3,4}/i);
+      if (passMatch) return { type: "passId", val: passMatch[0].toUpperCase() };
+
+      // 2. Check for 10-digit mobile number
+      const phoneMatch = text.match(/\b[6-9]\d{9}\b/);
+      if (phoneMatch) return { type: "phone", val: phoneMatch[0] };
+
+      // 3. Fallback: treat entire string as search query
+      return { type: "query", val: text.trim() };
+    }
+
+    // Lookup Attendee
+    function findAttendee(parsed) {
+      if (!parsed || !parsed.val) return null;
+      const val = parsed.val.toUpperCase();
+
+      return attendees.find(a => {
+        const pass = (a.passId || "").toUpperCase();
+        const phone = String(a.phone || "").replace(/[^0-9]/g, "");
+        if (pass === val || pass.replace("-", "") === val) return true;
+        if (phone.endsWith(val) || val.endsWith(phone)) return true;
+        return false;
+      });
+    }
+
+    // Display Result Card
+    function displayResult(attendee, queryVal) {
+      const placeholder = document.getElementById("resultPlaceholder");
+      const box = document.getElementById("resultBox");
+      const statusBadge = document.getElementById("resultStatusBadge");
+      const statusText = document.getElementById("resultStatusText");
+      const admitBtn = document.getElementById("btnAdmitPass");
+      const timeBox = document.getElementById("checkInTimestampBox");
+
+      placeholder.style.display = "none";
+      box.style.display = "flex";
+
+      if (!attendee) {
+        // INVALID PASS
+        playBeep("error");
+        box.className = "result-box result-invalid";
+        statusBadge.className = "result-badge badge-invalid";
+        statusText.innerText = "PASS NOT FOUND";
+        document.getElementById("resultPassCode").innerText = queryVal || "UNKNOWN";
+        document.getElementById("resultName").innerText = "Not Registered in Database";
+        document.getElementById("resultCollege").innerText = "This pass was not found in Episode #3 records.";
+        document.getElementById("resultPhone").innerText = "-";
+        document.getElementById("resultCity").innerText = "-";
+        document.getElementById("resultQuestionWrap").style.display = "none";
+        timeBox.style.display = "none";
+        admitBtn.style.display = "none";
+        activeAttendee = null;
+        return;
+      }
+
+      activeAttendee = attendee;
+      document.getElementById("resultPassCode").innerText = attendee.passId;
+      document.getElementById("resultName").innerText = attendee.name;
+      document.getElementById("resultCollege").innerText = attendee.college || "Participant";
+      document.getElementById("resultPhone").innerText = attendee.phone ? "+91 " + attendee.phone : "-";
+      document.getElementById("resultCity").innerText = attendee.city || "-";
+
+      if (attendee.question) {
+        document.getElementById("resultQuestionWrap").style.display = "block";
+        document.getElementById("resultQuestion").innerText = `"${attendee.question}"`;
+      } else {
+        document.getElementById("resultQuestionWrap").style.display = "none";
+      }
+
+      if (attendee.status === "Checked In") {
+        // ALREADY CHECKED IN
+        playBeep("warning");
+        box.className = "result-box result-warning";
+        statusBadge.className = "result-badge badge-warning";
+        statusText.innerText = "ALREADY CHECKED IN";
+        timeBox.style.display = "block";
+        document.getElementById("checkInTimestampText").innerText = `Admitted at ${attendee.checkInTime || "earlier today"}`;
+        admitBtn.style.display = "inline-flex";
+        admitBtn.innerHTML = '<i data-lucide="refresh-cw" style="width: 14px; height: 14px;"></i> <span>Allow Re-Entry (Override)</span>';
+      } else {
+        // VALID PASS READY TO ADMIT
+        playBeep("success");
+        box.className = "result-box result-valid";
+        statusBadge.className = "result-badge badge-valid";
+        statusText.innerText = "VALID PASS — ENTRY ALLOWED";
+        timeBox.style.display = "none";
+        admitBtn.style.display = "inline-flex";
+        admitBtn.innerHTML = '<i data-lucide="check" style="width: 14px; height: 14px;"></i> <span>Confirm Check-In</span>';
+
+        // Auto Admit if toggle is enabled
+        if (document.getElementById("autoAdmitToggle").checked) {
+          executeCheckIn(attendee);
+        }
+      }
+
+      lucide.createIcons();
+    }
+
+    // Execute Check-in with Backend Google Sheet
+    async function executeCheckIn(attendee, force = false) {
+      if (!attendee) return;
+      const nowFormatted = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+      // Immediate Optimistic UI Update
+      attendee.status = "Checked In";
+      attendee.checkInTime = nowFormatted;
+      attendee.volunteer = volunteerName;
+      localStorage.setItem("tat_ep3_attendees_cache", JSON.stringify(attendees));
+      updateStats();
+      renderRoster();
+
+      const box = document.getElementById("resultBox");
+      const statusBadge = document.getElementById("resultStatusBadge");
+      const statusText = document.getElementById("resultStatusText");
+      const timeBox = document.getElementById("checkInTimestampBox");
+      const admitBtn = document.getElementById("btnAdmitPass");
+
+      box.className = "result-box result-valid";
+      statusBadge.className = "result-badge badge-valid";
+      statusText.innerText = "ENTRY ADMITTED ✓";
+      timeBox.style.display = "block";
+      document.getElementById("checkInTimestampText").innerText = `Checked in now at ${nowFormatted} by ${volunteerName}`;
+      admitBtn.style.display = "none";
+      lucide.createIcons();
+
+      // Send to Google Apps Script in background
+      try {
+        const formData = new URLSearchParams();
+        formData.append("action", "checkin");
+        formData.append("passId", attendee.passId);
+        formData.append("phone", attendee.phone || "");
+        formData.append("volunteer", volunteerName);
+        if (force) formData.append("force", "true");
+
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: formData,
+          mode: "no-cors"
+        });
+      } catch (err) {
+        console.warn("Background checkin sync queued", err);
+      }
+    }
+
+    // Render Attendees Roster
+    function renderRoster() {
+      const tbody = document.getElementById("rosterTableBody");
+      const query = (document.getElementById("rosterSearchInput").value || "").toLowerCase().trim();
+
+      let filtered = attendees.filter(a => {
+        if (currentFilter === "checked" && a.status !== "Checked In") return false;
+        if (currentFilter === "pending" && a.status === "Checked In") return false;
+        if (query) {
+          const match = 
+            (a.passId || "").toLowerCase().includes(query) ||
+            (a.name || "").toLowerCase().includes(query) ||
+            (a.phone || "").includes(query) ||
+            (a.college || "").toLowerCase().includes(query) ||
+            (a.city || "").toLowerCase().includes(query);
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      document.getElementById("rosterCount").innerText = `${filtered.length} / ${attendees.length}`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">
+              No attendees found matching filter.
+            </td>
+          </tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(a => {
+        const isChecked = a.status === "Checked In";
+        return `
+          <tr>
+            <td style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #93c5fd;">${a.passId}</td>
+            <td><strong>${a.name}</strong></td>
+            <td>${a.phone ? "+91 " + a.phone : "-"}</td>
+            <td>${a.college || "-"}</td>
+            <td>${a.city || "-"}</td>
+            <td>
+              <span class="tag-status ${isChecked ? 'tag-checked' : 'tag-pending'}">
+                ${isChecked ? 'Checked In' : 'Pending'}
+              </span>
+            </td>
+            <td>
+              ${isChecked 
+                ? `<span style="font-size: 11px; color: #64748b;">${a.checkInTime || 'Admitted'}</span>`
+                : `<button class="btn btn-green" style="padding: 4px 8px; font-size: 11px;" onclick="window.quickAdmit('${a.passId}')">Admit</button>`
+              }
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    window.quickAdmit = function(passId) {
+      const a = attendees.find(x => x.passId === passId);
+      if (a) {
+        displayResult(a, passId);
+        executeCheckIn(a);
+      }
+    };
+
+    // Camera QR Scanner Management
+    async function startScanner() {
+      if (isScanning) {
+        stopScanner();
+        return;
+      }
+
+      try {
+        html5QrCode = new Html5Qrcode("reader");
+        const config = {
+          fps: 10,
+          qrbox: { width: 220, height: 220 },
+          aspectRatio: 1.0
+        };
+
+        await html5QrCode.start(
+          { facingMode: currentFacingMode },
+          config,
+          (decodedText) => {
+            const parsed = parseQrPayload(decodedText);
+            const attendee = findAttendee(parsed);
+            displayResult(attendee, parsed ? parsed.val : decodedText);
+          },
+          (errorMessage) => {}
+        );
+
+        isScanning = true;
+        document.getElementById("scanBtnText").innerText = "Stop Camera";
+        document.getElementById("btnStartScan").classList.add("btn-red");
+      } catch (err) {
+        alert("Camera permission denied or camera not found. You can still use the Manual Search Box above!");
+      }
+    }
+
+    async function stopScanner() {
+      if (html5QrCode && isScanning) {
+        try {
+          await html5QrCode.stop();
+        } catch (e) {}
+        isScanning = false;
+        document.getElementById("scanBtnText").innerText = "Start Camera";
+        document.getElementById("btnStartScan").classList.remove("btn-red");
+      }
+    }
+
+    // Toggle Camera Torch
+    async function toggleTorch() {
+      if (!html5QrCode || !isScanning) return;
+      try {
+        isTorchOn = !isTorchOn;
+        await html5QrCode.applyVideoConstraints({
+          advanced: [{ torch: isTorchOn }]
+        });
+      } catch (e) {
+        alert("Torch flashlight is not supported by your camera hardware.");
+      }
+    }
+
+    // Switch Front/Back Camera
+    async function switchCamera() {
+      currentFacingMode = currentFacingMode === "environment" ? "user" : "environment";
+      if (isScanning) {
+        await stopScanner();
+        await startScanner();
+      }
+    }
+
+    // Export Attendance to CSV
+    function exportToCsv() {
+      if (attendees.length === 0) {
+        alert("No attendee data to export.");
+        return;
+      }
+
+      const rows = [
+        ["Pass ID", "Student Name", "Mobile Number", "College", "City", "Check-in Status", "Check-in Time", "Question"]
+      ];
+
+      attendees.forEach(a => {
+        rows.push([
+          a.passId,
+          `"${(a.name || "").replace(/"/g, '""')}"`,
+          a.phone || "",
+          `"${(a.college || "").replace(/"/g, '""')}"`,
+          `"${(a.city || "").replace(/"/g, '""')}"`,
+          a.status || "Pending",
+          a.checkInTime || "",
+          `"${(a.question || "").replace(/"/g, '""')}"`
+        ]);
+      });
+
+      const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `The-Asif-Talks-Ep3-Attendance-${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Event Listeners
+    document.getElementById("btnStartScan").addEventListener("click", startScanner);
+    document.getElementById("btnSwitchCamera").addEventListener("click", switchCamera);
+    document.getElementById("btnTorch").addEventListener("click", toggleTorch);
+    document.getElementById("btnRefresh").addEventListener("click", syncAttendees);
+    document.getElementById("btnExportCsv").addEventListener("click", exportToCsv);
+
+    document.getElementById("manualSearchForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const val = document.getElementById("manualInput").value.trim();
+      if (!val) return;
+      const parsed = parseQrPayload(val);
+      const attendee = findAttendee(parsed);
+      displayResult(attendee, val);
+    });
+
+    document.getElementById("btnAdmitPass").addEventListener("click", () => {
+      if (activeAttendee) {
+        executeCheckIn(activeAttendee, true);
+      }
+    });
+
+    document.getElementById("btnDismissResult").addEventListener("click", () => {
+      document.getElementById("resultBox").style.display = "none";
+      document.getElementById("resultPlaceholder").style.display = "block";
+      document.getElementById("manualInput").value = "";
+      activeAttendee = null;
+    });
+
+    // Filter Tabs
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = btn.getAttribute("data-filter");
+        renderRoster();
+      });
+    });
+
+    document.getElementById("rosterSearchInput").addEventListener("input", renderRoster);
+
+    // Volunteer Name Modal
+    const vModal = document.getElementById("volunteerModal");
+    document.getElementById("btnVolunteer").addEventListener("click", () => {
+      document.getElementById("volunteerInput").value = volunteerName;
+      vModal.style.display = "flex";
+    });
+
+    document.getElementById("btnSaveVolunteer").addEventListener("click", () => {
+      const name = document.getElementById("volunteerInput").value.trim();
+      if (name) {
+        volunteerName = name;
+        localStorage.setItem("tat_volunteer_name", volunteerName);
+      }
+      vModal.style.display = "none";
+    });
+
+    // Auto-sync every 30 seconds
+    setInterval(syncAttendees, 30000);
+
+    // Initial Launch
+    loadCachedAttendees();
+    syncAttendees();
+  </script>
+</body>
+</html>
