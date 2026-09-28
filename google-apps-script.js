@@ -1,6 +1,7 @@
 /**
- * Google Apps Script Backend for "The Asif Talks (Episode #2)" Registration
- * Distinguished Guest: Hon. Mayor Syed Iqbal Syed Khwaja (Mayor, Parbhani Municipal Corporation)
+ * Google Apps Script Backend for "The Asif Talks (Episode #3)" Registration
+ * Distinguished Guest: Hon. Smt. Meghana Sakore-Bordikar
+ * (Minister of State, Government of Maharashtra | Guardian Minister, Parbhani District)
  *
  * ---------------------------------------------------------------------------------------------------------------------------------
  * 📋 GOOGLE SHEET HEADERS (ROW 1):
@@ -13,16 +14,16 @@
  * Column G: College / Institute / Organization
  * Column H: City / Location
  * Column I: How Heard
- * Column J: Question for Hon. Mayor Syed Iqbal
+ * Column J: Question for Hon. Smt. Meghana Bordikar
  * Column K: Photo & Video Consent
  * ---------------------------------------------------------------------------------------------------------------------------------
  */
 
-// Helper to get or create the Episode 2 sheet tab
+// Helper to get or create the Episode 3 sheet tab
 function getEpisodeSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var primarySheetName = "The-Asif-Talks-Registration-Form-Episode-2";
-  var fallbackSheetName = "Episode 2";
+  var primarySheetName = "The-Asif-Talks-Registration-Form-Episode-3";
+  var fallbackSheetName = "Episode 3";
   
   var sheet = ss.getSheetByName(primarySheetName) || ss.getSheetByName(fallbackSheetName);
   
@@ -46,7 +47,7 @@ function getEpisodeSheet() {
       "College / Institute / Organization",
       "City / Location",
       "How Heard",
-      "Question for Hon. Mayor Syed Iqbal",
+      "Question for Hon. Smt. Meghana Bordikar",
       "Photo & Video Consent"
     ];
     sheet.appendRow(headers);
@@ -71,19 +72,6 @@ function doPost(e) {
   lock.tryLock(10000); // Prevent concurrent write collisions
 
   try {
-    // Automatic cutoff on Friday, September 4, 2026 at 02:00 PM IST
-    var deadline = new Date("2026-09-04T14:00:00+05:30").getTime();
-    var nowTime = new Date().getTime();
-    if (nowTime >= deadline) {
-      return ContentService
-        .createTextOutput(JSON.stringify({ 
-          result: "closed",
-          error: "REGISTRATIONS_CLOSED",
-          message: "Registrations for The Asif Talks (Episode #2) closed automatically on Sep 4 at 02:00 PM." 
-        }))
-        .setMimeType(ContentService.MimeType.JSON);
-    }
-
     var sheet = getEpisodeSheet();
     var lastRow = sheet.getLastRow();
 
@@ -114,7 +102,7 @@ function doPost(e) {
               result: "duplicate",
               error: "DUPLICATE_PHONE",
               passId: existingPassId,
-              message: "This mobile number is already registered for The Asif Talks (Episode #2)! Pass ID: " + existingPassId 
+              message: "This mobile number is already registered for The Asif Talks (Episode #3)! Pass ID: " + existingPassId 
             }))
             .setMimeType(ContentService.MimeType.JSON);
         }
@@ -150,7 +138,7 @@ function doPost(e) {
         passId: passId, 
         registeredCount: passCount,
         remainingSeats: remainingSeats,
-        message: "Registration for Episode #2 recorded successfully" 
+        message: "Registration for Episode #3 recorded successfully" 
       }))
       .setMimeType(ContentService.MimeType.JSON);
 
@@ -175,7 +163,7 @@ function doGet(e) {
   var remainingSeats = Math.max(0, totalSeats - count);
   var nextPassId = "TAT-" + ("000" + (count + 1)).slice(-3);
 
-  // Check if a specific mobile number already exists & collect all registered phones for Ep 2
+  // Check if a specific mobile number already exists & collect all registered phones for Ep 3
   var phoneList = [];
   var checkPhone = e && e.parameter && (e.parameter.checkPhone || e.parameter.phone) ? normalizePhone(e.parameter.checkPhone || e.parameter.phone) : "";
   var isDuplicate = false;
@@ -197,14 +185,11 @@ function doGet(e) {
     }
   }
 
-  var deadline = new Date("2026-09-04T14:00:00+05:30").getTime();
-  var isClosed = new Date().getTime() >= deadline;
-
   var responseData = {
-    status: isClosed ? "closed" : "live",
-    isClosed: isClosed,
-    episode: "Episode #2",
-    guest: "Hon. Mayor Syed Iqbal Syed Khwaja",
+    status: "live",
+    isClosed: false,
+    episode: "Episode #3",
+    guest: "Hon. Smt. Meghana Sakore-Bordikar",
     totalSeats: totalSeats,
     registeredCount: count,
     remainingSeats: remainingSeats,
@@ -224,5 +209,5 @@ function doGet(e) {
  */
 function testSetup() {
   var sheet = getEpisodeSheet();
-  Logger.log("Episode 2 Sheet successfully connected: " + sheet.getName());
+  Logger.log("Episode 3 Sheet successfully connected: " + sheet.getName());
 }
