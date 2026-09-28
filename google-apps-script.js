@@ -129,7 +129,7 @@ function doPost(e) {
 
     sheet.appendRow(rowData);
 
-    var totalSeats = 200;
+    var totalSeats = 300;
     var remainingSeats = Math.max(0, totalSeats - passCount);
 
     return ContentService
@@ -159,7 +159,7 @@ function doGet(e) {
   var sheet = getEpisodeSheet();
   var lastRow = sheet.getLastRow();
   var count = Math.max(0, lastRow - 1);
-  var totalSeats = 200;
+  var totalSeats = 300;
   var remainingSeats = Math.max(0, totalSeats - count);
   var nextPassId = "TAT-" + ("000" + (count + 1)).slice(-3);
 
